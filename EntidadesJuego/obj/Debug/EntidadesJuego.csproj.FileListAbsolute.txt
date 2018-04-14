@@ -3,3 +3,8 @@ C:\Users\maxi_\Documents\Visual Studio 2017\Projects\Juego\EntidadesJuego\bin\De
 C:\Users\maxi_\Documents\Visual Studio 2017\Projects\Juego\EntidadesJuego\obj\Debug\EntidadesJuego.csprojResolveAssemblyReference.cache
 C:\Users\maxi_\Documents\Visual Studio 2017\Projects\Juego\EntidadesJuego\obj\Debug\EntidadesJuego.dll
 C:\Users\maxi_\Documents\Visual Studio 2017\Projects\Juego\EntidadesJuego\obj\Debug\EntidadesJuego.pdb
+C:\Users\maxi_\Desktop\Juego\EntidadesJuego\bin\Debug\EntidadesJuego.dll
+C:\Users\maxi_\Desktop\Juego\EntidadesJuego\bin\Debug\EntidadesJuego.pdb
+C:\Users\maxi_\Desktop\Juego\EntidadesJuego\obj\Debug\EntidadesJuego.csprojResolveAssemblyReference.cache
+C:\Users\maxi_\Desktop\Juego\EntidadesJuego\obj\Debug\EntidadesJuego.dll
+C:\Users\maxi_\Desktop\Juego\EntidadesJuego\obj\Debug\EntidadesJuego.pdb
