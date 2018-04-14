@@ -10,8 +10,15 @@ namespace EntidadesJuego
     {
         public string IdConecxion { get; set; }
         public string Nombre { get; set; }
+        public List<Carta> Cartas { get; set; }
         //VER AVATAR 
 
+        public Jugador ()
+        {
+            Cartas = new List<Carta>();
+        }
+
+       
         
 
     }
