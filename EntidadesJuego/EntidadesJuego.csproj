@@ -44,6 +44,7 @@
     <Compile Include="Carta.cs" />
     <Compile Include="Juego.cs" />
     <Compile Include="Jugador.cs" />
+    <Compile Include="Mazo.cs" />
     <Compile Include="Partida.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

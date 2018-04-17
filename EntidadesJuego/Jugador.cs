@@ -8,9 +8,9 @@ namespace EntidadesJuego
 {
   public  class Jugador
     {
-        public string IdConecxion { get; set; }
+        public string IdConexion { get; set; }
         public string Nombre { get; set; }
-        public List<Carta> Cartas { get; set; }
+        public List<Carta> Cartas { get;  }
         //VER AVATAR 
 
         public Jugador ()

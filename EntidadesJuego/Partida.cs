@@ -9,27 +9,37 @@ namespace EntidadesJuego
     public class Partida
     {
         public List<Jugador> jugadores { get; set; }
-        public List<Carta> mazo { get; set; }
+        public Mazo mazo { get; set; }
         public string Turno { get; set; }
 
-        public Partida ()
+        public Partida()
         {
             jugadores = new List<Jugador>();
-            mazo = new List<Carta>();
+            
         }
 
-        public Partida Jugador (Jugador jugador)
+        public Partida Jugador(Jugador jugador)
         {
             jugadores.Add(jugador);
             return this;
         }
 
-        public Partida Mazo (List<Carta> cartas)
+        public Partida Mazo(Mazo mazoElegido)
         {
-            mazo = cartas;
+            mazo = mazoElegido ;
             return this;
         }
 
+        
+        public void MezclarCartas ()
+        {
+            return;
+        }
+        public void RepartirCartas ()
+        {
+            
+            return;
+        }
 
 
 
