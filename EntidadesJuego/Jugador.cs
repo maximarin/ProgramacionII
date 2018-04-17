@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace EntidadesJuego
 {
-  public  class Jugador
+    public enum NumJugador { uno, dos }
+    public  class Jugador
     {
         public string IdConexion { get; set; }
         public string Nombre { get; set; }
         public List<Carta> Cartas { get;  }
+        public NumJugador NumeroJugador { get; set; }
         //VER AVATAR 
 
         public Jugador ()
