@@ -63,59 +63,56 @@ namespace EntidadesJuego
         //}
 
 
-        private void MezclarCartas(Mazo pmazzo)
+        private void MezclarCartas()
         {
-            List<int> IdCartasAleatorias = new List<int>();
+            var listaRetornar = new List<Carta>();
             Random numeroNuevo = new Random();
 
             bool corte = true;
             while (corte == true)
             {
-                int n = numeroNuevo.Next(1, pmazzo.Cartas.Count);
+                int n = numeroNuevo.Next(1, mazo.Cartas.Count);
 
-                if (IdCartasAleatorias == null) //Primer carta
+                if (listaRetornar == null) //Primer carta
                 {
-                    IdCartasAleatorias.Add(n);
+                    listaRetornar.Add(mazo.Cartas[n]);
+                    mazo.Cartas.RemoveAt(n);
                 }
                 else
                 {
                     bool ok = false;
-                    foreach (var item in IdCartasAleatorias) //Me fijo si el random del numero ya salío
+                    foreach (var item in listaRetornar) //Me fijo si el random ya había salido
                     {
-                        if (item == n)
+                        if (item.IdCarta == n)
                         {
                             ok = true;
                         }
                     }
-                    if (ok) //Si no salío agredo el id al final
+                    if (ok == false) //Si no salío agrego la carta
                     {
-                        IdCartasAleatorias.Add(n);
-                        if (IdCartasAleatorias.Count == pmazzo.Cartas.Count) //Si la lista de id tiene el mismo total que de cartas corto el while
+                        listaRetornar.Add(mazo.Cartas[n]);
+                        mazo.Cartas.RemoveAt(n);
+                        if ( mazo.Cartas.Count == 0) //Si el mazo está vacío se corta el while
                         {
                             corte = false;
                         }
                     }
                 }
             }
-            var listaRetornar = new List<Carta>();
-            foreach (var item in IdCartasAleatorias) //Reacomodo la lista de cartas
-            {
-                listaRetornar.Add(pmazzo.Cartas.First(x => x.IdCarta == item));
-            }
-            pmazzo.Cartas = listaRetornar;
+                   
+             mazo.Cartas = listaRetornar;
         }
 
         public void RepartirCartas()
         {
-            MezclarCartas(this.mazo); //Mezclo el mazo asignado
-
-            //Ver porque podriamos poner 2 varibles/enumerador de jugadores (y no una lista) y asignarle la mitad de cartas a cada uno
+            MezclarCartas(); //Mezclo el mazo asignado
+         
 
             int Cont = 1;
             foreach (var item in this.mazo.Cartas)
             {
                 //Asigna una carta a cada uno hasta que se terminen
-                if ((Cont % 2) == 0)
+                if ((Cont % 2) != 0)
                 {
                     var participante1 = jugadores.First(x => x.NumeroJugador == NumJugador.uno);
                     participante1.Cartas.Add(item);
