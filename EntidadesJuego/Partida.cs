@@ -11,6 +11,7 @@ namespace EntidadesJuego
         public List<Jugador> jugadores { get; set; }
         public Mazo mazo { get; set; }
         public string Turno { get; set; }
+        public bool EstaCompleto { get; set; }
 
         public Partida()
         {
@@ -30,14 +31,38 @@ namespace EntidadesJuego
             return this;
         }
 
-        
-        public void MezclarCartas ()
+        public void RevisarCantidadJugadores ()
         {
+            if (jugadores.Count() == 2)
+            {
+                this.EstaCompleto = true;
+            }
             return;
+        }
+        private Mazo MezclarCartas ()
+        {   
+            
+            return this.mazo;
         }
         public void RepartirCartas ()
         {
-            
+            //SE VERIFICA POR LAS DUDAS QUE LA CANTIDAD DE CARTAS SEA PAR
+            if (mazo.Cartas.Count() % 2 == 0 )   // "%" DEVUELVE EL RESTO DE LA DIVISIÓN
+            {   
+                int contador = 1;
+                foreach (var item in MezclarCartas().Cartas)
+                {
+                    if (contador % 2 != 0)
+                    {
+                        this.jugadores[1].Cartas.Add( item) ;
+                    }
+                    else
+                    {
+                        this.jugadores[2].Cartas.Add(item);
+                    }
+                }
+            }
+                     
             return;
         }
 

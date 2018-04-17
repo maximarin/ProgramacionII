@@ -25,16 +25,15 @@ namespace EntidadesJuego
             {
                 nuevoJuego = new Juego();
             }
-          
-            
+                     
                 return nuevoJuego;
             
         }
 
-        public void AgregarPartida(Partida nuevaPartida)
+        public static Partida AgregarPartida(Partida nuevaPartida)
         {
             nuevoJuego.Partidas.Add(nuevaPartida);
-            return;
+            return nuevaPartida;
         }
 
 
