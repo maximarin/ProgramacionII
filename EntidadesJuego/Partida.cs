@@ -126,7 +126,7 @@ namespace EntidadesJuego
             }
         }
 
-        public void Deja5Cartas(Jugador jugador)    //Modifico la lista del afectado
+        private void Deja5Cartas(Jugador jugador)    //Modifico la lista del afectado
         {
             var Lista5cartas = new List<Carta>();
             int c = 0;
@@ -138,78 +138,118 @@ namespace EntidadesJuego
             jugador.Cartas = Lista5cartas;
         }
 
-        public void ResolverCartasEspeciales(TipoDeCarta carta1, TipoDeCarta carta2, Jugador jugador1, Jugador jugador2)
+
+        private void ResolverCartasEspeciales(TipoDeCarta carta1, TipoDeCarta carta2, Jugador jugador1, Jugador jugador2)
         { //Doy por hecho que ambos se encuentran en la misma sala
-            foreach (var item in jugadores)
+
+            //Verde vs normal
+            if ((carta1 == TipoDeCarta.Especial) && (carta2 == TipoDeCarta.Normal))
             {
-                if (item.IdConexion == jugador1.IdConexion) //encuentro la sala
+                Deja5Cartas(jugador2);
+                return;
+            }
+            if ((carta2 == TipoDeCarta.Especial) && (carta1 == TipoDeCarta.Normal))
+            {
+                Deja5Cartas(jugador1);
+                return;
+            }
+            //Roja vs Amarilla
+            if ((TipoDeCarta.Roja == carta1) && (TipoDeCarta.Amarilla == carta2))
+            {
+                jugador2.Cartas.RemoveAt(0);
+                return;
+            }
+            if ((TipoDeCarta.Amarilla == carta1) && (TipoDeCarta.Roja == carta2))
+            {
+                jugador1.Cartas.RemoveAt(0);
+                return;
+            }
+            //Verde vs Roja
+            if ((TipoDeCarta.Especial == carta1) && (TipoDeCarta.Roja == carta2))
+            {
+                Deja5Cartas(jugador2);
+                jugador1.Cartas.RemoveRange(0, 2);
+                return;
+            }
+            if ((TipoDeCarta.Especial == carta2) && (TipoDeCarta.Roja == carta1))
+            {
+                Deja5Cartas(jugador1);
+                jugador2.Cartas.RemoveRange(0, 2);
+                return;
+            }
+            //Verde vs amarilla
+            if ((TipoDeCarta.Especial == carta1) && (TipoDeCarta.Amarilla == carta2))
+            {
+                Deja5Cartas(jugador2);
+                jugador1.Cartas.RemoveAt(0);
+                return;
+            }
+            if ((TipoDeCarta.Especial == carta2) && (TipoDeCarta.Amarilla == carta1))
+            {
+                Deja5Cartas(jugador1);
+                jugador2.Cartas.RemoveAt(0);
+                return;
+            }
+
+            //Amarrilla vs Normal
+            if ((TipoDeCarta.Amarilla == carta1) && (TipoDeCarta.Normal == carta2))
+            {
+                jugador2.Cartas.RemoveAt(0);
+                return;
+            }
+            if ((TipoDeCarta.Amarilla == carta2) && (TipoDeCarta.Normal == carta1))
+            {
+                jugador1.Cartas.RemoveAt(0);
+                return;
+            }
+
+            //Roja vs Normal
+            if ((TipoDeCarta.Roja == carta1) && (TipoDeCarta.Normal == carta2))
+            {
+                jugador2.Cartas.RemoveRange(0, 2);
+                return;
+            }
+            if ((TipoDeCarta.Roja == carta2) && (TipoDeCarta.Normal == carta1))
+            {
+                jugador1.Cartas.RemoveRange(0, 2);
+                return;
+            }
+
+          
+
+        } 
+
+        private bool ResolverCartasNormales (string atributo, int iDCartaJugador1, int iDCartaJugador2)
+        {
+            bool posible = false;
+            
+
+            var cartaJugador1 = jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First().Atributos.Where(x => x.Nombre == atributo).FirstOrDefault();
+            var cartaJugador2 = jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First().Atributos.Where(x => x.Nombre == atributo).FirstOrDefault();
+
+            //Se verifica que ambas cartas tengan la opcion elegida 
+            if (cartaJugador1 == null || cartaJugador2 == null)
+            {
+                return posible; //No es posible, debe elegir otro atributo.
+            }
+            else
+            {
+                
+                if (cartaJugador1.Valor > cartaJugador2.Valor) //GANA JUGADOR 1
                 {
-                    //Verde vs normal
-                    if ((carta1 == TipoDeCarta.Especial) && (carta2 == TipoDeCarta.Normal))
-                    {
-                        Deja5Cartas(jugador2);
-                    }
-                    if ((carta2 == TipoDeCarta.Especial) && (carta1 == TipoDeCarta.Normal))
-                    {
-                        Deja5Cartas(jugador1);
-                    }
-                    //Roja vs Amarilla
-                    if ((TipoDeCarta.Roja == carta1) && (TipoDeCarta.Amarilla == carta2))
-                    {
-                        jugador2.Cartas.RemoveAt(0);
-                    }
-                    if ((TipoDeCarta.Amarilla == carta1) && (TipoDeCarta.Roja == carta2))
-                    {
-                        jugador1.Cartas.RemoveAt(0);
-                    }
-                    //Verde vs Roja
-                    if ((TipoDeCarta.Especial == carta1) && (TipoDeCarta.Roja == carta2))
-                    {
-                        Deja5Cartas(jugador2);
-                        jugador1.Cartas.RemoveRange(0, 2);
-                    }
-                    if ((TipoDeCarta.Especial == carta2) && (TipoDeCarta.Roja == carta1))
-                    {
-                        Deja5Cartas(jugador1);
-                        jugador2.Cartas.RemoveRange(0, 2);
-                    }
-                    //Verde vs amarilla
-                    if ((TipoDeCarta.Especial == carta1) && (TipoDeCarta.Amarilla == carta2))
-                    {
-                        Deja5Cartas(jugador2);
-                        jugador1.Cartas.RemoveAt(0);
-                    }
-                    if ((TipoDeCarta.Especial == carta2) && (TipoDeCarta.Amarilla == carta1))
-                    {
-                        Deja5Cartas(jugador1);
-                        jugador2.Cartas.RemoveAt(0);
-                    }
-
-                    //Amarrilla vs Normal
-                    if ((TipoDeCarta.Amarilla == carta1) && (TipoDeCarta.Normal == carta2))
-                    {
-                        jugador2.Cartas.RemoveAt(0);
-                    }
-                    if ((TipoDeCarta.Amarilla == carta2) && (TipoDeCarta.Normal == carta1))
-                    {
-                        jugador1.Cartas.RemoveAt(0);
-                    }
-
-                    //Roja vs Normal
-                    if ((TipoDeCarta.Roja == carta1) && (TipoDeCarta.Normal == carta2))
-                    {
-                        jugador2.Cartas.RemoveRange(0, 2);
-                    }
-                    if ((TipoDeCarta.Roja == carta2) && (TipoDeCarta.Normal == carta1))
-                    {
-                        jugador1.Cartas.RemoveRange(0, 2);
-                    }
+                    jugadores[0].Cartas.Add(jugadores[1].Cartas[iDCartaJugador2]);
+                    jugadores[1].Cartas.RemoveAt(iDCartaJugador2);  //PREGUNTAR SI GANA ESA CARTA O UNA CUALQUIERA DEL MAZO DEL JUGADOR 2
+                    
                 }
+                else
+                {
+                    jugadores[1].Cartas.Add(jugadores[0].Cartas[iDCartaJugador1]);
+                    jugadores[0].Cartas.RemoveAt(iDCartaJugador1);
+                }
+
+                return posible = true;                
             }
         }
-
-
-
 
     }
 
