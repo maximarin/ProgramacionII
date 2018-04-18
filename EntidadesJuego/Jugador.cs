@@ -11,7 +11,7 @@ namespace EntidadesJuego
     {
         public string IdConexion { get; set; }
         public string Nombre { get; set; }
-        public List<Carta> Cartas { get;  }
+        public List<Carta> Cartas { get; set; }
         public NumJugador NumeroJugador { get; set; }
         //VER AVATAR 
 

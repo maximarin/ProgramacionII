@@ -47,7 +47,6 @@
     <Compile Include="Mazo.cs" />
     <Compile Include="Partida.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Prueba.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -19,7 +19,7 @@ namespace EntidadesJuego
 
         private static Juego nuevoJuego;
 
-        public static Juego CrearJuego ()
+        public static Juego CrearJuego()
         {
            if (nuevoJuego == null)
             {

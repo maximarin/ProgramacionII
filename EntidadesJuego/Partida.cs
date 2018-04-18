@@ -16,7 +16,7 @@ namespace EntidadesJuego
         public Partida()
         {
             jugadores = new List<Jugador>();
-            
+
         }
 
         public Partida Jugador(Jugador jugador)
@@ -27,7 +27,7 @@ namespace EntidadesJuego
 
         public Partida Mazo(Mazo mazoElegido)
         {
-            mazo = mazoElegido ;
+            mazo = mazoElegido;
             return this;
         }
 
@@ -92,21 +92,21 @@ namespace EntidadesJuego
                     {
                         listaRetornar.Add(mazo.Cartas[n]);
                         mazo.Cartas.RemoveAt(n);
-                        if ( mazo.Cartas.Count == 0) //Si el mazo está vacío se corta el while
+                        if (mazo.Cartas.Count == 0) //Si el mazo está vacío se corta el while
                         {
                             corte = false;
                         }
                     }
                 }
             }
-                   
-             mazo.Cartas = listaRetornar;
+
+            mazo.Cartas = listaRetornar;
         }
 
         public void RepartirCartas()
         {
             MezclarCartas(); //Mezclo el mazo asignado
-         
+
 
             int Cont = 1;
             foreach (var item in this.mazo.Cartas)
@@ -123,6 +123,88 @@ namespace EntidadesJuego
                     participante2.Cartas.Add(item);
                 }
                 Cont = Cont + 1;
+            }
+        }
+
+        public void Deja5Cartas(Jugador jugador)    //Modifico la lista del afectado
+        {
+            var Lista5cartas = new List<Carta>();
+            int c = 0;
+            while (c != 5)
+            {
+                Lista5cartas[c] = jugador.Cartas[c];
+                c++;
+            }
+            jugador.Cartas = Lista5cartas;
+        }
+
+        public void ResolverCartasEspeciales(TipoDeCarta carta1, TipoDeCarta carta2, Jugador jugador1, Jugador jugador2)
+        { //Doy por hecho que ambos se encuentran en la misma sala
+            foreach (var item in jugadores)
+            {
+                if (item.IdConexion == jugador1.IdConexion) //encuentro la sala
+                {
+                    //Verde vs normal
+                    if ((carta1 == TipoDeCarta.Especial) && (carta2 == TipoDeCarta.Normal))
+                    {
+                        Deja5Cartas(jugador2);
+                    }
+                    if ((carta2 == TipoDeCarta.Especial) && (carta1 == TipoDeCarta.Normal))
+                    {
+                        Deja5Cartas(jugador1);
+                    }
+                    //Roja vs Amarilla
+                    if ((TipoDeCarta.Roja == carta1) && (TipoDeCarta.Amarilla == carta2))
+                    {
+                        jugador2.Cartas.RemoveAt(0);
+                    }
+                    if ((TipoDeCarta.Amarilla == carta1) && (TipoDeCarta.Roja == carta2))
+                    {
+                        jugador1.Cartas.RemoveAt(0);
+                    }
+                    //Verde vs Roja
+                    if ((TipoDeCarta.Especial == carta1) && (TipoDeCarta.Roja == carta2))
+                    {
+                        Deja5Cartas(jugador2);
+                        jugador1.Cartas.RemoveRange(0, 2);
+                    }
+                    if ((TipoDeCarta.Especial == carta2) && (TipoDeCarta.Roja == carta1))
+                    {
+                        Deja5Cartas(jugador1);
+                        jugador2.Cartas.RemoveRange(0, 2);
+                    }
+                    //Verde vs amarilla
+                    if ((TipoDeCarta.Especial == carta1) && (TipoDeCarta.Amarilla == carta2))
+                    {
+                        Deja5Cartas(jugador2);
+                        jugador1.Cartas.RemoveAt(0);
+                    }
+                    if ((TipoDeCarta.Especial == carta2) && (TipoDeCarta.Amarilla == carta1))
+                    {
+                        Deja5Cartas(jugador1);
+                        jugador2.Cartas.RemoveAt(0);
+                    }
+
+                    //Amarrilla vs Normal
+                    if ((TipoDeCarta.Amarilla == carta1) && (TipoDeCarta.Normal == carta2))
+                    {
+                        jugador2.Cartas.RemoveAt(0);
+                    }
+                    if ((TipoDeCarta.Amarilla == carta2) && (TipoDeCarta.Normal == carta1))
+                    {
+                        jugador1.Cartas.RemoveAt(0);
+                    }
+
+                    //Roja vs Normal
+                    if ((TipoDeCarta.Roja == carta1) && (TipoDeCarta.Normal == carta2))
+                    {
+                        jugador2.Cartas.RemoveRange(0, 2);
+                    }
+                    if ((TipoDeCarta.Roja == carta2) && (TipoDeCarta.Normal == carta1))
+                    {
+                        jugador1.Cartas.RemoveRange(0, 2);
+                    }
+                }
             }
         }
 
