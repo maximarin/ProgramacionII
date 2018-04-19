@@ -13,25 +13,25 @@ namespace EntidadesJuego
         public string Turno { get; set; }
         public bool EstaCompleto { get; set; }
 
-        public Partida()
+        public Partida() //Test
         {
             jugadores = new List<Jugador>();
 
         }
 
-        public Partida Jugador(Jugador jugador)
+        public Partida Jugador(Jugador jugador) //Test
         {
             jugadores.Add(jugador);
             return this;
         }
 
-        public Partida Mazo(Mazo mazoElegido)
+        public Partida Mazo(Mazo mazoElegido) //Test
         {
             mazo = mazoElegido;
             return this;
         }
 
-        public void RevisarCantidadJugadores()
+        public void RevisarCantidadJugadores() //Test
         {
             if (jugadores.Count() == 2)
             {
@@ -41,36 +41,37 @@ namespace EntidadesJuego
         }
 
 
-        private void MezclarCartas()
+        public void MezclarCartas() //Test  (Esta publico porque sino el test no me lo tomaba)
         {
             var listaRetornar = new List<Carta>();
             Random numeroNuevo = new Random();
 
+            List<int> listaID = new List<int>();
+
             bool corte = true;
             while (corte == true)
             {
-                int n = numeroNuevo.Next(1, mazo.Cartas.Count);
+                int n = numeroNuevo.Next(1, this.mazo.Cartas.Count + 1);
 
-                if (listaRetornar == null) //Primer carta
+                if (listaID.Count == 0) //Primer carta
                 {
-                    listaRetornar.Add(mazo.Cartas[n]);
-                    mazo.Cartas.RemoveAt(n);
+                    listaID.Add(n);
                 }
                 else
                 {
                     bool ok = false;
-                    foreach (var item in listaRetornar) //Me fijo si el random ya había salido
+                    foreach (var item in listaID)
                     {
-                        if (item.IdCarta == n)
+                        if (n == item)
                         {
                             ok = true;
                         }
                     }
-                    if (ok == false) //Si no salío agrego la carta
+
+                    if (ok == false)
                     {
-                        listaRetornar.Add(mazo.Cartas[n]);
-                        mazo.Cartas.RemoveAt(n);
-                        if (mazo.Cartas.Count == 0) //Si el mazo está vacío se corta el while
+                        listaID.Add(n);
+                        if (listaID.Count == this.mazo.Cartas.Count)
                         {
                             corte = false;
                         }
@@ -78,10 +79,15 @@ namespace EntidadesJuego
                 }
             }
 
+            foreach (var item in listaID)
+            {
+                listaRetornar.Add(this.mazo.Cartas.First(x => x.IdCarta == item));
+            }
             mazo.Cartas = listaRetornar;
         }
 
-        public void RepartirCartas()
+
+        public void RepartirCartas() //Test
         {
             MezclarCartas(); //Mezclo el mazo asignado
 
@@ -213,7 +219,7 @@ namespace EntidadesJuego
             }
         } 
 
-        public string ResolverCartasNormales (string atributo, int iDCartaJugador1, int iDCartaJugador2)
+        public string ResolverCartasNormales (string atributo, int iDCartaJugador1, int iDCartaJugador2) //Test
         {
             string posible;
             

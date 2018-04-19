@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace TestsUnitarios
 {
     [TestClass]
-    public class UnitTest1
+    public class PartidasTest
     {
     
         [TestMethod]
@@ -104,6 +104,111 @@ namespace TestsUnitarios
             Assert.AreEqual(PartidaPrueba.jugadores[1].Cartas.Count, 2);
         }
 
+        [TestMethod]
+        public void DeberiaPoderCrearPartida()
+        {
+            var nuevapartida = new Partida();
+            nuevapartida.Turno = "Uno";
+            nuevapartida.EstaCompleto = true;
 
+            Assert.AreEqual(true, nuevapartida.EstaCompleto);
+            Assert.AreEqual("Uno", nuevapartida.Turno);
+            Assert.AreEqual(0, nuevapartida.jugadores.Count);
+            Assert.AreEqual(null, nuevapartida.mazo);
+        }
+
+        [TestMethod]
+        public void DeberiaPoderAgregarJugadoresALaPartida()
+        {
+            var nuevapartida = new Partida();
+            var jugador1 = new Jugador();
+            var jugador2 = new Jugador();
+
+            nuevapartida.jugadores.Add(jugador1);
+            nuevapartida.jugadores.Add(jugador2);
+
+            Assert.AreEqual(2, nuevapartida.jugadores.Count);
+        }
+
+        [TestMethod]
+        public void DeberiaPoderAsignarUnMazoAUnaPartida()
+        {
+            var nuevapartida = new Partida();
+            var mazoxmen = new Mazo();
+
+            nuevapartida.mazo = mazoxmen;
+
+            Assert.AreEqual(mazoxmen, nuevapartida.mazo);
+        }
+
+        [TestMethod]
+        public void DeberiaPoderControlarCanrtidadDeJugadores()
+        {
+            var nuevapartida = new Partida();
+            var jugador1 = new Jugador();
+            var jugador2 = new Jugador();
+
+            nuevapartida.jugadores.Add(jugador1);
+            nuevapartida.jugadores.Add(jugador2);
+
+            nuevapartida.EstaCompleto = false;
+            nuevapartida.RevisarCantidadJugadores();
+
+            Assert.AreEqual(true, nuevapartida.EstaCompleto);
+
+        }
+
+        [TestMethod]
+        public void SeDeberianMezclarLasCartas()
+        {
+            var nuevapartida = new Partida();
+            var carta1 = new Carta(); carta1.IdCarta = 1;
+            var carta2 = new Carta(); carta2.IdCarta = 2;
+            var carta3 = new Carta(); carta3.IdCarta = 3;
+            var carta4 = new Carta(); carta4.IdCarta = 4;
+            var carta5 = new Carta(); carta5.IdCarta = 5;
+
+            var mazzo = new Mazo();
+            mazzo.Cartas.Add(carta1);
+            mazzo.Cartas.Add(carta2);
+            mazzo.Cartas.Add(carta3);
+            mazzo.Cartas.Add(carta4);
+            mazzo.Cartas.Add(carta5);
+
+            nuevapartida.mazo = mazzo;
+            nuevapartida.MezclarCartas();
+            //Ver porque si sale la id 1 el test no va a funcionar (aunque las cartas se mezclen)
+            Assert.AreNotEqual(1, nuevapartida.mazo.Cartas[1]);
+        }
+
+        [TestMethod]
+        public void SeDeberiaRepartirTodasLasCartas()
+        {
+            var nuevapartida = new Partida();
+            var carta1 = new Carta(); carta1.IdCarta = 1;
+            var carta2 = new Carta(); carta2.IdCarta = 2;
+            var carta3 = new Carta(); carta3.IdCarta = 3;
+            var carta4 = new Carta(); carta4.IdCarta = 4;
+
+            var mazzo = new Mazo();
+            mazzo.Cartas.Add(carta1);
+            mazzo.Cartas.Add(carta2);
+            mazzo.Cartas.Add(carta3);
+            mazzo.Cartas.Add(carta4);
+
+            nuevapartida.mazo = mazzo;
+
+            var jugador1 = new Jugador();
+            jugador1.NumeroJugador = NumJugador.uno;
+            var jugador2 = new Jugador();
+            jugador1.NumeroJugador = NumJugador.dos;
+
+            nuevapartida.jugadores.Add(jugador1);
+            nuevapartida.jugadores.Add(jugador2);
+
+            nuevapartida.RepartirCartas();
+
+            Assert.AreEqual(2, jugador1.Cartas.Count);
+        }
     }
 }
