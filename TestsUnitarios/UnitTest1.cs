@@ -178,7 +178,9 @@ namespace TestsUnitarios
             nuevapartida.mazo = mazzo;
             nuevapartida.MezclarCartas();
             //Ver porque si sale la id 1 el test no va a funcionar (aunque las cartas se mezclen)
-            Assert.AreNotEqual(1, nuevapartida.mazo.Cartas[1]);
+
+            Assert.AreNotEqual(1, nuevapartida.mazo.Cartas[0].IdCarta);
+
         }
 
         [TestMethod]

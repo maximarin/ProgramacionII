@@ -43,47 +43,20 @@ namespace EntidadesJuego
 
         public void MezclarCartas() //Test  (Esta publico porque sino el test no me lo tomaba)
         {
-            var listaRetornar = new List<Carta>();
+            var listaCartasAuxiliar = new List<Carta>();
             Random numeroNuevo = new Random();
 
             List<int> listaID = new List<int>();
 
-            bool corte = true;
-            while (corte == true)
+            while (this.mazo.Cartas.Count > 0)
             {
-                int n = numeroNuevo.Next(1, this.mazo.Cartas.Count + 1);
-
-                if (listaID.Count == 0) //Primer carta
-                {
-                    listaID.Add(n);
-                }
-                else
-                {
-                    bool ok = false;
-                    foreach (var item in listaID)
-                    {
-                        if (n == item)
-                        {
-                            ok = true;
-                        }
-                    }
-
-                    if (ok == false)
-                    {
-                        listaID.Add(n);
-                        if (listaID.Count == this.mazo.Cartas.Count)
-                        {
-                            corte = false;
-                        }
-                    }
-                }
+                int n = numeroNuevo.Next(0, this.mazo.Cartas.Count); //PROBAR SI NO HAY QUE AGREGARLE EL +1
+                listaCartasAuxiliar.Add(mazo.Cartas[n]);
+                this.mazo.Cartas.RemoveAt(n);
             }
 
-            foreach (var item in listaID)
-            {
-                listaRetornar.Add(this.mazo.Cartas.First(x => x.IdCarta == item));
-            }
-            mazo.Cartas = listaRetornar;
+            mazo.Cartas = listaCartasAuxiliar;            
+        
         }
 
 
