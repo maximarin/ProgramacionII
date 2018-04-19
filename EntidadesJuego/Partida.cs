@@ -46,11 +46,9 @@ namespace EntidadesJuego
             var listaCartasAuxiliar = new List<Carta>();
             Random numeroNuevo = new Random();
 
-            List<int> listaID = new List<int>();
-
             while (this.mazo.Cartas.Count > 0)
             {
-                int n = numeroNuevo.Next(0, this.mazo.Cartas.Count); //PROBAR SI NO HAY QUE AGREGARLE EL +1
+                int n = numeroNuevo.Next(0, this.mazo.Cartas.Count); 
                 listaCartasAuxiliar.Add(mazo.Cartas[n]);
                 this.mazo.Cartas.RemoveAt(n);
             }

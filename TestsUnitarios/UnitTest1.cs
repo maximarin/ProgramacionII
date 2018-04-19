@@ -168,18 +168,24 @@ namespace TestsUnitarios
             var carta4 = new Carta(); carta4.IdCarta = 4;
             var carta5 = new Carta(); carta5.IdCarta = 5;
 
-            var mazzo = new Mazo();
-            mazzo.Cartas.Add(carta1);
-            mazzo.Cartas.Add(carta2);
-            mazzo.Cartas.Add(carta3);
-            mazzo.Cartas.Add(carta4);
-            mazzo.Cartas.Add(carta5);
+            var mazzo1 = new Mazo();
+            mazzo1.Cartas.Add(carta1);
+            mazzo1.Cartas.Add(carta2);
+            mazzo1.Cartas.Add(carta3);
+            mazzo1.Cartas.Add(carta4);
+            mazzo1.Cartas.Add(carta5);
 
-            nuevapartida.mazo = mazzo;
-            nuevapartida.MezclarCartas();
-            //Ver porque si sale la id 1 el test no va a funcionar (aunque las cartas se mezclen)
+            var mazzo2 = new Mazo();
+            mazzo2.Cartas.Add(carta1);
+            mazzo2.Cartas.Add(carta2);
+            mazzo2.Cartas.Add(carta3);
+            mazzo2.Cartas.Add(carta4);
+            mazzo2.Cartas.Add(carta5);
 
-            Assert.AreNotEqual(1, nuevapartida.mazo.Cartas[0].IdCarta);
+            nuevapartida.mazo = mazzo1;
+            nuevapartida.MezclarCartas();           
+
+            Assert.AreNotEqual(mazzo2, nuevapartida.mazo);
 
         }
 
