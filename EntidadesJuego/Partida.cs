@@ -124,100 +124,122 @@ namespace EntidadesJuego
 
             foreach (var item in jespecial.Cartas)
             {
-                jespecial.Cartas.Add(item); 
+                jespecial.Cartas.Add(item);
             }
             jafectado.Cartas = Lista5cartas; //Solo le quedan 5 cartas
         }
-         
-        private void ResolverCartasEspeciales(TipoDeCarta carta1, TipoDeCarta carta2, Jugador jugador1, Jugador jugador2)
-        { //Doy por hecho que ambos se encuentran en la misma sala
-            
-            //Verde vs normal
-            if ((carta1 == TipoDeCarta.Especial) && (carta2 == TipoDeCarta.Normal))
+
+        public void BuscoAgregoBorro(Carta cartalost, Jugador jugadorlost, int cant, Carta cartawin, Jugador jugadorwin) //Metodo D10S
+        {
+            for (int i = 0; i < jugadorlost.Cartas.Count; i++)
             {
-                Deja5Cartas(jugador1,jugador2);
+                if (cartalost == jugadorlost.Cartas[i])
+                {
+                    if (cant == 1)
+                    {
+                        jugadorwin.Cartas.Add(jugadorlost.Cartas[i]);
+                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                    }
+                    if (cant == 2)
+                    {
+                        jugadorwin.Cartas.Add(jugadorlost.Cartas[i]);
+                        jugadorwin.Cartas.Add(jugadorlost.Cartas[i + 1]);
+
+                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[i + 1]);
+                    }
+                }
+            }
+
+            foreach (var item in jugadorwin.Cartas)//La carta ganadora la borro(las especiales se usan 1 vez nomas)
+            {
+                if (cartawin == item)
+                {
+                    jugadorwin.Cartas.Remove(item);
+                }
+            }
+        }
+
+        private void ResolverCartasEspeciales(Carta carta1, Carta carta2, Jugador jugador1, Jugador jugador2)
+        { //Doy por hecho que ambos se encuentran en la misma sala
+
+
+            //Verde vs normal
+            if ((carta1.TipoCarta == TipoDeCarta.Especial) && (carta2.TipoCarta == TipoDeCarta.Normal))
+            {
+                Deja5Cartas(jugador1, jugador2);
                 return;
             }
-            if ((carta2 == TipoDeCarta.Especial) && (carta1 == TipoDeCarta.Normal))
+            if ((carta2.TipoCarta == TipoDeCarta.Especial) && (carta1.TipoCarta == TipoDeCarta.Normal))
             {
-                Deja5Cartas(jugador2,jugador1);
+                Deja5Cartas(jugador2, jugador1);
                 return;
             }
 
             //Roja vs Amarilla 
-            if ((TipoDeCarta.Roja == carta1) && (TipoDeCarta.Amarilla == carta2)) 
+            if ((TipoDeCarta.Roja == carta1.TipoCarta) && (TipoDeCarta.Amarilla == carta2.TipoCarta))
             {
-                jugador1.Cartas.Add(jugador2.Cartas[0]); //Robo y asigno
-                jugador2.Cartas.RemoveAt(0);
+                BuscoAgregoBorro(carta2, jugador2, 1, carta1, jugador1);
                 return;
             }
-            if ((TipoDeCarta.Amarilla == carta1) && (TipoDeCarta.Roja == carta2)) 
+            if ((TipoDeCarta.Amarilla == carta1.TipoCarta) && (TipoDeCarta.Roja == carta2.TipoCarta))
             {
-                jugador2.Cartas.Add(jugador1.Cartas[0]);
-                jugador1.Cartas.RemoveAt(0);
+                BuscoAgregoBorro(carta1, jugador1, 1, carta2, jugador2);
                 return;
             }
 
             //Verde vs Roja
-            if ((TipoDeCarta.Especial == carta1) && (TipoDeCarta.Roja == carta2)) 
+            if ((TipoDeCarta.Especial == carta1.TipoCarta) && (TipoDeCarta.Roja == carta2.TipoCarta))
             {
-                Deja5Cartas(jugador1,jugador2);
-                for (int i = 0; i < 1; i++) { jugador2.Cartas.Add(jugador1.Cartas[i]); }
-                jugador1.Cartas.RemoveRange(0, 2);
+                Deja5Cartas(jugador1, jugador2);
+                BuscoAgregoBorro(carta1, jugador1, 2, carta2, jugador2);
                 return;
             }
-            if ((TipoDeCarta.Especial == carta2) && (TipoDeCarta.Roja == carta1))
+            if ((TipoDeCarta.Especial == carta2.TipoCarta) && (TipoDeCarta.Roja == carta1.TipoCarta))
             {
-                Deja5Cartas(jugador2,jugador1);
-                for (int i = 0; i < 1; i++) { jugador1.Cartas.Add(jugador2.Cartas[i]); }               
-                jugador2.Cartas.RemoveRange(0, 2);
+                Deja5Cartas(jugador2, jugador1);
+                BuscoAgregoBorro(carta2, jugador2, 2, carta1, jugador1);
                 return;
             }
 
             //Verde vs amarilla
-            if ((TipoDeCarta.Especial == carta1) && (TipoDeCarta.Amarilla == carta2))
+            if ((TipoDeCarta.Especial == carta1.TipoCarta) && (TipoDeCarta.Amarilla == carta2.TipoCarta))
             {
-                Deja5Cartas(jugador1,jugador2);
-                jugador2.Cartas.Add(jugador1.Cartas[0]);
-                jugador1.Cartas.RemoveAt(0);
+                Deja5Cartas(jugador1, jugador2);
+                BuscoAgregoBorro(carta1, jugador1, 1, carta2, jugador2);
                 return;
             }
-            if ((TipoDeCarta.Especial == carta2) && (TipoDeCarta.Amarilla == carta1))
+            if ((TipoDeCarta.Especial == carta2.TipoCarta) && (TipoDeCarta.Amarilla == carta1.TipoCarta))
             {
-                Deja5Cartas(jugador2,jugador1);
-                jugador1.Cartas.Add(jugador2.Cartas[0]);
-                jugador2.Cartas.RemoveAt(0);
+                Deja5Cartas(jugador2, jugador1);
+                BuscoAgregoBorro(carta2, jugador2, 1, carta1, jugador1);
                 return;
             }
 
             //Amarrilla vs Normal
-            if ((TipoDeCarta.Amarilla == carta1) && (TipoDeCarta.Normal == carta2))
+            if ((TipoDeCarta.Amarilla == carta1.TipoCarta) && (TipoDeCarta.Normal == carta2.TipoCarta))
             {
-                jugador1.Cartas.Add(jugador2.Cartas[0]);
-                jugador2.Cartas.RemoveAt(0);
+                BuscoAgregoBorro(carta2, jugador2, 1, carta1, jugador1);
                 return;
             }
-            if ((TipoDeCarta.Amarilla == carta2) && (TipoDeCarta.Normal == carta1))
+            if ((TipoDeCarta.Amarilla == carta2.TipoCarta) && (TipoDeCarta.Normal == carta1.TipoCarta))
             {
-                jugador2.Cartas.Add(jugador1.Cartas[0]);
-                jugador1.Cartas.RemoveAt(0);
+                BuscoAgregoBorro(carta1, jugador1, 1, carta2, jugador2);
                 return;
             }
 
             //Roja vs Normal
-            if ((TipoDeCarta.Roja == carta1) && (TipoDeCarta.Normal == carta2))
+            if ((TipoDeCarta.Roja == carta1.TipoCarta) && (TipoDeCarta.Normal == carta2.TipoCarta))
             {
-                for (int i = 0; i < 1; i++) { jugador1.Cartas.Add(jugador2.Cartas[i]); }              
-                jugador2.Cartas.RemoveRange(0, 2);
+                BuscoAgregoBorro(carta2, jugador2, 2, carta1, jugador1);
                 return;
             }
-            if ((TipoDeCarta.Roja == carta2) && (TipoDeCarta.Normal == carta1))
+            if ((TipoDeCarta.Roja == carta2.TipoCarta) && (TipoDeCarta.Normal == carta1.TipoCarta))
             {
-                for (int i = 0; i < 1; i++) { jugador2.Cartas.Add(jugador1.Cartas[i]); }               
-                jugador1.Cartas.RemoveRange(0, 2);
+                BuscoAgregoBorro(carta1, jugador1, 2, carta2, jugador2);
                 return;
             }
-        } 
+        }
 
         public string ResolverCartasNormales (string atributo, int iDCartaJugador1, int iDCartaJugador2) //Test
         {
