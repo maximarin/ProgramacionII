@@ -218,5 +218,33 @@ namespace TestsUnitarios
 
             Assert.AreEqual(2, jugador1.Cartas.Count);
         }
+
+        [TestMethod]
+        public void DeberiaQuedarElJugadorCon5CartasAlEnfrentarseALaCartaVerde()
+        {
+            Partida nuevaPartida = new Partida();
+            List<Atributo> atributos = new List<Atributo>();
+            atributos.Add(new Atributo { Nombre = "Velocidad", Valor = 25 });
+
+            Carta carta1 = new Carta { IdCarta = 1, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            Carta carta2 = new Carta { IdCarta = 1, TipoCarta = TipoDeCarta.Especial, Atributos = null };
+
+            Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1");
+            Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("1");
+
+            jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1);
+
+            jugador2.Cartas.Add(carta2);
+
+            nuevaPartida.Jugador(jugador1); nuevaPartida.Jugador(jugador2); nuevaPartida.EstaCompleto = true;
+
+            nuevaPartida.Deja5Cartas(jugador2, jugador1);
+
+            Assert.AreEqual(5, jugador1.Cartas.Count);
+               
+
+            
+        }
+
     }
 }

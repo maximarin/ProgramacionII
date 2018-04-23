@@ -48,13 +48,13 @@ namespace EntidadesJuego
 
             while (this.mazo.Cartas.Count > 0)
             {
-                int n = numeroNuevo.Next(0, this.mazo.Cartas.Count); 
+                int n = numeroNuevo.Next(0, this.mazo.Cartas.Count);
                 listaCartasAuxiliar.Add(mazo.Cartas[n]);
                 this.mazo.Cartas.RemoveAt(n);
             }
 
-            mazo.Cartas = listaCartasAuxiliar;            
-        
+            mazo.Cartas = listaCartasAuxiliar;
+
         }
 
 
@@ -81,23 +81,17 @@ namespace EntidadesJuego
             }
         }
 
-        private void Deja5Cartas(Jugador jespecial, Jugador jafectado)    //Modifico la lista del afectado
+        public void Deja5Cartas(Jugador jespecial, Jugador jafectado)    //Modifico la lista del afectado
         {
-            var Lista5cartas = new List<Carta>();
-            int c = 0;
-            while (c != 5)
+            int i = 0;
+           while (jafectado.Cartas.Count > 5 )
             {
-                Lista5cartas[c] = jafectado.Cartas[c];
-                c++;
+                jespecial.Cartas.Add(jafectado.Cartas[i]);
+                jafectado.Cartas.Remove(jafectado.Cartas[i]);
+                i++;
             }
-
-            jafectado.Cartas.RemoveRange(0, 5);
-
-            foreach (var item in jespecial.Cartas)
-            {
-                jespecial.Cartas.Add(item);
-            }
-            jafectado.Cartas = Lista5cartas; //Solo le quedan 5 cartas
+            
+            return;
         }
 
         public void BuscoAgregoBorro(Carta cartalost, Jugador jugadorlost, int cant, Carta cartawin, Jugador jugadorwin) //Metodo D10S
@@ -212,37 +206,37 @@ namespace EntidadesJuego
             }
         }
 
-        public string ResolverCartasNormales (string atributo, int iDCartaJugador1, int iDCartaJugador2) //Test
+        public string ResolverCartasNormales(string atributo, int iDCartaJugador1, int iDCartaJugador2) //Test
         {
             string posible;
-            
+
             var cartaJugador1 = jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First().Atributos.Where(x => x.Nombre == atributo).FirstOrDefault();
             var cartaJugador2 = jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First().Atributos.Where(x => x.Nombre == atributo).FirstOrDefault();
 
             //Se verifica que ambas cartas tengan la opcion elegida 
             if (cartaJugador1 == null || cartaJugador2 == null)
             {
-                return posible ="ELEGIR OTRO ATRIBUTO"; //No es posible, debe elegir otro atributo.
+                return posible = "ELEGIR OTRO ATRIBUTO"; //No es posible, debe elegir otro atributo.
             }
             else
             {
-                
+
 
                 if (cartaJugador1.Valor > cartaJugador2.Valor) //GANA JUGADOR 1
                 {
                     int indice = jugadores[1].Cartas.IndexOf(jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First());
-                    jugadores[0].Cartas.Add(jugadores[1].Cartas.First(x=> x.IdCarta == iDCartaJugador2));
+                    jugadores[0].Cartas.Add(jugadores[1].Cartas.First(x => x.IdCarta == iDCartaJugador2));
                     jugadores[1].Cartas.RemoveAt(indice);  //PREGUNTAR SI GANA ESA CARTA O UNA CUALQUIERA DEL MAZO DEL JUGADOR 2
                     return posible = "GANADOR JUGADOR 1";
                 }
                 else
-                {   
+                {
                     if (cartaJugador2.Valor > cartaJugador1.Valor) //GANA JUGADOR 2
                     {
                         int indice = jugadores[0].Cartas.IndexOf(jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First());
                         jugadores[1].Cartas.Add(jugadores[0].Cartas.First(x => x.IdCarta == iDCartaJugador1));
                         jugadores[0].Cartas.RemoveAt(indice);
-                        return posible = "GANADOR JUGADOR 2"; 
+                        return posible = "GANADOR JUGADOR 2";
                     }
                     else
                     {
@@ -250,7 +244,7 @@ namespace EntidadesJuego
                     }
                 }
 
-                             
+
             }
         }
 
