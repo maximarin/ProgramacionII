@@ -147,47 +147,20 @@ namespace TestsUnitarios
             var nuevapartida = new Partida();
             var jugador1 = new Jugador();
             var jugador2 = new Jugador();
+            var mazo = new Mazo();
 
+            nuevapartida.mazo = mazo;
             nuevapartida.jugadores.Add(jugador1);
             nuevapartida.jugadores.Add(jugador2);
 
             nuevapartida.EstaCompleto = false;
-            nuevapartida.RevisarCantidadJugadores();
+            nuevapartida.RepartirCartas();
 
             Assert.AreEqual(true, nuevapartida.EstaCompleto);
 
         }
 
-        [TestMethod]
-        public void SeDeberianMezclarLasCartas()
-        {
-            var nuevapartida = new Partida();
-            var carta1 = new Carta(); carta1.IdCarta = 1;
-            var carta2 = new Carta(); carta2.IdCarta = 2;
-            var carta3 = new Carta(); carta3.IdCarta = 3;
-            var carta4 = new Carta(); carta4.IdCarta = 4;
-            var carta5 = new Carta(); carta5.IdCarta = 5;
 
-            var mazzo1 = new Mazo();
-            mazzo1.Cartas.Add(carta1);
-            mazzo1.Cartas.Add(carta2);
-            mazzo1.Cartas.Add(carta3);
-            mazzo1.Cartas.Add(carta4);
-            mazzo1.Cartas.Add(carta5);
-
-            var mazzo2 = new Mazo();
-            mazzo2.Cartas.Add(carta1);
-            mazzo2.Cartas.Add(carta2);
-            mazzo2.Cartas.Add(carta3);
-            mazzo2.Cartas.Add(carta4);
-            mazzo2.Cartas.Add(carta5);
-
-            nuevapartida.mazo = mazzo1;
-            nuevapartida.MezclarCartas();           
-
-            Assert.AreNotEqual(mazzo2, nuevapartida.mazo);
-
-        }
 
         [TestMethod]
         public void SeDeberiaRepartirTodasLasCartas()
@@ -204,6 +177,13 @@ namespace TestsUnitarios
             mazzo.Cartas.Add(carta3);
             mazzo.Cartas.Add(carta4);
 
+            var mazzo2 = new Mazo();
+            mazzo2.Cartas.Add(carta1);
+            mazzo2.Cartas.Add(carta2);
+            mazzo2.Cartas.Add(carta3);
+            mazzo2.Cartas.Add(carta4);
+           
+
             nuevapartida.mazo = mazzo;
 
             var jugador1 = new Jugador();
@@ -217,6 +197,7 @@ namespace TestsUnitarios
             nuevapartida.RepartirCartas();
 
             Assert.AreEqual(2, jugador1.Cartas.Count);
+            Assert.AreNotEqual(mazzo2, nuevapartida.mazo);
         }
 
         [TestMethod]
@@ -230,7 +211,7 @@ namespace TestsUnitarios
             Carta carta2 = new Carta { IdCarta = 1, TipoCarta = TipoDeCarta.Especial, Atributos = null };
 
             Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1");
-            Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("1");
+            Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("2");
 
             jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta1);
 
@@ -242,9 +223,53 @@ namespace TestsUnitarios
 
             Assert.AreEqual(5, jugador1.Cartas.Count);
                
-
-            
+           
         }
 
+        [TestMethod] 
+        public void NoDeberiaRepartirConMazoVacio()
+        {
+            Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1");
+            Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("2");
+            Partida nuevaPartida = new Partida();
+            var mazo = new Mazo(); 
+
+            nuevaPartida.Jugador(jugador1).Jugador(jugador2).Mazo(mazo).EstaCompleto = true;
+            
+            nuevaPartida.RepartirCartas();
+
+            Assert.AreEqual(0, nuevaPartida.jugadores[0].Cartas.Count);
+
+           
+        }
+
+        [TestMethod]
+        public void DeberiaSacarDosCartasAlJugadorQueEnfrentaAUnaCartaRoja()
+        {
+            List<Atributo> atributos = new List<Atributo>();
+            atributos.Add(new Atributo { Nombre = "Velocidad", Valor = 25 });
+            Carta carta1 = new Carta { IdCarta = 1, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            Carta carta2 = new Carta { IdCarta = 2, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            Carta carta3 = new Carta { IdCarta = 3, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            Carta carta4 = new Carta { IdCarta = 4, TipoCarta = TipoDeCarta.Roja, Atributos = null };
+            Carta carta5 = new Carta { IdCarta = 5, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+
+            Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1");
+            Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("2");
+
+            jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta2); jugador1.Cartas.Add(carta3); jugador1.Cartas.Add(carta5);
+            jugador2.Cartas.Add(carta4); 
+
+
+            Partida nuevaPartida = new Partida();
+            nuevaPartida.Jugador(jugador1).Jugador(jugador2); 
+
+            nuevaPartida.BuscoAgregoBorro(carta3, jugador1, 2, carta4, jugador2);
+
+            Assert.AreEqual(2, nuevaPartida.jugadores[1].Cartas.Count);
+            Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count); 
+            
+
+        }
     }
 }

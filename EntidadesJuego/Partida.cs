@@ -15,8 +15,8 @@ namespace EntidadesJuego
 
         public Partida() //Test
         {
-            jugadores = new List<Jugador>();
-
+            this.jugadores = new List<Jugador>();
+            this.mazo = null;
         }
 
         public Partida Jugador(Jugador jugador) //Test
@@ -31,7 +31,7 @@ namespace EntidadesJuego
             return this;
         }
 
-        public void RevisarCantidadJugadores() //Test
+        private void RevisarCantidadJugadores()
         {
             if (jugadores.Count() == 2)
             {
@@ -41,62 +41,116 @@ namespace EntidadesJuego
         }
 
 
-        public void MezclarCartas() //Test  (Esta publico porque sino el test no me lo tomaba)
+        private void MezclarCartas() //Test  (Esta publico porque sino el test no me lo tomaba)
         {
             var listaCartasAuxiliar = new List<Carta>();
+            List<int> lista = new List<int>();
             Random numeroNuevo = new Random();
+            int n = 0;
+            int cont = 1;
 
             while (this.mazo.Cartas.Count > 0)
             {
-                int n = numeroNuevo.Next(0, this.mazo.Cartas.Count);
-                listaCartasAuxiliar.Add(mazo.Cartas[n]);
-                this.mazo.Cartas.RemoveAt(n);
+                bool enc = false;
+
+                if (this.mazo.Cartas.Count == 1)
+                {
+                    n = numeroNuevo.Next(0, listaCartasAuxiliar.Count);
+                    var aux = listaCartasAuxiliar[n];
+                    listaCartasAuxiliar[n] = this.mazo.Cartas[0];
+                    listaCartasAuxiliar.Add(aux);
+
+                    break;
+                }
+                while (enc == false)
+                {
+                    n = numeroNuevo.Next(1, this.mazo.Cartas.Count + 1);
+
+                    if (lista.Count == 0 && n != 1)
+                    {
+                        lista.Add(n);
+                        listaCartasAuxiliar.Add(this.mazo.Cartas.Where(x => x.IdCarta == n).First());
+                        this.mazo.Cartas.Remove(this.mazo.Cartas.Where(x => x.IdCarta == n).First());
+                        enc = true;
+
+                    }
+
+                    if (lista.Count >= 1)
+
+                        foreach (var item in lista)
+                        {
+                            if (item == n)
+                            {
+                                enc = true;
+
+                                break;
+                            }
+
+                        }
+
+                    if (enc == false)
+                    {
+                        lista.Add(n);
+                        listaCartasAuxiliar.Add(this.mazo.Cartas.Where(x => x.IdCarta == n).First());
+                        this.mazo.Cartas.Remove(this.mazo.Cartas.Where(x => x.IdCarta == n).First());
+                        enc = true;
+                    }
+                }
+
             }
+
 
             mazo.Cartas = listaCartasAuxiliar;
 
         }
 
 
-        public void RepartirCartas() //Test
+
+        public void RepartirCartas()
         {
-            MezclarCartas(); //Mezclo el mazo asignado
-
-
-            int Cont = 1;
-            foreach (var item in this.mazo.Cartas)
+            RevisarCantidadJugadores();
+            if (this.mazo.Cartas != null && this.EstaCompleto == true)
             {
-                //Asigna una carta a cada uno hasta que se terminen
-                if ((Cont % 2) != 0)
+
+                MezclarCartas(); //Mezclo el mazo asignado
+
+
+                int Cont = 1;
+                foreach (var item in this.mazo.Cartas)
                 {
-                    var participante1 = jugadores.First(x => x.NumeroJugador == NumJugador.uno);
-                    participante1.Cartas.Add(item);
+                    //Asigna una carta a cada uno hasta que se terminen
+                    if ((Cont % 2) != 0)
+                    {
+                        var participante1 = jugadores.First(x => x.NumeroJugador == NumJugador.uno);
+                        participante1.Cartas.Add(item);
+                    }
+                    else
+                    {
+                        var participante2 = jugadores.First(x => x.NumeroJugador == NumJugador.dos);
+                        participante2.Cartas.Add(item);
+                    }
+                    Cont = Cont + 1;
+
                 }
-                else
-                {
-                    var participante2 = jugadores.First(x => x.NumeroJugador == NumJugador.dos);
-                    participante2.Cartas.Add(item);
-                }
-                Cont = Cont + 1;
             }
         }
 
         public void Deja5Cartas(Jugador jespecial, Jugador jafectado)    //Modifico la lista del afectado
         {
             int i = 0;
-           while (jafectado.Cartas.Count > 5 )
+            while (jafectado.Cartas.Count > 5)
             {
                 jespecial.Cartas.Add(jafectado.Cartas[i]);
                 jafectado.Cartas.Remove(jafectado.Cartas[i]);
                 i++;
             }
-            
+
             return;
         }
 
         public void BuscoAgregoBorro(Carta cartalost, Jugador jugadorlost, int cant, Carta cartawin, Jugador jugadorwin) //Metodo D10S
         {
-            for (int i = 0; i < jugadorlost.Cartas.Count; i++)
+            for (int i = 0; i < jugadorlost.Cartas.Count ; i++)
             {
                 if (cartalost == jugadorlost.Cartas[i])
                 {
@@ -108,10 +162,23 @@ namespace EntidadesJuego
                     if (cant == 2)
                     {
                         jugadorwin.Cartas.Add(jugadorlost.Cartas[i]);
-                        jugadorwin.Cartas.Add(jugadorlost.Cartas[i + 1]);
 
-                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
-                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[i + 1]);
+                        if (i + 1 <= jugadorlost.Cartas.Count - 1)  //Si supera la cantidad, tiene que volver a la primera
+                        {
+                            var siguienteCarta = jugadorlost.Cartas[i + 1];
+                            jugadorwin.Cartas.Add(siguienteCarta);
+
+                            jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                            jugadorlost.Cartas.Remove(siguienteCarta);
+                        }
+                        else  
+                        {
+                            jugadorwin.Cartas.Add(jugadorlost.Cartas[0]);
+
+                            jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                            jugadorlost.Cartas.Remove(jugadorlost.Cartas[0]);
+                        }
+                      
                     }
                 }
             }
@@ -121,6 +188,7 @@ namespace EntidadesJuego
                 if (cartawin == item)
                 {
                     jugadorwin.Cartas.Remove(item);
+                    break;
                 }
             }
         }
