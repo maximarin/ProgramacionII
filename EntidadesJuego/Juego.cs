@@ -9,25 +9,27 @@ namespace EntidadesJuego
     public class Juego
     {
         public List<Partida> Partidas { get; set; }
+        public List<Ranking> Rankings { get; set; }
 
         //HAY UN SOLO JUEGO, POR LO TANTO SE APLICA SINGLETON
 
         private Juego()
         {
-            Partidas = new List<Partida>();
+            this.Partidas = new List<Partida>();
+            this.Rankings = new List<Ranking>();
         }
 
         private static Juego nuevoJuego;
 
         public static Juego CrearJuego()
         {
-           if (nuevoJuego == null)
+            if (nuevoJuego == null)
             {
                 nuevoJuego = new Juego();
             }
-                     
-                return nuevoJuego;
-            
+
+            return nuevoJuego;
+
         }
 
         public static Partida AgregarPartida(Partida nuevaPartida)
@@ -36,8 +38,16 @@ namespace EntidadesJuego
             return nuevaPartida;
         }
 
+        //private void ActualizarRanking()
+        //{
+        //    var ListaRetornar = new List<Ranking>();
 
+        //    foreach (var item in Partidas)
+        //    {
 
+        //    }
+        //}
 
+ 
     }
 }
