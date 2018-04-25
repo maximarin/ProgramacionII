@@ -196,8 +196,21 @@ namespace TestsUnitarios
 
             nuevapartida.RepartirCartas();
 
+            bool ok = false;
+            foreach (var item in nuevapartida.jugadores[0].Cartas)
+            {
+                foreach (var item2 in nuevapartida.jugadores[1].Cartas)
+                {
+                    if (item==item2)
+                    {
+                        ok = true;
+                    }
+                }
+            }
+            
             Assert.AreEqual(2, jugador1.Cartas.Count);
             Assert.AreNotEqual(mazzo2, nuevapartida.mazo);
+            Assert.AreEqual(false, ok);
         }
 
         [TestMethod]
@@ -271,5 +284,6 @@ namespace TestsUnitarios
             
 
         }
+
     }
 }

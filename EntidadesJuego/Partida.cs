@@ -41,7 +41,7 @@ namespace EntidadesJuego
         }
 
 
-        private void MezclarCartas() //Test  (Esta publico porque sino el test no me lo tomaba)
+        private void MezclarCartas() //Test  //Modo Dios
         {
             var listaCartasAuxiliar = new List<Carta>();
             List<int> lista = new List<int>();
