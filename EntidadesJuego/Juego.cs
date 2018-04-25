@@ -38,37 +38,25 @@ namespace EntidadesJuego
             return nuevaPartida;
         }
 
-        public void ActualizarRanking()
+        public void ActualizarRanking() //Test  Modo super Dios
         {
             var ListaRetornar = new List<Ranking>();
+            bool primeravez = false;
 
-            foreach (var item in Partidas)
+            foreach (var item in this.Partidas)
             {
                 if (item.HayCartas(item.jugadores.First(x => x.NumeroJugador == NumJugador.uno), item.jugadores.First(x => x.NumeroJugador == NumJugador.dos)))
                 {
-                    var jugadoralrankig = item.DetectarJugadorPerdedor(item.jugadores.First(x => x.NumeroJugador == NumJugador.uno), item.jugadores.First(x => x.NumeroJugador == NumJugador.dos));
-
-                    Jugador agregar = new Jugador();
-
-                    if (jugadoralrankig == item.jugadores.First(x => x.NumeroJugador == NumJugador.uno))
-                    {
-                        agregar = jugadoralrankig;
-                    }
-                    else
-                    {
-                        if (jugadoralrankig == item.jugadores.First(x => x.NumeroJugador == NumJugador.dos))
-                        {
-                            agregar = jugadoralrankig;
-                        }
-                    }
+                    var jugadoralrankig = item.DetectarJugadorGanador(item.jugadores.First(x => x.NumeroJugador == NumJugador.uno), item.jugadores.First(x => x.NumeroJugador == NumJugador.dos));
 
                     Ranking nuevo = new Ranking();
-                    nuevo.Nombre = agregar.nombre;                    
+                    nuevo.Nombre = jugadoralrankig.nombre;                 
 
-                    if (this.Rankings.Count == 0)
+                    if (primeravez==false)
                     {
                         nuevo.VecesQueGano = 1;
-                        ListaRetornar.Add(nuevo);                        
+                        ListaRetornar.Add(nuevo);
+                        primeravez = true;
                     }
                     else
                     {

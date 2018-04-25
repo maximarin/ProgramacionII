@@ -318,16 +318,23 @@ namespace EntidadesJuego
         {
             bool terminar = false;
 
-            if ((jugador1.Cartas == null) || (jugador2.Cartas == null))
+            if ((jugador1.Cartas.Count == 0) || (jugador2.Cartas.Count == 0))
             {
                 terminar = true;
             }
             return terminar;
         }
 
-        public Jugador DetectarJugadorPerdedor(Jugador jugador1, Jugador jugador2) //Cuando el metodo HayCartas devolvio un True 
+        public Jugador DetectarJugadorGanador(Jugador jugador1, Jugador jugador2) //Cuando el metodo HayCartas devolvio un True 
         {
-            if (jugador1.Cartas == null) { return jugador1; } else { return jugador2; }
+            if (jugador1.Cartas.Count != 0)
+            {
+                return jugador1;
+            }
+            else
+            {
+                return jugador2;
+            }
         }
 
     }
