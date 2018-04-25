@@ -314,13 +314,6 @@ namespace TestsUnitarios
 
             nuevojuego.ActualizarRanking();
 
-            Ranking agregar = new Ranking();
-            agregar.Nombre = "Juan";
-            agregar.VecesQueGano = 2;
-
-            var lista = new List<Ranking>();
-            lista.Add(agregar);
-
             Assert.AreEqual(1, nuevojuego.Rankings.Count);
         }
     }
