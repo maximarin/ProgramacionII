@@ -269,7 +269,6 @@ namespace TestsUnitarios
             Assert.AreEqual(2, nuevaPartida.jugadores[1].Cartas.Count);
             Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count); 
             
-
         }
     }
 }
