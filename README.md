@@ -1,6 +1,13 @@
-# TP PROGRAMACIÓN 2
+# TP PROGRAMACIÓN 2 ![alt text][logo]
+
+[logo]: https://github.com/NicoMalta/analisisnumerico/blob/master/logo.png
                                                                                                                             
-                                                                                                                            
+
+
+
+
+
+
 ## Aira - Marín - Muller                                                                                                                    
  
 ![alt text][logo]
