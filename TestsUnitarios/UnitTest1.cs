@@ -8,7 +8,7 @@ namespace TestsUnitarios
     [TestClass]
     public class PartidasTest
     {
-    
+
         [TestMethod]
         public void DeberiaGanarJugadroDosPorAtributoConValorMasAlto()
         {
@@ -37,7 +37,7 @@ namespace TestsUnitarios
             Jugador2.Cartas.Add(Carta3); Jugador2.Cartas.Add(Carta4);
 
             Assert.AreEqual(PartidaPrueba.ResolverCartasNormales("Fuerza", 1, 4), "GANADOR JUGADOR 2");
-            Assert.AreEqual(PartidaPrueba.jugadores[0].Cartas.Count , 1);
+            Assert.AreEqual(PartidaPrueba.jugadores[0].Cartas.Count, 1);
             Assert.AreEqual(PartidaPrueba.jugadores[1].Cartas.Count, 3);
 
         }
@@ -53,7 +53,7 @@ namespace TestsUnitarios
 
             var Atributo1 = new Atributo() { Nombre = "Fuerza", Valor = 20 };
             var Atributo2 = new Atributo() { Nombre = "Velocidad", Valor = 30 };
-            var Atributo3 = new Atributo() { Nombre = "Fuerza", Valor = 20};
+            var Atributo3 = new Atributo() { Nombre = "Fuerza", Valor = 20 };
             var Atributo4 = new Atributo() { Nombre = "Resistencia", Valor = 40 };
 
             List<Atributo> Lista1 = new List<Atributo>();
@@ -182,7 +182,7 @@ namespace TestsUnitarios
             mazzo2.Cartas.Add(carta2);
             mazzo2.Cartas.Add(carta3);
             mazzo2.Cartas.Add(carta4);
-           
+
 
             nuevapartida.mazo = mazzo;
 
@@ -196,8 +196,21 @@ namespace TestsUnitarios
 
             nuevapartida.RepartirCartas();
 
+            bool ok = false;
+            foreach (var item in nuevapartida.jugadores[0].Cartas)
+            {
+                foreach (var item2 in nuevapartida.jugadores[1].Cartas)
+                {
+                    if (item == item2)
+                    {
+                        ok = true;
+                    }
+                }
+            }
+
             Assert.AreEqual(2, jugador1.Cartas.Count);
             Assert.AreNotEqual(mazzo2, nuevapartida.mazo);
+            Assert.AreEqual(false, ok);
         }
 
         [TestMethod]
@@ -222,25 +235,25 @@ namespace TestsUnitarios
             nuevaPartida.Deja5Cartas(jugador2, jugador1);
 
             Assert.AreEqual(5, jugador1.Cartas.Count);
-               
-           
+
+
         }
 
-        [TestMethod] 
+        [TestMethod]
         public void NoDeberiaRepartirConMazoVacio()
         {
             Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1");
             Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("2");
             Partida nuevaPartida = new Partida();
-            var mazo = new Mazo(); 
+            var mazo = new Mazo();
 
             nuevaPartida.Jugador(jugador1).Jugador(jugador2).Mazo(mazo).EstaCompleto = true;
-            
+
             nuevaPartida.RepartirCartas();
 
             Assert.AreEqual(0, nuevaPartida.jugadores[0].Cartas.Count);
 
-           
+
         }
 
         [TestMethod]
@@ -258,17 +271,55 @@ namespace TestsUnitarios
             Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("2");
 
             jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta2); jugador1.Cartas.Add(carta3); jugador1.Cartas.Add(carta5);
-            jugador2.Cartas.Add(carta4); 
+            jugador2.Cartas.Add(carta4);
 
 
             Partida nuevaPartida = new Partida();
-            nuevaPartida.Jugador(jugador1).Jugador(jugador2); 
+            nuevaPartida.Jugador(jugador1).Jugador(jugador2);
 
             nuevaPartida.BuscoAgregoBorro(carta3, jugador1, 2, carta4, jugador2);
 
             Assert.AreEqual(2, nuevaPartida.jugadores[1].Cartas.Count);
+
             Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count); 
             
+
+            Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count);
+        }
+
+        [TestMethod]
+        public void DeberiaActualizarRanking()
+        {
+            var nuevojuego = Juego.CrearJuego();
+
+            Carta carta1 = new Carta();
+
+            var nuevapartida1 = new Partida();
+            Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1"); 
+            Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("1"); jugador2.Cartas.Add(carta1);
+            nuevapartida1.jugadores.Add(jugador1);
+            nuevapartida1.jugadores.Add(jugador2);
+
+            var nuevapartida2 = new Partida();
+            Jugador jugador21 = new Jugador().Nombre("Juan").Numero(NumJugador.uno).IdConexion("2"); jugador21.Cartas.Add(carta1);
+            Jugador jugador22 = new Jugador().Nombre("Laucha").Numero(NumJugador.dos).IdConexion("2");
+            nuevapartida2.jugadores.Add(jugador21);
+            nuevapartida2.jugadores.Add(jugador22);
+
+            var nuevapartida3 = new Partida();
+            Jugador jugador213 = new Jugador().Nombre("Juan Aira").Numero(NumJugador.uno).IdConexion("3"); jugador213.Cartas.Add(carta1);
+            Jugador jugador223 = new Jugador().Nombre("Laucha Modo Dios").Numero(NumJugador.dos).IdConexion("3"); jugador223.Cartas.Add(carta1);
+            nuevapartida3.jugadores.Add(jugador213);
+            nuevapartida3.jugadores.Add(jugador223);
+
+            nuevojuego.Partidas.Add(nuevapartida1);
+            nuevojuego.Partidas.Add(nuevapartida2);
+            nuevojuego.Partidas.Add(nuevapartida3);
+
+            nuevojuego.ActualizarRanking();
+
+            Assert.AreEqual(1, nuevojuego.Rankings.Count);
+
         }
     }
 }

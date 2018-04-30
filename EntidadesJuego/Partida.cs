@@ -41,7 +41,7 @@ namespace EntidadesJuego
         }
 
 
-        private void MezclarCartas() //Test  (Esta publico porque sino el test no me lo tomaba)
+        private void MezclarCartas() //Test  //Modo Dios
         {
             var listaCartasAuxiliar = new List<Carta>();
             List<int> lista = new List<int>();
@@ -150,7 +150,7 @@ namespace EntidadesJuego
 
         public void BuscoAgregoBorro(Carta cartalost, Jugador jugadorlost, int cant, Carta cartawin, Jugador jugadorwin) //Metodo D10S
         {
-            for (int i = 0; i < jugadorlost.Cartas.Count ; i++)
+            for (int i = 0; i < jugadorlost.Cartas.Count; i++)
             {
                 if (cartalost == jugadorlost.Cartas[i])
                 {
@@ -171,14 +171,14 @@ namespace EntidadesJuego
                             jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
                             jugadorlost.Cartas.Remove(siguienteCarta);
                         }
-                        else  
+                        else
                         {
                             jugadorwin.Cartas.Add(jugadorlost.Cartas[0]);
 
                             jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
                             jugadorlost.Cartas.Remove(jugadorlost.Cartas[0]);
                         }
-                      
+
                     }
                 }
             }
@@ -311,14 +311,32 @@ namespace EntidadesJuego
                         return posible = "EMPATE";
                     }
                 }
-
-
             }
         }
 
+        public bool HayCartas(Jugador jugador1, Jugador jugador2) //Metodo para verificar cada vez que se cambia de turno
+        {
+            bool terminar = false;
+
+            if ((jugador1.Cartas.Count == 0) || (jugador2.Cartas.Count == 0))
+            {
+                terminar = true;
+            }
+            return terminar;
+        }
+
+        public Jugador DetectarJugadorGanador(Jugador jugador1, Jugador jugador2) //Cuando el metodo HayCartas devolvio un True 
+        {
+            if (jugador1.Cartas.Count != 0)
+            {
+                return jugador1;
+            }
+            else
+            {
+                return jugador2;
+            }
+        }
 
     }
-
-
 }
 
