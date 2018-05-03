@@ -281,11 +281,66 @@ namespace TestsUnitarios
 
             Assert.AreEqual(2, nuevaPartida.jugadores[1].Cartas.Count);
 
-            Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count); 
-            
+            Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count);
+
 
             Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count);
         }
+
+        [TestMethod]
+        public void DeberiaSacarUnaCartaAlJugadorQueEnfrentaAUnaCartaAmarillaConUnaNormal()
+        {
+            List<Atributo> atributos = new List<Atributo>();
+            atributos.Add(new Atributo { Nombre = "Velocidad", Valor = 25 });
+            Carta carta1 = new Carta { IdCarta = 1, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            Carta carta2 = new Carta { IdCarta = 2, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            Carta carta3 = new Carta { IdCarta = 3, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            Carta carta4 = new Carta { IdCarta = 4, TipoCarta = TipoDeCarta.Amarilla, Atributos = null };
+            Carta carta5 = new Carta { IdCarta = 5, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+
+            Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1");
+            Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("2");
+
+            jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta2); jugador1.Cartas.Add(carta3); jugador1.Cartas.Add(carta5);
+            jugador2.Cartas.Add(carta4);
+
+
+            Partida nuevaPartida = new Partida();
+            nuevaPartida.Jugador(jugador1).Jugador(jugador2);
+
+            nuevaPartida.BuscoAgregoBorro(carta3, jugador1, 1, carta4, jugador2);
+            Assert.AreEqual(3, nuevaPartida.jugadores[0].Cartas.Count);
+            Assert.AreEqual(1, nuevaPartida.jugadores[1].Cartas.Count);
+        }
+
+        [TestMethod]
+        public void DeberiaSacarUnaCartaAlJugadorQueEnfrentaAUnaCartaRojaConUnaAmarilla()
+        {
+
+            List<Atributo> atributos = new List<Atributo>();
+            atributos.Add(new Atributo { Nombre = "Velocidad", Valor = 25 });
+            Carta carta1 = new Carta { IdCarta = 1, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            Carta carta2 = new Carta { IdCarta = 2, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            Carta carta4 = new Carta { IdCarta = 3, TipoCarta = TipoDeCarta.Roja, Atributos = null };
+            Carta carta3 = new Carta { IdCarta = 4, TipoCarta = TipoDeCarta.Amarilla, Atributos = null };
+            Carta carta5 = new Carta { IdCarta = 5, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            Carta carta6 = new Carta { IdCarta = 6, TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+
+            Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1");
+            Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("2");
+
+            jugador1.Cartas.Add(carta1); jugador1.Cartas.Add(carta2); jugador1.Cartas.Add(carta3); jugador1.Cartas.Add(carta5);
+            jugador2.Cartas.Add(carta4); jugador2.Cartas.Add(carta6);
+
+            Partida nuevaPartida = new Partida();
+            nuevaPartida.Jugador(jugador1).Jugador(jugador2);
+
+            nuevaPartida.BuscoAgregoBorro(carta3, jugador1, 1, carta4, jugador2);
+            Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count);
+            Assert.AreEqual(2, nuevaPartida.jugadores[1].Cartas.Count);
+
+        }
+
 
         [TestMethod]
         public void DeberiaActualizarRanking()
@@ -295,7 +350,7 @@ namespace TestsUnitarios
             Carta carta1 = new Carta();
 
             var nuevapartida1 = new Partida();
-            Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1"); 
+            Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1");
             Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("1"); jugador2.Cartas.Add(carta1);
             nuevapartida1.jugadores.Add(jugador1);
             nuevapartida1.jugadores.Add(jugador2);

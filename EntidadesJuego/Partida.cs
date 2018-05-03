@@ -150,38 +150,112 @@ namespace EntidadesJuego
 
         public void BuscoAgregoBorro(Carta cartalost, Jugador jugadorlost, int cant, Carta cartawin, Jugador jugadorwin) //Metodo D10S
         {
-            for (int i = 0; i < jugadorlost.Cartas.Count; i++)
+            if (jugadorlost.Cartas.Count >= cant)
             {
-                if (cartalost == jugadorlost.Cartas[i])
+
+
+                for (int i = 0; i < jugadorlost.Cartas.Count; i++)
                 {
-                    if (cant == 1)
+                    if (cartalost == jugadorlost.Cartas[i])
                     {
-                        jugadorwin.Cartas.Add(jugadorlost.Cartas[i]);
-                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
-                    }
-                    if (cant == 2)
-                    {
-                        jugadorwin.Cartas.Add(jugadorlost.Cartas[i]);
-
-                        if (i + 1 <= jugadorlost.Cartas.Count - 1)  //Si supera la cantidad, tiene que volver a la primera
+                        if (cant == 1)
                         {
-                            var siguienteCarta = jugadorlost.Cartas[i + 1];
-                            jugadorwin.Cartas.Add(siguienteCarta);
+                            if (cartalost.TipoCarta != TipoDeCarta.Amarilla && cartalost.TipoCarta != TipoDeCarta.Roja)
+                            {
+                                jugadorwin.Cartas.Add(jugadorlost.Cartas[i]);
+                                jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                            }
+                            else
+                            {
+                                if (i + 1 <= jugadorlost.Cartas.Count - 1)
+                                {
+                                    jugadorwin.Cartas.Add(jugadorlost.Cartas[i + 1]);
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[i + 1]);
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                                }
+                                else
+                                {
+                                    jugadorwin.Cartas.Add(jugadorlost.Cartas[0]);
 
-                            jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
-                            jugadorlost.Cartas.Remove(siguienteCarta);
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[0]);
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                                }
+                            }
                         }
-                        else
+                        if (cant == 2)
                         {
-                            jugadorwin.Cartas.Add(jugadorlost.Cartas[0]);
+                            bool enc = false;
+                            if (cartalost.TipoCarta != TipoDeCarta.Amarilla && cartalost.TipoCarta != TipoDeCarta.Roja)  //SI NO ES AMARILLA O ROJA SE AGREGA AL OTRO MAZO
+                            {
+                                jugadorwin.Cartas.Add(jugadorlost.Cartas[i]);
 
-                            jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
-                            jugadorlost.Cartas.Remove(jugadorlost.Cartas[0]);
+
+
+
+                                if (i + 1 <= jugadorlost.Cartas.Count - 1)  //Si supera la cantidad, tiene que volver a la primera
+                                {
+                                    var siguienteCarta = jugadorlost.Cartas[i + 1];
+                                    jugadorwin.Cartas.Add(siguienteCarta);
+
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                                    jugadorlost.Cartas.Remove(siguienteCarta);
+                                }
+                                else
+                                {
+                                    jugadorwin.Cartas.Add(jugadorlost.Cartas[0]);
+
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[0]);
+                                }
+
+                            }
+                            else   //ES AMARILLA O ROJA. ENTONCES HAY QUE AGREGAR AL OTRO MAZO LAS DOS SIGUIENTES Y ELIMINAR LA ESPECIAL
+                            {
+                                if (i + 2 <= jugadorlost.Cartas.Count - 1)
+                                {
+                                    jugadorwin.Cartas.Add(jugadorlost.Cartas[i + 1]);
+                                    jugadorwin.Cartas.Add(jugadorlost.Cartas[i + 2]);
+
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[i + 1]);
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[i + 2]);
+                                }
+
+                                else
+                                {
+                                    if (i + 1 <= jugadorlost.Cartas.Count - 1)
+                                    {
+                                        jugadorwin.Cartas.Add(jugadorlost.Cartas[i + 1]);
+                                        jugadorwin.Cartas.Add(jugadorlost.Cartas[0]);
+
+                                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[i + 1]);
+                                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[0]);
+                                    }
+                                    else
+                                    {
+                                        jugadorwin.Cartas.Add(jugadorlost.Cartas[0]);
+                                        jugadorwin.Cartas.Add(jugadorlost.Cartas[1]);
+
+                                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[0]);
+                                        jugadorlost.Cartas.Remove(jugadorlost.Cartas[1]);
+                                    }
+                                }
+
+
+
+                            }
+
                         }
+
+
 
                     }
                 }
             }
+
+
 
             foreach (var item in jugadorwin.Cartas)//La carta ganadora la borro(las especiales se usan 1 vez nomas)
             {
@@ -192,6 +266,7 @@ namespace EntidadesJuego
                 }
             }
         }
+
 
         private void ResolverCartasEspeciales(Carta carta1, Carta carta2, Jugador jugador1, Jugador jugador2)
         { //Doy por hecho que ambos se encuentran en la misma sala
