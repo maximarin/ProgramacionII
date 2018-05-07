@@ -177,8 +177,9 @@ namespace EntidadesJuego
                                 {
                                     jugadorwin.Cartas.Add(jugadorlost.Cartas[0]);
 
-                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[0]);
                                     jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
+                                    jugadorlost.Cartas.Remove(jugadorlost.Cartas[0]);
+                                  
                                 }
                             }
                         }
