@@ -12,11 +12,13 @@ namespace EntidadesJuego
         public Mazo mazo { get; set; }
         public string Turno { get; set; }
         public bool EstaCompleto { get; set; }
+        public Ranking resultado { get; set; }
 
         public Partida() //Test
         {
             this.jugadores = new List<Jugador>();
             this.mazo = null;
+            this.resultado = new Ranking();
         }
 
         public Partida Jugador(Jugador jugador) //Test
@@ -179,7 +181,7 @@ namespace EntidadesJuego
 
                                     jugadorlost.Cartas.Remove(jugadorlost.Cartas[i]);
                                     jugadorlost.Cartas.Remove(jugadorlost.Cartas[0]);
-                                  
+
                                 }
                             }
                         }
@@ -413,6 +415,40 @@ namespace EntidadesJuego
             }
         }
 
+
+        public void ActualizarRanking() //Test  Modo super Dios
+        {
+            var ganador = new Jugador();
+
+            resultado.NombreJugador1 = jugadores[0].nombre;
+            resultado.NombreJugador2 = jugadores[1].nombre;
+
+
+            if (HayCartas(jugadores[0], jugadores[1]))
+            {
+                ganador = DetectarJugadorGanador(jugadores[0], jugadores[1]);
+
+                if (ganador == jugadores[0])
+                {
+                    resultado.VecesQueGanoElJugador1 = resultado.VecesQueGanoElJugador1 + 1;
+                }
+                else
+                {
+                    resultado.VecesQueGanoElJugador2 = resultado.VecesQueGanoElJugador2 + 1;
+                }
+            }            
+        }
+
+        public void Revancha()
+        {
+            foreach (var item in this.jugadores)
+            {
+                item.Cartas = null; 
+                item.Cartas = new List<Carta>(); 
+            }
+            this.RepartirCartas();
+        }
     }
+
 }
 

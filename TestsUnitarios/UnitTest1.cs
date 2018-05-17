@@ -186,10 +186,8 @@ namespace TestsUnitarios
 
             nuevapartida.mazo = mazzo;
 
-            var jugador1 = new Jugador();
-            jugador1.NumeroJugador = NumJugador.uno;
-            var jugador2 = new Jugador();
-            jugador1.NumeroJugador = NumJugador.dos;
+            var jugador1 = new Jugador();   jugador1.NumeroJugador = NumJugador.uno;
+            var jugador2 = new Jugador();   jugador1.NumeroJugador = NumJugador.dos;
 
             nuevapartida.jugadores.Add(jugador1);
             nuevapartida.jugadores.Add(jugador2);
@@ -211,6 +209,11 @@ namespace TestsUnitarios
             Assert.AreEqual(2, jugador1.Cartas.Count);
             Assert.AreNotEqual(mazzo2, nuevapartida.mazo);
             Assert.AreEqual(false, ok);
+
+            //Si se juega revancha
+            nuevapartida.Revancha();
+            Assert.AreEqual(2, nuevapartida.jugadores[0].Cartas.Count);
+            Assert.AreEqual(2, nuevapartida.jugadores[1].Cartas.Count);
         }
 
         [TestMethod]
@@ -436,31 +439,18 @@ namespace TestsUnitarios
             Carta carta1 = new Carta();
 
             var nuevapartida1 = new Partida();
-            Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1");
-            Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("1"); jugador2.Cartas.Add(carta1);
+            Jugador jugador1 = new Jugador().Nombre("Riquelme").Numero(NumJugador.uno).IdConexion("1");
+            Jugador jugador2 = new Jugador().Nombre("Palermo").Numero(NumJugador.dos).IdConexion("1"); jugador2.Cartas.Add(carta1);
             nuevapartida1.jugadores.Add(jugador1);
-            nuevapartida1.jugadores.Add(jugador2);
-
-            var nuevapartida2 = new Partida();
-            Jugador jugador21 = new Jugador().Nombre("Juan").Numero(NumJugador.uno).IdConexion("2"); jugador21.Cartas.Add(carta1);
-            Jugador jugador22 = new Jugador().Nombre("Laucha").Numero(NumJugador.dos).IdConexion("2");
-            nuevapartida2.jugadores.Add(jugador21);
-            nuevapartida2.jugadores.Add(jugador22);
-
-            var nuevapartida3 = new Partida();
-            Jugador jugador213 = new Jugador().Nombre("Juan Aira").Numero(NumJugador.uno).IdConexion("3"); jugador213.Cartas.Add(carta1);
-            Jugador jugador223 = new Jugador().Nombre("Laucha Modo Dios").Numero(NumJugador.dos).IdConexion("3"); jugador223.Cartas.Add(carta1);
-            nuevapartida3.jugadores.Add(jugador213);
-            nuevapartida3.jugadores.Add(jugador223);
+            nuevapartida1.jugadores.Add(jugador2);                                       
 
             nuevojuego.Partidas.Add(nuevapartida1);
-            nuevojuego.Partidas.Add(nuevapartida2);
-            nuevojuego.Partidas.Add(nuevapartida3);
+            nuevojuego.Partidas[0].ActualizarRanking();            
 
-            nuevojuego.ActualizarRanking();
-
-            Assert.AreEqual(1, nuevojuego.Rankings.Count);
-
+            Assert.AreEqual(1, nuevojuego.Partidas[0].resultado.VecesQueGanoElJugador2);
+            Assert.AreEqual(0, nuevojuego.Partidas[0].resultado.VecesQueGanoElJugador1);
+            Assert.AreEqual("Riquelme", nuevojuego.Partidas[0].resultado.NombreJugador1);
+            Assert.AreEqual("Palermo", nuevojuego.Partidas[0].resultado.NombreJugador2);
         }
 
       
