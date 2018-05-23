@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace EntidadesJuego
 {
-    public enum TipoDeCarta { Normal = 1, Roja = 2, Amarilla = 3, Especial = 4 }
+    public enum TipoDeCarta { Normal = 0, Amarilla = 1 , Roja = 2, Especial = 3 }
     public class Carta
     {   
         public int IdCarta { get; set; }
         public List<Atributo> Atributos { get; set; }
         public TipoDeCarta TipoCarta { get; set; }
-
+        
         public Carta()
         {
             this.Atributos = new List<Atributo>();

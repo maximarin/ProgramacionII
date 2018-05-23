@@ -10,6 +10,8 @@ namespace EntidadesJuego
     {
         public List<Partida> Partidas { get; set; }
         public List<Ranking> Rankings { get; set; }
+        public List<Jugador> Jugadores { get; set; }
+        public List<Mazo> Mazos { get; set; }
 
         //HAY UN SOLO JUEGO, POR LO TANTO SE APLICA SINGLETON
 
@@ -36,7 +38,17 @@ namespace EntidadesJuego
         {
             nuevoJuego.Partidas.Add(nuevaPartida);
             return nuevaPartida;
+        } 
+        
+
+
+        public static Jugador CrearJugador (Jugador nuevoJugador)
+        {
+            nuevoJuego.Jugadores.Add(nuevoJugador);
+            return nuevoJugador;
         }
+
+        
 
         public void ActualizarRanking() //Test  Modo super Dios
         {
@@ -81,6 +93,7 @@ namespace EntidadesJuego
             ListaRetornar.OrderByDescending(x => x.VecesQueGano);
             this.Rankings = ListaRetornar;
         }
+
 
 
     }

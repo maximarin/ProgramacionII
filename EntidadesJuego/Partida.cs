@@ -12,6 +12,9 @@ namespace EntidadesJuego
         public Mazo mazo { get; set; }
         public string Turno { get; set; }
         public bool EstaCompleto { get; set; }
+        public string nombre { get; set; }
+
+
 
         public Partida() //Test
         {
@@ -31,6 +34,11 @@ namespace EntidadesJuego
             return this;
         }
 
+        public Partida Nombre(string nom)
+        {
+            this.nombre = nom;
+            return this;
+        }
         private void RevisarCantidadJugadores()
         {
             if (jugadores.Count() == 2)
@@ -412,6 +420,8 @@ namespace EntidadesJuego
                 return jugador2;
             }
         }
+
+       
 
     }
 }
