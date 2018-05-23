@@ -414,9 +414,7 @@ namespace EntidadesJuego
         public Jugador DetectarJugadorGanador(Jugador jugador1, Jugador jugador2) //Cuando el metodo HayCartas devolvio un True 
         {
             if (jugador1.Cartas.Count != 0)
-            {
                 return jugador1;
-            }
             else
             {
                 return jugador2;
