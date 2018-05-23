@@ -8,12 +8,15 @@ namespace EntidadesJuego
 {
     public class Ranking
     {
-        public string Nombre { get; set; }
-        public int VecesQueGano { get; set; }
+        public string NombreJugador1 { get; set; }
+        public string NombreJugador2 { get; set; }
+        public int VecesQueGanoElJugador1 { get; set; }
+        public int VecesQueGanoElJugador2 { get; set; }
 
         public Ranking()
         {
-            this.VecesQueGano = 0;
+            this.VecesQueGanoElJugador1 = 0;
+            this.VecesQueGanoElJugador2 = 0;
         }
     }
 }
