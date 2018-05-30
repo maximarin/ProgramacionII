@@ -33,20 +33,22 @@ namespace Cromy.web.Hubs
         {
             var jugador2 = new Jugador();
             jugador2.Nombre(usuario).IdConexion(Context.ConnectionId).Numero(NumJugador.dos);
-            var partidaEncontrada = juego.Partidas.Where(x => x.nombre == partida).First();
+            var partidaEncontrada = juego.Partidas.Where(x => x.nombre == partida && x.jugadores[1].idConexion == jugador2.idConexion).First();
             
             Clients.All.eliminarPartida(partidaEncontrada);
-            partidaEncontrada.RepartirCartas();
+            
 
 
             Clients.Client(partidaEncontrada.jugadores[0].idConexion).dibujarTablero(partidaEncontrada.jugadores[0], partidaEncontrada.jugadores[1], partidaEncontrada.mazo);
             Clients.Client(partidaEncontrada.jugadores[1].idConexion).dibujarTablero(partidaEncontrada.jugadores[0], partidaEncontrada.jugadores[1], partidaEncontrada.mazo);
 
+            partidaEncontrada.RepartirCartas();
+
         }
 
         public void ObtenerPartidas()
         {
-            Clients.Caller.agregarPartidas(juego.Partidas);
+            Clients.Caller.agregarPartidas(juego.RetornarPartidas());
         }
 
         public void ObtenerMazos()

@@ -1,0 +1,261 @@
+body {
+    background: #1065ce;
+    color: #fff;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: 'Raleway', cursive;
+}
+
+footer {
+    color: #1c1c1c;
+    font-weight:bold;
+    text-align: center;
+    font-family:'Open Sans Condensed', sans-serif;
+}
+
+.button-area {
+    margin-top: 0px;
+}
+
+.baraja-demo {
+    color: #aaa;
+}
+
+.no-js .baraja-demo {
+    width: auto;
+}
+
+.baraja-demo h4 {
+    color: #666;
+    font-size: 14px;
+    padding: 8px 10px 5px;
+    margin: 20px 3px 5px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.baraja-demo p {
+    font-size: 12px;
+    font-weight: 700;
+    padding: 0 10px;
+    margin: 10px 3px 0;
+}
+
+.baraja-demo ul.baraja-container li {
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.baraja-demo li img {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    height: 297px;
+    width:190px;
+}
+
+.card-container {
+    position: relative;
+}
+
+    .card-container .back-card {
+        float: none;
+        position: absolute;
+        z-index: 900;
+        -webkit-transform: rotateX(0) rotateY(0);
+        -moz-transform: rotateX(0) rotateY(0);
+        -ms-transform: rotateX(0) rotateY(0);
+        -o-transform: rotateX(0) rotateY(0);
+        transform: rotateX(0) rotateY(0);
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-transition: all .4s ease-in-out;
+        -moz-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+    }
+
+    .card-container.flip .back-card {
+        z-index: 900;
+        -webkit-transform: rotateY(180);
+        -moz-transform: rotateY(180);
+        -ms-transform: rotateY(180);
+        -o-transform: rotateY(180);
+        transform: rotateY(180);
+    }
+
+    .card-container .front-card {
+        float: none;
+        position: absolute;
+        z-index: 800;
+        -webkit-transform: rotateY(-180);
+        -moz-transform: rotateY(-179deg); /* setting to 180 causes an unnatural-looking half-flip */
+        -ms-transform: rotateY(-179deg);
+        -o-transform: rotateY(-179deg);
+        transform: rotateY(-179deg);
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        backface-visibility: hidden;
+        /* -- transition is the magic sauce for animation -- */
+        -webkit-transition: all .4s ease-in-out;
+        -moz-transition: all .4s ease-in-out;
+        -o-transition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
+    }
+
+    .card-container.flip .front-card {
+        z-index: 1000;
+        -webkit-transform: rotateX(0) rotateY(0);
+        -moz-transform: rotateX(0) rotateY(0);
+        -ms-transform: rotateX(0) rotateY(0);
+        -o-transform: rotateX(0) rotateY(0);
+        transform: rotateX(0) rotateY(0);
+    }
+
+.player-countcards {
+    text-align: center;
+}
+
+.player-name {
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    -o-transition: all 0.7s ease;
+    transition: all 0.7s ease;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 40px;
+    margin-top: 0px;   
+}
+
+    .player-name.winner {
+        text-shadow: 0 0 30px #ffcb00;
+    }
+
+.attributeStyle {
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.star {
+    position: absolute;
+    background: url(../img/star.png) no-repeat;
+    background-size: contain;
+    overflow: hidden;
+    z-index: 9999;
+    display: none;
+}
+
+    .star.star-1 {
+        width: 50px;
+        height: 34px;
+        top: 110px;
+        left: 97px;
+    }
+
+    .star.star-2 {
+        width: 83px;
+        height: 77px;
+        top: -42px;
+        left: 263px;
+    }
+
+    .star.star-3 {
+        width: 74px;
+        height: 70px;
+        top: 271px;
+        left: 82px;
+    }
+
+    .star.star-4 {
+        width: 68px;
+        height: 70px;
+        top: 282px;
+        left: 267px;
+    }
+
+
+.form-control {
+    border-color: #666;
+}
+
+.btn {
+    border-color: #1c1c1c;
+}
+
+legend {
+    border-color: #555;
+}
+
+hr {
+    border-color: #999;
+}
+
+.nav-tabs {
+    border-color: #fff;
+}
+
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+        border-color: #fff;
+        background-color: #fff;
+    }
+
+    .nav-tabs > li > a:hover {
+        border-color: #fff;
+    }
+
+.nav > li > a:focus, .nav > li > a:hover {
+    background-color: #fff;
+}
+
+.table > thead > tr > th {
+    border-color: none;
+    border: none;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    border-color: none;
+        border: none;
+}
+
+#start-session-options {
+    margin-top: 20px;
+}
+
+.card-count {
+    font-size: 26px;
+    margin-left: 8px;
+    font-weight:bold;
+}
+
+.player-area {
+    border-right-style: inset;
+    border-color: #fff;
+}
+
+@media (max-width: 991px) {
+    .player2-area {
+        height: 0;
+        overflow: hidden;
+    }
+
+    .player-area {
+        border: none;
+    }
+}
+
+/*@media (min-width: 992px) {
+    .ns-box {
+        display: none;
+    }
+}*/

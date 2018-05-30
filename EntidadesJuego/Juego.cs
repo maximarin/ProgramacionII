@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,33 +14,101 @@ namespace EntidadesJuego
         public List<Jugador> Jugadores { get; set; }
         public List<Mazo> Mazos { get; set; }
 
-        //HAY UN SOLO JUEGO, POR LO TANTO SE APLICA SINGLETON
+        //HAY UN SOLO JUEGO, POR LO TANTO SE APLICA SINGLETON 
 
-        private Juego()
+        
+
+        public Juego()
         {
             this.Partidas = new List<Partida>();
         }
 
-        private static Juego nuevoJuego;
-
-        public static Juego CrearJuego()
+        public Partida AgregarPartida(Partida nuevaPartida)
         {
-            if (nuevoJuego == null)
-            {
-                nuevoJuego = new Juego();
-            }
-
-            return nuevoJuego;
-
-        }
-
-        public static Partida AgregarPartida(Partida nuevaPartida)
-        {
-            nuevoJuego.Partidas.Add(nuevaPartida);
+            Partidas.Add(nuevaPartida);
             return nuevaPartida;
         }
 
+        public void AgregarMazos ()
+        {
+            var lines = File.ReadAllLines(@"D:\prueba.txt");
+            int cont = 0;
+            var nuevoMazo = new Mazo();
+            string[] datos;
+            List<Atributo> Atributos = new List<Atributo>();
+
+            foreach (var line in lines)   //LEO EL ARCHIVO
+            {
+               if (cont == 0 )
+                {
+                    nuevoMazo.Nombre = line;  //SI ESTOY EN LA PRIMER LÍNEA DEFINO EL NOMBRE DEL MAZO 
+                }
+               else 
+                {
+                    datos = line.Split('|'); 
+
+                    if (cont == 1)     //SI ES LA SEGUNDA LÍNEA AÑADO LOS ATRIBUTOS A UN VECTOR 
+                    {
+                         
+                        for (int i = 0; i < datos.Length; i++)
+                        {
+                            var atrib = new Atributo();
+                            atrib.Nombre = datos[i];
+                            Atributos.Add(atrib);
+                        }
+                    }
+                    else
+                    {
+                        var nuevaCarta = new Carta();        //A PARTIR DE LA TERCER LÍNEA VOY CREANDO LAS CARTAS Y ASIGNANDO LOS VALORES A LOS ATRIBUTOS
+                        nuevaCarta.Atributos = Atributos;
+                        nuevaCarta.TipoCarta = TipoDeCarta.Normal;
+                        int j = 0;
+                        for (int i = 0; i < datos.Length; i++)
+                        {
+                            if(i == 0)
+                            {
+                                nuevaCarta.IdCarta = Convert.ToInt32(datos[i]);
+                            }
+                            else
+                            {
+                                nuevaCarta.Atributos[j].Valor = Convert.ToDouble(datos[i]);
+                            }
+
+                            j++;
+                            
+                        }
+
+                        nuevoMazo.Cartas.Add(nuevaCarta);
+
+                    }
+                        
+                
+                }
+                cont++;
+            }
+
+            var cartaAmarilla = new Carta();
+            cartaAmarilla.IdCarta = 1;
+            cartaAmarilla.TipoCarta = TipoDeCarta.Amarilla;
+            cartaAmarilla.Atributos = null;
+
+            var cartaRoja = new Carta();
+            cartaRoja.IdCarta = 2;
+            cartaRoja.TipoCarta = TipoDeCarta.Roja;
+            cartaRoja.Atributos = null;
 
 
+            var cartaEspecial = new Carta();
+            cartaEspecial.IdCarta = 3;
+            cartaEspecial.TipoCarta = TipoDeCarta.Especial;
+            cartaEspecial.Atributos = null;
+
+            nuevoMazo.Cartas.Add(cartaAmarilla); nuevoMazo.Cartas.Add(cartaRoja); nuevoMazo.Cartas.Add(cartaEspecial);
+        }
+
+        public List<Partida> RetornarPartidas()
+        {
+            return Partidas;
+        }
     }
 }

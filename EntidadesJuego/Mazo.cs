@@ -9,6 +9,7 @@ namespace EntidadesJuego
    public class Mazo
     {
         public List<Carta> Cartas { get; set; }
+        public string Nombre { get; set; }
 
         public Mazo ()
         {

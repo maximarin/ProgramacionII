@@ -1,0 +1,158 @@
+﻿<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Trabajo Práctico - Programación II</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Content/css/bootstrap.css">
+    <link href="Content/css/main.css" rel="stylesheet" />
+    <link href="Content/css/baraja.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="Content/css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="Content/css/ns-style-growl.css" />
+
+    <script src="Scripts/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" style="color:white; font-weight:bold;">JUEGO DE CARTAS</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div>&nbsp;</div>
+        <!--<h1>Juego de Cartas</h1>-->
+        <!-- Example row of columns -->
+        <div class="row" id="user-session-options">
+            <fieldset>
+                <legend>Completa tus datos...</legend>
+                <div class="col-md-6">
+                    <div>
+                        <div class="form-group">
+                            <label for="user-name">Nombre Jugador</label>
+                            <input type="text" class="form-control" id="user-name" placeholder="Mi Nombre...">
+                        </div>
+                        <button type="button" id="start-session" class="btn btn-default">
+                            INICIAR<br>
+                        </button>
+                    </div>
+                </div>
+                </fieldset>
+        </div>
+        <div class="row" id="start-session-options" style="display: none;">
+            <fieldset>
+                <legend>Selecciona la forma de juego...</legend>
+
+                <div class="col-md-12">
+                    <div role="tabpanel">
+
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#newGame" aria-controls="newGame" role="tab" data-toggle="tab">Nueva partida</a></li>
+                            <li role="presentation"><a href="#existingGame" aria-controls="existingGame" role="tab" data-toggle="tab">Sumarse a partida existente</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active col-md-6" id="newGame">
+                                <div>&nbsp;</div>
+                                <div>
+                                    <div class="form-group">
+                                        <label for="card-type">Mazo</label>
+                                        <select id="card-type" class="form-control"></select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="game-name">Nombre Partida</label>
+                                        <input type="text" class="form-control" id="game-name" placeholder="Mi partida...">
+                                    </div>
+                                    <button type="button" id="start-game" class="btn btn-default">CONFIRMAR</button>
+                                </div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="existingGame">
+                                <table class="table" id="available-games">
+                                    <caption>Unite a una de las partidas disponibles:</caption>
+                                    <thead>
+                                        <tr>
+                                            <th>Creador</th>
+                                            <th>Nombre</th>
+                                            <th>Mazo</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div id="game-area" class="row" style="display: none;">
+            <div class="col-lg-6 col-md-6 col-sm-12 player-area">
+                <h2 class="player-name">Jugador 1</h2>
+                <h4 class="player-countcards">Cartas restantes: <span class="card-count"></span></h4>
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-8 baraja-demo">
+                        <div class="star star-1"></div>
+                        <div class="star star-2"></div>
+                        <div class="star star-3"></div>
+                        <div class="star star-4"></div>
+                        <ul id="baraja-el" class="baraja-container"></ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-10 button-area">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 player2-area">
+                <h2 class="player-name">Jugador 2</h2>
+                <h4 class="player-countcards">Cartas restantes: <span class="card-count"></span></h4>
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-8 baraja-demo">
+                        <div class="star star-1"></div>
+                        <div class="star star-2"></div>
+                        <div class="star star-3"></div>
+                        <div class="star star-4"></div>
+                        <ul id="baraja-2" class="baraja-container"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>&nbsp;</div>
+        <footer>
+          <p>&copy; UCSE DAR - 2015 - PROGRAMACION II</p>
+        </footer>
+    </div> <!-- /container -->
+
+    <script src="Scripts/vendor/jquery-1.11.2.min.js"></script>
+    <script src="Scripts/vendor/bootstrap.js"></script>
+    <script src="Scripts/vendor/jquery.blockUI.js"></script>
+    <script src="Scripts/jquery.baraja.js"></script>
+    <script src="Scripts/main.js"></script>
+
+    <!--Reference the SignalR library. -->
+    <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <!--Reference the autogenerated SignalR hub script. -->
+    <script src="/signalr/hubs"></script>
+    <!--Reference the client logic.-->
+    <script src="Scripts/index.js"></script>
+
+    <script src="Scripts/classie.js"></script>
+    <script src="Scripts/notificationFx.js"></script>
+</body>
+</html>
