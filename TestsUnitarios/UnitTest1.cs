@@ -434,7 +434,7 @@ namespace TestsUnitarios
         [TestMethod]
         public void DeberiaActualizarRanking()
         {
-            var nuevojuego = Juego.CrearJuego();
+            var nuevojuego = new Juego();
 
             Carta carta1 = new Carta();
 

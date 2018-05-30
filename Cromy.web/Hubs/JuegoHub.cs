@@ -56,25 +56,25 @@ namespace Cromy.web.Hubs
             Clients.Caller.agregarMazos();
         }
 
-        public void Cantar(string idAtributo, string idCarta)
-        {
-            if (jugada.connectionIdGanador == Context.ConnectionId)
-            {
-                Clients.Caller.ganarMano(resultado, false);
-                Clients.Client(jugada.connectionIdPerdedor).perderMano(resultado, false);
+        //public void Cantar(string idAtributo, string idCarta)
+        //{
+        //    if (jugada.connectionIdGanador == Context.ConnectionId)
+        //    {
+        //        Clients.Caller.ganarMano(resultado, false);
+        //        Clients.Client(jugada.connectionIdPerdedor).perderMano(resultado, false);
 
-            }
-            else
-            {
-                Clients.Client(jugada.connectionIdGanador).ganarMano(resultado, false);
-                Clients.Caller.perderMano(resultado, false);
+        //    }
+        //    else
+        //    {
+        //        Clients.Client(jugada.connectionIdGanador).ganarMano(resultado, false);
+        //        Clients.Caller.perderMano(resultado, false);
 
-            }
-            if (jugada.finalizoJuego)
-            {
-                Clients.Caller.ganar();
-                Clients.Client(jugada.connectionIdPerdedor).perder();
-            }
-        }
+        //    }
+        //    if (jugada.finalizoJuego)
+        //    {
+        //        Clients.Caller.ganar();
+        //        Clients.Client(jugada.connectionIdPerdedor).perder();
+        //    }
+        //}
     }
 }

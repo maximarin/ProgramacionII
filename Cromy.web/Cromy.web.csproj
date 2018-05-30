@@ -87,14 +87,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\baraja.css" />
-    <Content Include="css\bootstrap-theme.css" />
-    <Content Include="css\bootstrap.css" />
-    <Content Include="css\main.css" />
-    <Content Include="css\ns-default.css" />
-    <Content Include="css\ns-style-growl.css" />
-    <Content Include="img\bg.jpg" />
-    <Content Include="img\star.png" />
+    <Content Include="Content\css\baraja.css" />
+    <Content Include="Content\css\bootstrap-theme.css" />
+    <Content Include="Content\css\bootstrap.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\ns-default.css" />
+    <Content Include="Content\css\ns-style-growl.css" />
+    <Content Include="Content\img\bg.jpg" />
+    <Content Include="Content\img\star.png" />
     <Content Include="Index.html" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
