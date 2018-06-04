@@ -12,7 +12,9 @@ namespace EntidadesJuego
         public int IdCarta { get; set; }
         public List<Atributo> Atributos { get; set; }
         public TipoDeCarta TipoCarta { get; set; }
-        
+        public string Nombre { get; set; }
+
+
         public Carta()
         {
             this.Atributos = new List<Atributo>();

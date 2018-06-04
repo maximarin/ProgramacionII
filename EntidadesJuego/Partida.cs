@@ -20,7 +20,7 @@ namespace EntidadesJuego
         public Partida() //Test
         {
             this.jugadores = new List<Jugador>();
-            this.mazo = null;
+          
             this.resultado = new Ranking();
         }
 

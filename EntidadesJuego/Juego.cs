@@ -16,11 +16,13 @@ namespace EntidadesJuego
 
         //HAY UN SOLO JUEGO, POR LO TANTO SE APLICA SINGLETON 
 
-        
+
 
         public Juego()
         {
             this.Partidas = new List<Partida>();
+            this.Mazos = new List<Mazo>();
+            this.Mazos = AgregarMazos();
         }
 
         public Partida AgregarPartida(Partida nuevaPartida)
@@ -29,9 +31,9 @@ namespace EntidadesJuego
             return nuevaPartida;
         }
 
-        public void AgregarMazos ()
+        public List<Mazo> AgregarMazos()
         {
-            var lines = File.ReadAllLines(@"D:\prueba.txt");
+            var lines = File.ReadAllLines(@"C:\Users\maxi_\Desktop\Juego\Cromy.web\Mazos\X-men\Informacion.txt");
             int cont = 0;
             var nuevoMazo = new Mazo();
             string[] datos;
@@ -39,17 +41,17 @@ namespace EntidadesJuego
 
             foreach (var line in lines)   //LEO EL ARCHIVO
             {
-               if (cont == 0 )
+                if (cont == 0)
                 {
                     nuevoMazo.Nombre = line;  //SI ESTOY EN LA PRIMER LÍNEA DEFINO EL NOMBRE DEL MAZO 
                 }
-               else 
+                else
                 {
-                    datos = line.Split('|'); 
+                    datos = line.Split('|');
 
                     if (cont == 1)     //SI ES LA SEGUNDA LÍNEA AÑADO LOS ATRIBUTOS A UN VECTOR 
                     {
-                         
+
                         for (int i = 0; i < datos.Length; i++)
                         {
                             var atrib = new Atributo();
@@ -65,24 +67,36 @@ namespace EntidadesJuego
                         int j = 0;
                         for (int i = 0; i < datos.Length; i++)
                         {
-                            if(i == 0)
+                            if (i == 0)
                             {
                                 nuevaCarta.IdCarta = Convert.ToInt32(datos[i]);
                             }
                             else
                             {
-                                nuevaCarta.Atributos[j].Valor = Convert.ToDouble(datos[i]);
+                                if (i == 1)
+                                {
+                                    nuevaCarta.Nombre = datos[i];
+
+                                }
+                                else
+                                {
+                                    nuevaCarta.Atributos[j].Valor = Convert.ToDouble(datos[i]);
+                                    j++;
+                                }
+                                    
+
+
                             }
 
-                            j++;
-                            
+                           
+
                         }
 
                         nuevoMazo.Cartas.Add(nuevaCarta);
 
                     }
-                        
-                
+
+
                 }
                 cont++;
             }
@@ -104,11 +118,22 @@ namespace EntidadesJuego
             cartaEspecial.Atributos = null;
 
             nuevoMazo.Cartas.Add(cartaAmarilla); nuevoMazo.Cartas.Add(cartaRoja); nuevoMazo.Cartas.Add(cartaEspecial);
+
+
+            Mazos.Add(nuevoMazo);
+
+            return this.Mazos;
         }
 
         public List<Partida> RetornarPartidas()
         {
             return Partidas;
+        }
+
+        public Mazo BuscarMazo(string nombre)
+        {
+            var mazo = Mazos.Where(x => x.Nombre == nombre).FirstOrDefault();
+            return mazo;
         }
     }
 }

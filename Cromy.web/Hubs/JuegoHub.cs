@@ -11,17 +11,18 @@ namespace Cromy.web.Hubs
     public class JuegoHub : Hub
     {
         private static Juego juego = new Juego();
-        public static Partida partidaCreada = new Partida();
+        
 
         public void CrearPartida(string usuario, string partida, string mazo)
         {
+            var partidaCreada = new Partida();
             var jugador1 = new Jugador();
             jugador1.Nombre(usuario).Numero(NumJugador.uno).IdConexion(Context.ConnectionId);
 
-
-
-            
             partidaCreada.Nombre(partida).Jugador(jugador1);
+            partidaCreada.Mazo(juego.BuscarMazo(mazo));
+            juego.AgregarPartida(partidaCreada);
+
 
             // Notifico a los otros usuarios de la nueva partida.
             Clients.Others.agregarPartida(partidaCreada);
@@ -48,12 +49,13 @@ namespace Cromy.web.Hubs
 
         public void ObtenerPartidas()
         {
-            Clients.Caller.agregarPartidas(juego.RetornarPartidas());
+            Clients.Caller.agregarPartidas(juego.RetornarPartidas().Select(x => x.nombre));
         }
 
         public void ObtenerMazos()
         {
-            Clients.Caller.agregarMazos();
+            Clients.Caller.agregarMazos(juego.AgregarMazos().Select(x => x.Nombre));
+           
         }
 
         //public void Cantar(string idAtributo, string idCarta)
