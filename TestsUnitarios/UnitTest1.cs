@@ -431,27 +431,27 @@ namespace TestsUnitarios
 
         }
 
-        [TestMethod]
-        public void DeberiaActualizarRanking()
-        {
-            var nuevojuego = new Juego();
+        //[TestMethod]
+        //public void DeberiaActualizarRanking()
+        //{
+        //    var nuevojuego = new Juego();
 
-            Carta carta1 = new Carta();
+        //    Carta carta1 = new Carta();
 
-            var nuevapartida1 = new Partida();
-            Jugador jugador1 = new Jugador().Nombre("Riquelme").Numero(NumJugador.uno).IdConexion("1");
-            Jugador jugador2 = new Jugador().Nombre("Palermo").Numero(NumJugador.dos).IdConexion("1"); jugador2.Cartas.Add(carta1);
-            nuevapartida1.jugadores.Add(jugador1);
-            nuevapartida1.jugadores.Add(jugador2);                                       
+        //    var nuevapartida1 = new Partida();
+        //    Jugador jugador1 = new Jugador().Nombre("Riquelme").Numero(NumJugador.uno).IdConexion("1");
+        //    Jugador jugador2 = new Jugador().Nombre("Palermo").Numero(NumJugador.dos).IdConexion("1"); jugador2.Cartas.Add(carta1);
+        //    nuevapartida1.jugadores.Add(jugador1);
+        //    nuevapartida1.jugadores.Add(jugador2);                                       
 
-            nuevojuego.Partidas.Add(nuevapartida1);
-            nuevojuego.Partidas[0].ActualizarRanking();            
+        //    nuevojuego.Partidas.Add(nuevapartida1);
+        //    nuevojuego.Partidas[0].ActualizarRanking();            
 
-            Assert.AreEqual(1, nuevojuego.Partidas[0].resultado.VecesQueGanoElJugador2);
-            Assert.AreEqual(0, nuevojuego.Partidas[0].resultado.VecesQueGanoElJugador1);
-            Assert.AreEqual("Riquelme", nuevojuego.Partidas[0].resultado.NombreJugador1);
-            Assert.AreEqual("Palermo", nuevojuego.Partidas[0].resultado.NombreJugador2);
-        }
+        //    Assert.AreEqual(1, nuevojuego.Partidas[0].resultado.VecesQueGanoElJugador2);
+        //    Assert.AreEqual(0, nuevojuego.Partidas[0].resultado.VecesQueGanoElJugador1);
+        //    Assert.AreEqual("Riquelme", nuevojuego.Partidas[0].resultado.NombreJugador1);
+        //    Assert.AreEqual("Palermo", nuevojuego.Partidas[0].resultado.NombreJugador2);
+        //}
 
       
     }

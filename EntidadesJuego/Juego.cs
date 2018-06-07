@@ -33,7 +33,7 @@ namespace EntidadesJuego
 
         public List<Mazo> AgregarMazos()
         {
-            var lines = File.ReadAllLines(@"C:\Users\maxi_\Desktop\Juego\Cromy.web\Mazos\X-men\Informacion.txt");
+            var lines = File.ReadAllLines(@"C:\Users\Juan Aira\Desktop\Cromy\informacion.txt");
             int cont = 0;
             var nuevoMazo = new Mazo();
             string[] datos;
@@ -125,9 +125,20 @@ namespace EntidadesJuego
             return this.Mazos;
         }
 
-        public List<Partida> RetornarPartidas()
+        public List<PartidasHub> RetornarPartidas()
         {
-            return Partidas;
+            List<PartidasHub> ListaRetornar = new List<PartidasHub>();
+
+            foreach (var item in this.Partidas)
+            {
+                var x = new PartidasHub();
+                x.Usuario = item.jugadores[0].nombre;
+                x.Mazo = item.mazo.Nombre;
+                x.Nombre = item.nombre;
+
+                ListaRetornar.Add(x);
+            }
+            return ListaRetornar;
         }
 
         public Mazo BuscarMazo(string nombre)

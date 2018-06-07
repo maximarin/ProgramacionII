@@ -11,7 +11,7 @@ namespace Cromy.web.Hubs
     public class JuegoHub : Hub
     {
         private static Juego juego = new Juego();
-        
+
 
         public void CrearPartida(string usuario, string partida, string mazo)
         {
@@ -21,23 +21,22 @@ namespace Cromy.web.Hubs
 
             partidaCreada.Nombre(partida).Jugador(jugador1);
             partidaCreada.Mazo(juego.BuscarMazo(mazo));
-            juego.AgregarPartida(partidaCreada);
-
+            juego.AgregarPartida(partidaCreada);                    
 
             // Notifico a los otros usuarios de la nueva partida.
             Clients.Others.agregarPartida(partidaCreada);
 
-            Clients.Caller.esperarJugador();
+            Clients.Caller.esperarJugador();                      
         }
 
         public void UnirsePartida(string usuario, string partida)
-        {
+        {            
             var jugador2 = new Jugador();
             jugador2.Nombre(usuario).IdConexion(Context.ConnectionId).Numero(NumJugador.dos);
             var partidaEncontrada = juego.Partidas.Where(x => x.nombre == partida && x.jugadores[1].idConexion == jugador2.idConexion).First();
-            
+
             Clients.All.eliminarPartida(partidaEncontrada);
-            
+
 
 
             Clients.Client(partidaEncontrada.jugadores[0].idConexion).dibujarTablero(partidaEncontrada.jugadores[0], partidaEncontrada.jugadores[1], partidaEncontrada.mazo);
@@ -49,13 +48,15 @@ namespace Cromy.web.Hubs
 
         public void ObtenerPartidas()
         {
-            Clients.Caller.agregarPartidas(juego.RetornarPartidas().Select(x => x.nombre));
+
+            Clients.Caller.agregarPartidas(juego.RetornarPartidas());        
+
         }
 
         public void ObtenerMazos()
         {
             Clients.Caller.agregarMazos(juego.AgregarMazos().Select(x => x.Nombre));
-           
+
         }
 
         //public void Cantar(string idAtributo, string idCarta)
