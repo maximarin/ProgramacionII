@@ -51,7 +51,7 @@ namespace EntidadesJuego
         }
 
 
-        private void MezclarCartas() //Test  //Modo Dios
+        private void MezclarCartas() //Test 
         {
             var listaCartasAuxiliar = new List<Carta>();
             List<int> lista = new List<int>();
@@ -454,6 +454,8 @@ namespace EntidadesJuego
             }
             this.RepartirCartas();
         }
+   
+
     }
 
 }

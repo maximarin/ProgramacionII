@@ -33,17 +33,16 @@ namespace Cromy.web.Hubs
         {            
             var jugador2 = new Jugador();
             jugador2.Nombre(usuario).IdConexion(Context.ConnectionId).Numero(NumJugador.dos);
-            var partidaEncontrada = juego.Partidas.Where(x => x.nombre == partida && x.jugadores[1].idConexion == jugador2.idConexion).First();
 
-            Clients.All.eliminarPartida(partidaEncontrada);
+            //AgregarAlSegundoJugador, agrega al jugador a la partida que elige y devuelve la partida que es
+            var partidaEncontrada = juego.AgregarSegundoJugador(jugador2 , partida);          
 
-
+            Clients.All.eliminarPartida(partidaEncontrada.nombre);
 
             Clients.Client(partidaEncontrada.jugadores[0].idConexion).dibujarTablero(partidaEncontrada.jugadores[0], partidaEncontrada.jugadores[1], partidaEncontrada.mazo);
             Clients.Client(partidaEncontrada.jugadores[1].idConexion).dibujarTablero(partidaEncontrada.jugadores[0], partidaEncontrada.jugadores[1], partidaEncontrada.mazo);
 
-            partidaEncontrada.RepartirCartas();
-
+            partidaEncontrada.RepartirCartas();    
         }
 
         public void ObtenerPartidas()
@@ -55,12 +54,13 @@ namespace Cromy.web.Hubs
 
         public void ObtenerMazos()
         {
-            Clients.Caller.agregarMazos(juego.AgregarMazos().Select(x => x.Nombre));
+            Clients.Caller.agregarMazos(juego.NombreDeLosMazos());
 
         }
 
         //public void Cantar(string idAtributo, string idCarta)
-        //{
+        //{            
+
         //    if (jugada.connectionIdGanador == Context.ConnectionId)
         //    {
         //        Clients.Caller.ganarMano(resultado, false);

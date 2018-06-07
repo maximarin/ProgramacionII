@@ -29,11 +29,11 @@ namespace EntidadesJuego
         {
             Partidas.Add(nuevaPartida);
             return nuevaPartida;
-        }
+        }  
 
         public List<Mazo> AgregarMazos()
         {
-            var lines = File.ReadAllLines(@"C:\Users\Juan Aira\Desktop\Cromy\informacion.txt");
+            var lines = File.ReadAllLines(@"C:\Users\Juan Aira\Desktop\P\Cromy.web\Mazos\X-Men\Informacion.txt");
             int cont = 0;
             var nuevoMazo = new Mazo();
             string[] datos;
@@ -145,6 +145,32 @@ namespace EntidadesJuego
         {
             var mazo = Mazos.Where(x => x.Nombre == nombre).FirstOrDefault();
             return mazo;
+        }
+
+        public Partida AgregarSegundoJugador(Jugador jug, string parti)
+        {
+            var par = new Partida();
+            foreach (var item in this.Partidas)
+            {
+                 if (item.nombre==parti)
+                {
+                    item.jugadores.Add(jug);
+                    par = item;
+                }
+            }
+            return par;
+        }
+
+        public List<string> NombreDeLosMazos()
+        {
+            var ListaRertornar = new List<string>();
+
+            foreach (var item in this.Mazos)
+            {
+                ListaRertornar.Add(item.Nombre);
+            }
+
+            return ListaRertornar;
         }
     }
 }
