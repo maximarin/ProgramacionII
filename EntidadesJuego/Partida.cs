@@ -53,6 +53,7 @@ namespace EntidadesJuego
 
         private void MezclarCartas() //Test 
         {
+            int total = this.mazo.Cartas.Count;
             var listaCartasAuxiliar = new List<Carta>();
             List<int> lista = new List<int>();
             Random numeroNuevo = new Random();
@@ -74,7 +75,7 @@ namespace EntidadesJuego
                 }
                 while (enc == false)
                 {
-                    n = numeroNuevo.Next(1, this.mazo.Cartas.Count + 1);
+                    n = numeroNuevo.Next(1, total);
 
                     if (lista.Count == 0 && n != 1)
                     {
@@ -108,9 +109,13 @@ namespace EntidadesJuego
                 }
 
             }
-
-
-            mazo.Cartas = listaCartasAuxiliar;
+            this.mazo.Cartas = null;
+            this.mazo.Cartas = new List<Carta>();
+            foreach (var item in listaCartasAuxiliar)
+            {
+                this.mazo.Cartas.Add(item);
+            }
+            
 
         }
 
@@ -122,7 +127,7 @@ namespace EntidadesJuego
             if (this.mazo.Cartas != null && this.EstaCompleto == true)
             {
 
-                //MezclarCartas(); //Mezclo el mazo asignado
+                MezclarCartas(); //Mezclo el mazo asignado
 
 
                 int Cont = 1;
