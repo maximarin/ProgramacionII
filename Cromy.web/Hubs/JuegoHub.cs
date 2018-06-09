@@ -98,14 +98,14 @@ namespace Cromy.web.Hubs
 
             if (idGanador == Context.ConnectionId)
             {
-               // Clients.Caller.ganarMano(resultado, false);
-              //  Clients.Client(idPerdedor).perderMano(resultado, false);
+                Clients.Caller.ganarMano(resultado, false);
+                Clients.Client(idPerdedor).perderMano(resultado, false);
 
             }
             else
             {
-               // Clients.Client(idGanador).ganarMano(resultado, false);
-                //Clients.Caller.perderMano(resultado, false);
+                Clients.Client(idGanador).ganarMano(resultado, false);
+                /Clients.Caller.perderMano(resultado, false);
 
             }
             if (partidaEcontrada.HayCartas(partidaEcontrada.jugadores[0], partidaEcontrada.jugadores[1]))
