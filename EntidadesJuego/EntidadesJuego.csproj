@@ -42,9 +42,13 @@
   <ItemGroup>
     <Compile Include="Atributo.cs" />
     <Compile Include="Carta.cs" />
+    <Compile Include="CartaHub.cs" />
+    <Compile Include="DibujarTableroHub.cs" />
     <Compile Include="Juego.cs" />
     <Compile Include="Jugador.cs" />
+    <Compile Include="JugadorHub.cs" />
     <Compile Include="Mazo.cs" />
+    <Compile Include="MazoHub.cs" />
     <Compile Include="Partida.cs" />
     <Compile Include="PartidasHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

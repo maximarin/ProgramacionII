@@ -172,5 +172,46 @@ namespace EntidadesJuego
 
             return ListaRertornar;
         }
+
+        public DibujarTableroHub DibujarTablero(Partida p)
+        {
+            var Retornar = new DibujarTableroHub();
+            Retornar.Jugador1.Nombre = p.jugadores[0].nombre;
+            Retornar.Jugador2.Nombre = p.jugadores[1].nombre;
+
+            foreach (var item in p.jugadores[0].Cartas)
+            {
+                var x = new CartaHub();
+                x.Codigo = item.IdCarta.ToString();
+                x.Nombre = item.Nombre;
+                Retornar.Jugador1.Cartas.Add(x);
+            }
+
+            foreach (var item in p.jugadores[1].Cartas)
+            {
+                var x = new CartaHub();
+                x.Codigo = item.IdCarta.ToString();
+                x.Nombre = item.Nombre;
+                Retornar.Jugador2.Cartas.Add(x);
+            }
+
+            Retornar.Mazo.Nombre = p.mazo.Nombre;
+        
+            foreach (var item in p.mazo.Cartas)
+            {
+                if (item.TipoCarta== TipoDeCarta.Normal)
+                {
+                    foreach (var item2 in item.Atributos)
+                    {
+                        Retornar.Mazo.NombreAtributos.Add(item2.Nombre);
+                    }
+                    break;
+                }
+            }
+
+            return Retornar;
+        }
+
+
     }
 }

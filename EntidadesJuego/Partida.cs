@@ -122,7 +122,7 @@ namespace EntidadesJuego
             if (this.mazo.Cartas != null && this.EstaCompleto == true)
             {
 
-                MezclarCartas(); //Mezclo el mazo asignado
+                //MezclarCartas(); //Mezclo el mazo asignado
 
 
                 int Cont = 1;

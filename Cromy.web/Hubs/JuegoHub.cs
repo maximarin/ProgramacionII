@@ -35,14 +35,19 @@ namespace Cromy.web.Hubs
             jugador2.Nombre(usuario).IdConexion(Context.ConnectionId).Numero(NumJugador.dos);
 
             //AgregarAlSegundoJugador, agrega al jugador a la partida que elige y devuelve la partida que es
-            var partidaEncontrada = juego.AgregarSegundoJugador(jugador2 , partida);          
+            var partidaEncontrada = juego.AgregarSegundoJugador(jugador2 , partida);
+
+            partidaEncontrada.RepartirCartas();
+            
+            //Dibujar
+            var x = juego.DibujarTablero(partidaEncontrada);
 
             Clients.All.eliminarPartida(partidaEncontrada.nombre);
 
-            Clients.Client(partidaEncontrada.jugadores[0].idConexion).dibujarTablero(partidaEncontrada.jugadores[0], partidaEncontrada.jugadores[1], partidaEncontrada.mazo);
-            Clients.Client(partidaEncontrada.jugadores[1].idConexion).dibujarTablero(partidaEncontrada.jugadores[0], partidaEncontrada.jugadores[1], partidaEncontrada.mazo);
+            Clients.Client(partidaEncontrada.jugadores[0].idConexion).dibujarTablero(x.Jugador1,x.Jugador2,x.Mazo);
+            Clients.Client(partidaEncontrada.jugadores[1].idConexion).dibujarTablero(x.Jugador1, x.Jugador2, x.Mazo);
 
-            partidaEncontrada.RepartirCartas();    
+               
         }
 
         public void ObtenerPartidas()
@@ -59,7 +64,7 @@ namespace Cromy.web.Hubs
         }
 
         //public void Cantar(string idAtributo, string idCarta)
-        //{            
+        //{
 
         //    if (jugada.connectionIdGanador == Context.ConnectionId)
         //    {
