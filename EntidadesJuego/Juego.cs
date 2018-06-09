@@ -23,6 +23,7 @@ namespace EntidadesJuego
             this.Partidas = new List<Partida>();
             this.Mazos = new List<Mazo>();
             this.Mazos = AgregarMazos();
+            this.Jugadores = new List<Jugador>();
         }
 
         public Partida AgregarPartida(Partida nuevaPartida)
@@ -33,7 +34,7 @@ namespace EntidadesJuego
 
         public List<Mazo> AgregarMazos()
         {           
-            var lines = File.ReadAllLines(@"C:\Users\Juan Aira\Desktop\Tpdeprog\Cromy.web\Mazos\X-Men\Informacion.txt");
+            var lines = File.ReadAllLines(@"C:\Users\maxi_\Desktop\Juego\Cromy.web\Mazos\X-Men\Informacion.txt");
             int cont = 0;
             var nuevoMazo = new Mazo();
             string[] datos;
@@ -62,7 +63,15 @@ namespace EntidadesJuego
                     else
                     {
                         var nuevaCarta = new Carta();        //A PARTIR DE LA TERCER LÍNEA VOY CREANDO LAS CARTAS Y ASIGNANDO LOS VALORES A LOS ATRIBUTOS
-                        nuevaCarta.Atributos = Atributos;
+                        List<Atributo> nuevosAtributos = new List<Atributo>();
+                        foreach (var item in Atributos)
+                        {
+                            Atributo atribut = new Atributo();
+                            atribut.Nombre = item.Nombre;
+                            nuevosAtributos.Add(atribut);
+                        }
+
+                        nuevaCarta.Atributos = nuevosAtributos;
                         nuevaCarta.TipoCarta = TipoDeCarta.Normal;
                         int j = 0;
                         for (int i = 0; i < datos.Length; i++)

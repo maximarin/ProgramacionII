@@ -280,7 +280,7 @@ namespace TestsUnitarios
             Partida nuevaPartida = new Partida();
             nuevaPartida.Jugador(jugador1).Jugador(jugador2);
 
-            nuevaPartida.BuscoAgregoBorro(carta3, jugador1, 2, carta4, jugador2);
+            nuevaPartida.AgregarCartasGanadas(carta3, jugador1, 2, carta4, jugador2);
 
             Assert.AreEqual(2, nuevaPartida.jugadores[1].Cartas.Count);
 
@@ -311,7 +311,7 @@ namespace TestsUnitarios
             Partida nuevaPartida = new Partida();
             nuevaPartida.Jugador(jugador1).Jugador(jugador2);
 
-            nuevaPartida.BuscoAgregoBorro(carta3, jugador1, 1, carta4, jugador2);
+            nuevaPartida.AgregarCartasGanadas(carta3, jugador1, 1, carta4, jugador2);
             Assert.AreEqual(3, nuevaPartida.jugadores[0].Cartas.Count);
             Assert.AreEqual(1, nuevaPartida.jugadores[1].Cartas.Count);
         }
@@ -338,7 +338,7 @@ namespace TestsUnitarios
             Partida nuevaPartida = new Partida();
             nuevaPartida.Jugador(jugador1).Jugador(jugador2);
 
-            nuevaPartida.BuscoAgregoBorro(carta3, jugador1, 1, carta4, jugador2);
+            nuevaPartida.AgregarCartasGanadas(carta3, jugador1, 1, carta4, jugador2);
             Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count);
             Assert.AreEqual(2, nuevaPartida.jugadores[1].Cartas.Count);
 
@@ -366,7 +366,7 @@ namespace TestsUnitarios
             Partida nuevaPartida = new Partida();
             nuevaPartida.Jugador(jugador1).Jugador(jugador2);
 
-            nuevaPartida.BuscoAgregoBorro(carta3, jugador1, 1, carta4, jugador2);
+            nuevaPartida.AgregarCartasGanadas(carta3, jugador1, 1, carta4, jugador2);
             Assert.AreEqual(1, nuevaPartida.jugadores[0].Cartas.Count);
             Assert.AreEqual(2, nuevaPartida.jugadores[1].Cartas.Count);
             Assert.AreEqual(carta2, nuevaPartida.jugadores[0].Cartas[0]); 
@@ -395,7 +395,7 @@ namespace TestsUnitarios
             Partida nuevaPartida = new Partida();
             nuevaPartida.Jugador(jugador1).Jugador(jugador2);
 
-            nuevaPartida.BuscoAgregoBorro(carta5, jugador1, 2, carta4, jugador2);
+            nuevaPartida.AgregarCartasGanadas(carta5, jugador1, 2, carta4, jugador2);
             Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count);
             Assert.AreEqual(3, nuevaPartida.jugadores[1].Cartas.Count);
             Assert.AreEqual(carta2, nuevaPartida.jugadores[0].Cartas[0]);
@@ -424,7 +424,7 @@ namespace TestsUnitarios
             Partida nuevaPartida = new Partida();
             nuevaPartida.Jugador(jugador1).Jugador(jugador2);
 
-            nuevaPartida.BuscoAgregoBorro(carta3, jugador1, 1, carta4, jugador2);
+            nuevaPartida.AgregarCartasGanadas(carta3, jugador1, 1, carta4, jugador2);
             Assert.AreEqual(2, nuevaPartida.jugadores[0].Cartas.Count);
             Assert.AreEqual(2, nuevaPartida.jugadores[1].Cartas.Count);
             

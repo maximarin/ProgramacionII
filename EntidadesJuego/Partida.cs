@@ -10,7 +10,7 @@ namespace EntidadesJuego
     {
         public List<Jugador> jugadores { get; set; }
         public Mazo mazo { get; set; }
-        public string Turno { get; set; }
+        public Jugador Turno { get; set; }
         public bool EstaCompleto { get; set; }
         public string nombre { get; set; }
         public Ranking resultado { get; set; }
@@ -46,6 +46,7 @@ namespace EntidadesJuego
             if (jugadores.Count() == 2)
             {
                 this.EstaCompleto = true;
+                this.Turno = jugadores[0];
             }
             return;
         }
@@ -163,7 +164,7 @@ namespace EntidadesJuego
             return;
         }
 
-        public void BuscoAgregoBorro(Carta cartalost, Jugador jugadorlost, int cant, Carta cartawin, Jugador jugadorwin) //Metodo D10S
+        public void AgregarCartasGanadas(Carta cartalost, Jugador jugadorlost, int cant, Carta cartawin, Jugador jugadorwin) //Metodo D10S
         {
             if (jugadorlost.Cartas.Count >= cant)
             {
@@ -284,109 +285,105 @@ namespace EntidadesJuego
         }
 
 
-        private void ResolverCartasEspeciales(Carta carta1, Carta carta2, Jugador jugador1, Jugador jugador2)
+        private string ResolverCartasEspeciales(Carta carta1, Carta carta2, Jugador jugador1, Jugador jugador2)
         { //Doy por hecho que ambos se encuentran en la misma sala
 
+            string ganador = "";
 
             //Verde vs normal
             if ((carta1.TipoCarta == TipoDeCarta.Especial) && (carta2.TipoCarta == TipoDeCarta.Normal))
             {
                 Deja5Cartas(jugador1, jugador2);
-                return;
+      
+                return ganador = jugador1.idConexion;
             }
             if ((carta2.TipoCarta == TipoDeCarta.Especial) && (carta1.TipoCarta == TipoDeCarta.Normal))
             {
                 Deja5Cartas(jugador2, jugador1);
-                return;
+                return ganador = jugador2.idConexion;
             }
 
             //Roja vs Amarilla 
             if ((TipoDeCarta.Roja == carta1.TipoCarta) && (TipoDeCarta.Amarilla == carta2.TipoCarta))
             {
-                BuscoAgregoBorro(carta2, jugador2, 1, carta1, jugador1);
-                return;
+                AgregarCartasGanadas(carta2, jugador2, 1, carta1, jugador1);
+                return ganador = jugador1.idConexion;
             }
             if ((TipoDeCarta.Amarilla == carta1.TipoCarta) && (TipoDeCarta.Roja == carta2.TipoCarta))
             {
-                BuscoAgregoBorro(carta1, jugador1, 1, carta2, jugador2);
-                return;
+                AgregarCartasGanadas(carta1, jugador1, 1, carta2, jugador2);
+                return ganador = jugador2.idConexion;
             }
 
             //Verde vs Roja
             if ((TipoDeCarta.Especial == carta1.TipoCarta) && (TipoDeCarta.Roja == carta2.TipoCarta))
             {
                 Deja5Cartas(jugador1, jugador2);
-                BuscoAgregoBorro(carta1, jugador1, 2, carta2, jugador2);
-                return;
+                AgregarCartasGanadas(carta1, jugador1, 2, carta2, jugador2);
+                return ganador = jugador1.idConexion;
             }
             if ((TipoDeCarta.Especial == carta2.TipoCarta) && (TipoDeCarta.Roja == carta1.TipoCarta))
             {
                 Deja5Cartas(jugador2, jugador1);
-                BuscoAgregoBorro(carta2, jugador2, 2, carta1, jugador1);
-                return;
+                AgregarCartasGanadas(carta2, jugador2, 2, carta1, jugador1);
+                return ganador = jugador2.idConexion;
             }
 
             //Verde vs amarilla
             if ((TipoDeCarta.Especial == carta1.TipoCarta) && (TipoDeCarta.Amarilla == carta2.TipoCarta))
             {
                 Deja5Cartas(jugador1, jugador2);
-                BuscoAgregoBorro(carta1, jugador1, 1, carta2, jugador2);
-                return;
+                AgregarCartasGanadas(carta1, jugador1, 1, carta2, jugador2);
+                return ganador = jugador1.idConexion;
             }
             if ((TipoDeCarta.Especial == carta2.TipoCarta) && (TipoDeCarta.Amarilla == carta1.TipoCarta))
             {
                 Deja5Cartas(jugador2, jugador1);
-                BuscoAgregoBorro(carta2, jugador2, 1, carta1, jugador1);
-                return;
+                AgregarCartasGanadas(carta2, jugador2, 1, carta1, jugador1);
+
+                return ganador = jugador2.idConexion;
             }
 
             //Amarrilla vs Normal
             if ((TipoDeCarta.Amarilla == carta1.TipoCarta) && (TipoDeCarta.Normal == carta2.TipoCarta))
             {
-                BuscoAgregoBorro(carta2, jugador2, 1, carta1, jugador1);
-                return;
+                AgregarCartasGanadas(carta2, jugador2, 1, carta1, jugador1);
+                return ganador = jugador1.idConexion;
             }
             if ((TipoDeCarta.Amarilla == carta2.TipoCarta) && (TipoDeCarta.Normal == carta1.TipoCarta))
             {
-                BuscoAgregoBorro(carta1, jugador1, 1, carta2, jugador2);
-                return;
+                AgregarCartasGanadas(carta1, jugador1, 1, carta2, jugador2);
+                return ganador = jugador2.idConexion;
             }
 
             //Roja vs Normal
             if ((TipoDeCarta.Roja == carta1.TipoCarta) && (TipoDeCarta.Normal == carta2.TipoCarta))
             {
-                BuscoAgregoBorro(carta2, jugador2, 2, carta1, jugador1);
-                return;
+                AgregarCartasGanadas(carta2, jugador2, 2, carta1, jugador1);
+                return ganador = jugador1.idConexion;
             }
             if ((TipoDeCarta.Roja == carta2.TipoCarta) && (TipoDeCarta.Normal == carta1.TipoCarta))
             {
-                BuscoAgregoBorro(carta1, jugador1, 2, carta2, jugador2);
-                return;
+                AgregarCartasGanadas(carta1, jugador1, 2, carta2, jugador2);
+                return ganador = jugador2.idConexion;
             }
+
+            return ganador;
         }
 
         public string ResolverCartasNormales(string atributo, int iDCartaJugador1, int iDCartaJugador2) //Test
         {
             string posible;
 
-            var cartaJugador1 = jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First().Atributos.Where(x => x.Nombre == atributo).FirstOrDefault();
-            var cartaJugador2 = jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First().Atributos.Where(x => x.Nombre == atributo).FirstOrDefault();
-
-            //Se verifica que ambas cartas tengan la opcion elegida 
-            if (cartaJugador1 == null || cartaJugador2 == null)
-            {
-                return posible = "ELEGIR OTRO ATRIBUTO"; //No es posible, debe elegir otro atributo.
-            }
-            else
-            {
-
+            var cartaJugador1 = jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First().Atributos.Where(x => x.Nombre == atributo).First();
+            var cartaJugador2 = jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First().Atributos.Where(x => x.Nombre == atributo).First();
 
                 if (cartaJugador1.Valor > cartaJugador2.Valor) //GANA JUGADOR 1
                 {
                     int indice = jugadores[1].Cartas.IndexOf(jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First());
                     jugadores[0].Cartas.Add(jugadores[1].Cartas.First(x => x.IdCarta == iDCartaJugador2));
                     jugadores[1].Cartas.RemoveAt(indice);  //PREGUNTAR SI GANA ESA CARTA O UNA CUALQUIERA DEL MAZO DEL JUGADOR 2
-                    return posible = "GANADOR JUGADOR 1";
+                    return posible = jugadores[0].idConexion;
                 }
                 else
                 {
@@ -395,14 +392,14 @@ namespace EntidadesJuego
                         int indice = jugadores[0].Cartas.IndexOf(jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First());
                         jugadores[1].Cartas.Add(jugadores[0].Cartas.First(x => x.IdCarta == iDCartaJugador1));
                         jugadores[0].Cartas.RemoveAt(indice);
-                        return posible = "GANADOR JUGADOR 2";
+                        return posible = jugadores[1].idConexion;
                     }
                     else
                     {
                         return posible = "EMPATE";
                     }
                 }
-            }
+            
         }
 
         public bool HayCartas(Jugador jugador1, Jugador jugador2) //Metodo para verificar cada vez que se cambia de turno
@@ -460,7 +457,17 @@ namespace EntidadesJuego
             this.RepartirCartas();
         }
    
-
+        public string AnalizarCartas (Carta cartaJugador1, Carta cartaJugador2, string Atributo)
+        {
+            if (cartaJugador1.TipoCarta == TipoDeCarta.Normal && cartaJugador2.TipoCarta== TipoDeCarta.Normal)
+            {
+                return ResolverCartasNormales(Atributo,cartaJugador1.IdCarta,cartaJugador2.IdCarta);
+            }
+            else
+            {
+                return ResolverCartasEspeciales(cartaJugador1, cartaJugador2, jugadores[0], jugadores[1]);
+            }
+        }
     }
 
 }
