@@ -20,7 +20,7 @@ namespace EntidadesJuego
         public Partida() //Test
         {
             this.jugadores = new List<Jugador>();
-          
+
             this.resultado = new Ranking();
         }
 
@@ -116,7 +116,7 @@ namespace EntidadesJuego
             {
                 this.mazo.Cartas.Add(item);
             }
-            
+
 
         }
 
@@ -294,7 +294,7 @@ namespace EntidadesJuego
             if ((carta1.TipoCarta == TipoDeCarta.Especial) && (carta2.TipoCarta == TipoDeCarta.Normal))
             {
                 Deja5Cartas(jugador1, jugador2);
-      
+
                 return ganador = jugador1.idConexion;
             }
             if ((carta2.TipoCarta == TipoDeCarta.Especial) && (carta1.TipoCarta == TipoDeCarta.Normal))
@@ -378,28 +378,38 @@ namespace EntidadesJuego
             var cartaJugador1 = jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First().Atributos.Where(x => x.Nombre == atributo).First();
             var cartaJugador2 = jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First().Atributos.Where(x => x.Nombre == atributo).First();
 
-                if (cartaJugador1.Valor > cartaJugador2.Valor) //GANA JUGADOR 1
+            if (cartaJugador1.Valor > cartaJugador2.Valor) //GANA JUGADOR 1
+            {
+                int indice = jugadores[1].Cartas.IndexOf(jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First());
+                var cartaGanadora = jugadores[0].Cartas[0];
+                jugadores[0].Cartas.Remove(cartaGanadora);
+                jugadores[0].Cartas.Add(cartaGanadora);
+                jugadores[0].Cartas.Add(jugadores[1].Cartas.First(x => x.IdCarta == iDCartaJugador2));
+                jugadores[1].Cartas.RemoveAt(indice);
+                
+
+                return posible = jugadores[0].idConexion;
+            }
+            else
+            {
+                if (cartaJugador2.Valor > cartaJugador1.Valor) //GANA JUGADOR 2
                 {
-                    int indice = jugadores[1].Cartas.IndexOf(jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First());
-                    jugadores[0].Cartas.Add(jugadores[1].Cartas.First(x => x.IdCarta == iDCartaJugador2));
-                    jugadores[1].Cartas.RemoveAt(indice);  //PREGUNTAR SI GANA ESA CARTA O UNA CUALQUIERA DEL MAZO DEL JUGADOR 2
-                    return posible = jugadores[0].idConexion;
+                    int indice = jugadores[0].Cartas.IndexOf(jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First());
+                    var cartaGanadora = jugadores[1].Cartas[0];
+                    jugadores[1].Cartas.Remove(cartaGanadora);
+                    jugadores[1].Cartas.Add(cartaGanadora);
+                    jugadores[1].Cartas.Add(jugadores[0].Cartas.First(x => x.IdCarta == iDCartaJugador1));
+                    jugadores[0].Cartas.RemoveAt(indice);
+                   
+
+                    return posible = jugadores[1].idConexion;
                 }
                 else
                 {
-                    if (cartaJugador2.Valor > cartaJugador1.Valor) //GANA JUGADOR 2
-                    {
-                        int indice = jugadores[0].Cartas.IndexOf(jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First());
-                        jugadores[1].Cartas.Add(jugadores[0].Cartas.First(x => x.IdCarta == iDCartaJugador1));
-                        jugadores[0].Cartas.RemoveAt(indice);
-                        return posible = jugadores[1].idConexion;
-                    }
-                    else
-                    {
-                        return posible = "EMPATE";
-                    }
+                    return posible = "EMPATE";
                 }
-            
+            }
+
         }
 
         public bool HayCartas(Jugador jugador1, Jugador jugador2) //Metodo para verificar cada vez que se cambia de turno
@@ -444,24 +454,24 @@ namespace EntidadesJuego
                 {
                     resultado.VecesQueGanoElJugador2 = resultado.VecesQueGanoElJugador2 + 1;
                 }
-            }            
+            }
         }
 
         public void Revancha()
         {
             foreach (var item in this.jugadores)
             {
-                item.Cartas = null; 
-                item.Cartas = new List<Carta>(); 
+                item.Cartas = null;
+                item.Cartas = new List<Carta>();
             }
             this.RepartirCartas();
         }
-   
-        public string AnalizarCartas (Carta cartaJugador1, Carta cartaJugador2, string Atributo)
+
+        public string AnalizarCartas(Carta cartaJugador1, Carta cartaJugador2, string Atributo)
         {
-            if (cartaJugador1.TipoCarta == TipoDeCarta.Normal && cartaJugador2.TipoCarta== TipoDeCarta.Normal)
+            if (cartaJugador1.TipoCarta == TipoDeCarta.Normal && cartaJugador2.TipoCarta == TipoDeCarta.Normal)
             {
-                return ResolverCartasNormales(Atributo,cartaJugador1.IdCarta,cartaJugador2.IdCarta);
+                return ResolverCartasNormales(Atributo, cartaJugador1.IdCarta, cartaJugador2.IdCarta);
             }
             else
             {

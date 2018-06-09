@@ -116,17 +116,18 @@ namespace EntidadesJuego
             cartaAmarilla.Atributos = null;
 
             var cartaRoja = new Carta();
-            cartaRoja.IdCarta = 2;
+            cartaRoja.IdCarta = 3;
             cartaRoja.TipoCarta = TipoDeCarta.Roja;
             cartaRoja.Atributos = null;
 
 
             var cartaEspecial = new Carta();
-            cartaEspecial.IdCarta = 3;
+            cartaEspecial.IdCarta = 2;
             cartaEspecial.TipoCarta = TipoDeCarta.Especial;
             cartaEspecial.Atributos = null;
 
             nuevoMazo.Cartas.Add(cartaAmarilla); nuevoMazo.Cartas.Add(cartaRoja); nuevoMazo.Cartas.Add(cartaEspecial);
+
 
 
             Mazos.Add(nuevoMazo);
