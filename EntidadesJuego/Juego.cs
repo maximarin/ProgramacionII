@@ -45,12 +45,13 @@ namespace EntidadesJuego
             cartaRoja.TipoCarta = TipoDeCarta.Roja;
             cartaRoja.Atributos = null;
 
-            //var cartaAmarilla = new Carta();
-            //cartaAmarilla.IdCarta = "amarilla";
-            //cartaAmarilla.TipoCarta = TipoDeCarta.Amarilla;
-            //cartaAmarilla.Atributos = null;
+            var cartaAmarilla = new Carta();
+            cartaAmarilla.IdCarta = "amarilla";
+            cartaAmarilla.TipoCarta = TipoDeCarta.Amarilla;
+            cartaAmarilla.Atributos = null;
 
             nuevoMazo.Cartas.Add(cartaRoja);
+            nuevoMazo.Cartas.Add(cartaAmarilla);
 
             foreach (var line in lines)   //LEO EL ARCHIVO
             {
@@ -104,28 +105,13 @@ namespace EntidadesJuego
                                     nuevaCarta.Atributos[j].Valor = Convert.ToDouble(datos[i]);
                                     j++;
                                 }
-                                    
-
-
-                            }
-
-                           
-
+                            }                            
                         }
-
                         nuevoMazo.Cartas.Add(nuevaCarta);
-
                     }
-
-
                 }
                 cont++;
             }
-
-
-
-
-
 
             //var cartaEspecial = new Carta();
             //cartaEspecial.IdCarta = "especial";
