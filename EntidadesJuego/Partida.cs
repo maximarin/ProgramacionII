@@ -54,71 +54,49 @@ namespace EntidadesJuego
 
         private void MezclarCartas() //Test 
         {
-            /*
+
             int total = this.mazo.Cartas.Count;
             var listaCartasAuxiliar = new List<Carta>();
-            List<int> lista = new List<int>();
+          
             Random numeroNuevo = new Random();
-            int n = 0;
-            int cont = 1;
 
-            while (this.mazo.Cartas.Count > 0)
-            {
-                bool enc = false;
-
-                if (this.mazo.Cartas.Count == 1)
+                var sorteo = new List<int>();
+                int contador = 1;
+                while (total > contador)
                 {
-                    n = numeroNuevo.Next(0, listaCartasAuxiliar.Count);
-                    var aux = listaCartasAuxiliar[n];
-                    listaCartasAuxiliar[n] = this.mazo.Cartas[0];
-                    listaCartasAuxiliar.Add(aux);
+                    int sor = numeroNuevo.Next(1, total);
 
-                    break;
-                }
-                while (enc == false)
-                {
-                    n = numeroNuevo.Next(1, total);
-
-                    if (lista.Count == 0 && n != 1)
+                    if (contador == 1)
                     {
-                        lista.Add(n);
-                        listaCartasAuxiliar.Add(this.mazo.Cartas.Where(x => x.IdCarta == n.ToString()).First());
-                        this.mazo.Cartas.Remove(this.mazo.Cartas.Where(x => x.IdCarta == n.ToString()).First());
-                        enc = true;
-
+                        sorteo.Add(sor);
+                        listaCartasAuxiliar.Add(this.mazo.Cartas[sor]);
+                        contador++;
                     }
-
-                    if (lista.Count >= 1)
-
-                        foreach (var item in lista)
+                    else
+                    {
+                        bool encontrado = false;
+                        foreach (var item in sorteo)
                         {
-                            if (item == n)
+                            if (item == sor)
                             {
-                                enc = true;
-
+                                encontrado = true;
                                 break;
                             }
-
                         }
 
-                    if (enc == false)
-                    {
-                        lista.Add(n);
-                        listaCartasAuxiliar.Add(this.mazo.Cartas.Where(x => x.IdCarta == n.ToString()).First());
-                        this.mazo.Cartas.Remove(this.mazo.Cartas.Where(x => x.IdCarta == n.ToString()).First());
-                        enc = true;
+                        if (encontrado == false)
+                        {
+                            listaCartasAuxiliar.Add(this.mazo.Cartas[sor]);
+                            sorteo.Add(sor);
+                            contador++;
+                        }
                     }
+
                 }
 
-            }
-            this.mazo.Cartas = null;
-            this.mazo.Cartas = new List<Carta>();
-            foreach (var item in listaCartasAuxiliar)
-            {
-                this.mazo.Cartas.Add(item);
-            }
 
-    */
+            this.mazo.Cartas = listaCartasAuxiliar;
+
         }
 
 
@@ -153,12 +131,12 @@ namespace EntidadesJuego
         }
 
         public void Deja5Cartas(Jugador jespecial, Jugador jafectado)    //Modifico la lista del afectado
-        {       
+        {
             while (jafectado.Cartas.Count > 5)
             {
                 jespecial.Cartas.Add(jafectado.Cartas[0]);
                 jafectado.Cartas.Remove(jafectado.Cartas[0]);
-                
+
             }
 
             return;
@@ -170,23 +148,23 @@ namespace EntidadesJuego
             {
                 if (cant == 1)
                 {
-                    
-                    
-                        jugadorwin.Cartas.Remove(cartawin);
-                        if (cartalost.TipoCarta == TipoDeCarta.Amarilla)
-                        {
-                            var siguienteCarta = jugadorlost.Cartas[1];
-                            jugadorlost.Cartas.Remove(cartalost);
-                            jugadorwin.Cartas.Add(siguienteCarta);
-                            jugadorlost.Cartas.Remove(siguienteCarta);
-                        
-                        }
-                        else
-                        {
-                            jugadorwin.Cartas.Add(cartalost);
-                            jugadorlost.Cartas.Remove(cartalost);
-                        }
-                    
+
+
+                    jugadorwin.Cartas.Remove(cartawin);
+                    if (cartalost.TipoCarta == TipoDeCarta.Amarilla)
+                    {
+                        var siguienteCarta = jugadorlost.Cartas[1];
+                        jugadorlost.Cartas.Remove(cartalost);
+                        jugadorwin.Cartas.Add(siguienteCarta);
+                        jugadorlost.Cartas.Remove(siguienteCarta);
+
+                    }
+                    else
+                    {
+                        jugadorwin.Cartas.Add(cartalost);
+                        jugadorlost.Cartas.Remove(cartalost);
+                    }
+
                 }
                 else
                 {
@@ -237,13 +215,13 @@ namespace EntidadesJuego
             if ((TipoDeCarta.Especial == carta1.TipoCarta) && (TipoDeCarta.Roja == carta2.TipoCarta))
             {
                 Deja5Cartas(jugador1, jugador2);
-                
+
                 return ganador = jugador1.idConexion;
             }
             if ((TipoDeCarta.Especial == carta2.TipoCarta) && (TipoDeCarta.Roja == carta1.TipoCarta))
             {
                 Deja5Cartas(jugador2, jugador1);
-                
+
                 return ganador = jugador2.idConexion;
             }
 
@@ -251,13 +229,13 @@ namespace EntidadesJuego
             if ((TipoDeCarta.Especial == carta1.TipoCarta) && (TipoDeCarta.Amarilla == carta2.TipoCarta))
             {
                 Deja5Cartas(jugador1, jugador2);
-                
+
                 return ganador = jugador1.idConexion;
             }
             if ((TipoDeCarta.Especial == carta2.TipoCarta) && (TipoDeCarta.Amarilla == carta1.TipoCarta))
             {
                 Deja5Cartas(jugador2, jugador1);
-                
+
 
                 return ganador = jugador2.idConexion;
             }
@@ -304,7 +282,7 @@ namespace EntidadesJuego
                 jugadores[0].Cartas.Add(cartaGanadora);
                 jugadores[0].Cartas.Add(jugadores[1].Cartas.First(x => x.IdCarta == iDCartaJugador2));
                 jugadores[1].Cartas.RemoveAt(indice);
-                
+
 
                 return posible = jugadores[0].idConexion;
             }
@@ -318,7 +296,7 @@ namespace EntidadesJuego
                     jugadores[1].Cartas.Add(cartaGanadora);
                     jugadores[1].Cartas.Add(jugadores[0].Cartas.First(x => x.IdCarta == iDCartaJugador1));
                     jugadores[0].Cartas.RemoveAt(indice);
-                   
+
 
                     return posible = jugadores[1].idConexion;
                 }
