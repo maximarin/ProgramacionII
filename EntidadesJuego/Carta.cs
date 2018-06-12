@@ -9,7 +9,7 @@ namespace EntidadesJuego
     public enum TipoDeCarta { Normal = 0, Amarilla = 1 , Roja = 2, Especial = 3 }
     public class Carta
     {   
-        public int IdCarta { get; set; }
+        public string IdCarta { get; set; }
         public List<Atributo> Atributos { get; set; }
         public TipoDeCarta TipoCarta { get; set; }
         public string Nombre { get; set; }

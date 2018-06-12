@@ -34,11 +34,23 @@ namespace EntidadesJuego
 
         public List<Mazo> AgregarMazos()
         {           
-            var lines = File.ReadAllLines(@"C:\Users\maxi_\Desktop\Juego\Cromy.web\Mazos\X-Men\Informacion.txt");
+            var lines = File.ReadAllLines(@"C:\Users\Juan Aira\Desktop\T\Cromy.web\Mazos\X-Men\Informacion.txt");
             int cont = 0;
             var nuevoMazo = new Mazo();
             string[] datos;
             List<Atributo> Atributos = new List<Atributo>();
+
+            var cartaRoja = new Carta();
+            cartaRoja.IdCarta = "roja";
+            cartaRoja.TipoCarta = TipoDeCarta.Roja;
+            cartaRoja.Atributos = null;
+
+            //var cartaAmarilla = new Carta();
+            //cartaAmarilla.IdCarta = "amarilla";
+            //cartaAmarilla.TipoCarta = TipoDeCarta.Amarilla;
+            //cartaAmarilla.Atributos = null;
+
+            nuevoMazo.Cartas.Add(cartaRoja);
 
             foreach (var line in lines)   //LEO EL ARCHIVO
             {
@@ -78,7 +90,7 @@ namespace EntidadesJuego
                         {
                             if (i == 0)
                             {
-                                nuevaCarta.IdCarta = Convert.ToInt32(datos[i]);
+                                nuevaCarta.IdCarta = datos[i];
                             }
                             else
                             {
@@ -110,23 +122,17 @@ namespace EntidadesJuego
                 cont++;
             }
 
-            var cartaAmarilla = new Carta();
-            cartaAmarilla.IdCarta = 1;
-            cartaAmarilla.TipoCarta = TipoDeCarta.Amarilla;
-            cartaAmarilla.Atributos = null;
-
-            var cartaRoja = new Carta();
-            cartaRoja.IdCarta = 3;
-            cartaRoja.TipoCarta = TipoDeCarta.Roja;
-            cartaRoja.Atributos = null;
 
 
-            var cartaEspecial = new Carta();
-            cartaEspecial.IdCarta = 2;
-            cartaEspecial.TipoCarta = TipoDeCarta.Especial;
-            cartaEspecial.Atributos = null;
 
-            nuevoMazo.Cartas.Add(cartaAmarilla); nuevoMazo.Cartas.Add(cartaRoja); nuevoMazo.Cartas.Add(cartaEspecial);
+
+
+            //var cartaEspecial = new Carta();
+            //cartaEspecial.IdCarta = "especial";
+            //cartaEspecial.TipoCarta = TipoDeCarta.Especial;
+            //cartaEspecial.Atributos = null;
+
+           // nuevoMazo.Cartas.Add(cartaRoja); //nuevoMazo.Cartas.Add(cartaEspecial);
 
 
 

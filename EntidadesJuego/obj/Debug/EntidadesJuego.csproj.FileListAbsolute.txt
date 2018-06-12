@@ -38,3 +38,9 @@ C:\Users\Juan Aira\Desktop\Tpdeprog\EntidadesJuego\obj\Debug\EntidadesJuego.cspr
 C:\Users\Juan Aira\Desktop\Tpdeprog\EntidadesJuego\obj\Debug\EntidadesJuego.csproj.CoreCompileInputs.cache
 C:\Users\Juan Aira\Desktop\Tpdeprog\EntidadesJuego\obj\Debug\EntidadesJuego.dll
 C:\Users\Juan Aira\Desktop\Tpdeprog\EntidadesJuego\obj\Debug\EntidadesJuego.pdb
+C:\Users\Juan Aira\Desktop\T\EntidadesJuego\bin\Debug\EntidadesJuego.dll
+C:\Users\Juan Aira\Desktop\T\EntidadesJuego\bin\Debug\EntidadesJuego.pdb
+C:\Users\Juan Aira\Desktop\T\EntidadesJuego\obj\Debug\EntidadesJuego.csproj.CoreCompileInputs.cache
+C:\Users\Juan Aira\Desktop\T\EntidadesJuego\obj\Debug\EntidadesJuego.dll
+C:\Users\Juan Aira\Desktop\T\EntidadesJuego\obj\Debug\EntidadesJuego.pdb
+C:\Users\Juan Aira\Desktop\T\EntidadesJuego\obj\Debug\EntidadesJuego.csprojResolveAssemblyReference.cache

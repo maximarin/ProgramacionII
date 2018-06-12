@@ -67,24 +67,23 @@ namespace Cromy.web.Hubs
         public void Cantar(string idAtributo, string idCarta)
         {
             var jugadorTurno = juego.Jugadores.Where(x => x.idConexion == Context.ConnectionId).FirstOrDefault();
-            var partidaEcontrada = juego.Partidas.Where(x => x.jugadores[0] == jugadorTurno || x.jugadores[1] == jugadorTurno).FirstOrDefault();
-            var jugadorOponente = new Jugador();
-            string idGanador = "";
-            string idPerdedor = ""; 
-          
-            
-            if (jugadorTurno.NumeroJugador == NumJugador.uno)
-            {
-                jugadorOponente = partidaEcontrada.jugadores[1];
-               
+            var jugadorOponente = juego.Jugadores.Where(x => x.idConexion != Context.ConnectionId).FirstOrDefault();
 
-               idGanador = partidaEcontrada.AnalizarCartas(jugadorTurno.Cartas.Where(x => x.IdCarta == int.Parse(idCarta)).First(), jugadorOponente.Cartas.First(), idAtributo);
-   
+            var partidaEcontrada = juego.Partidas.Where(x => x.jugadores[0] == jugadorTurno || x.jugadores[1] == jugadorTurno).FirstOrDefault();
+            
+            string idGanador = "";
+            string idPerdedor = "";
+
+            var cartaJugadorTurno = partidaEcontrada.jugadores.Where(x => x.idConexion == jugadorTurno.idConexion).First().Cartas[0];
+            var cartaJugadorOponente = partidaEcontrada.jugadores.Where(x => x.idConexion == jugadorOponente.idConexion).First().Cartas[0];
+
+            if (jugadorTurno.NumeroJugador == NumJugador.uno)
+            {              
+               idGanador = partidaEcontrada.AnalizarCartas(jugadorTurno.Cartas.Where(x => x.IdCarta == idCarta).First(), jugadorOponente.Cartas.First(), idAtributo);   
             }
             else
             {
-                jugadorOponente = partidaEcontrada.jugadores[0];
-                idGanador = partidaEcontrada.AnalizarCartas(jugadorOponente.Cartas.First(), jugadorTurno.Cartas.Where(x => x.IdCarta == int.Parse(idCarta)).First(), idAtributo);
+                idGanador = partidaEcontrada.AnalizarCartas(jugadorOponente.Cartas.First(), jugadorTurno.Cartas.Where(x => x.IdCarta == idCarta).First(), idAtributo);
             }
                 
             if (idGanador == jugadorTurno.idConexion)
@@ -96,20 +95,44 @@ namespace Cromy.web.Hubs
                 idPerdedor = jugadorTurno.idConexion;
             }
 
-            var cartaGanador = partidaEcontrada.jugadores.Where(x => x.idConexion == idGanador).First().Cartas[0];
-            var cartaPerdedor = partidaEcontrada.jugadores.Where(x => x.idConexion == idPerdedor).First().Cartas[0];
+
 
             if (idGanador == Context.ConnectionId)
             {
-                Clients.Caller.ganarMano(cartaGanador, false);
-                Clients.Client(idPerdedor).perderMano(cartaPerdedor, false);
+                if (cartaJugadorTurno.IdCarta == "amarilla")
+                {
+                    Clients.Caller.ganarManoPorTarjetaAmarilla();
+                    Clients.Client(idPerdedor).perderMano();
+                }
+                else if (cartaJugadorTurno.IdCarta == "roja")
+                {
+                    Clients.Caller.ganarManoPorTarjetaRoja();
+                    Clients.Client(idPerdedor).perderManoPorTarjetaRoja();                    
+                }
+                else
+                {
+                    Clients.Caller.ganarMano();
+                    Clients.Client(idPerdedor).perderMano();
+                }
 
             }
             else
             {
-                Clients.Client(idGanador).ganarMano(cartaGanador, false);
-                Clients.Caller.perderMano(cartaPerdedor, false);
-
+                if (cartaJugadorOponente.IdCarta == "amarilla")
+                {
+                    Clients.Client(idGanador).ganarManoPorTarjetaAmarilla();
+                    Clients.Caller.perderManoPorTarjetaAmarilla();
+                }
+                else if (cartaJugadorOponente.IdCarta == "roja")
+                {
+                    Clients.Client(idGanador).ganarManoPorTarjetaRoja();
+                    Clients.Caller.perderManoPorTarjetaRoja();                    
+                }
+                else
+                {
+                    Clients.Client(idGanador).ganarMano();
+                    Clients.Caller.perderMano();
+                }
             }
             if (partidaEcontrada.HayCartas(partidaEcontrada.jugadores[0], partidaEcontrada.jugadores[1]))
             {

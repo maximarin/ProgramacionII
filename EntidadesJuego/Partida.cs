@@ -54,6 +54,7 @@ namespace EntidadesJuego
 
         private void MezclarCartas() //Test 
         {
+            /*
             int total = this.mazo.Cartas.Count;
             var listaCartasAuxiliar = new List<Carta>();
             List<int> lista = new List<int>();
@@ -81,8 +82,8 @@ namespace EntidadesJuego
                     if (lista.Count == 0 && n != 1)
                     {
                         lista.Add(n);
-                        listaCartasAuxiliar.Add(this.mazo.Cartas.Where(x => x.IdCarta == n).First());
-                        this.mazo.Cartas.Remove(this.mazo.Cartas.Where(x => x.IdCarta == n).First());
+                        listaCartasAuxiliar.Add(this.mazo.Cartas.Where(x => x.IdCarta == n.ToString()).First());
+                        this.mazo.Cartas.Remove(this.mazo.Cartas.Where(x => x.IdCarta == n.ToString()).First());
                         enc = true;
 
                     }
@@ -103,8 +104,8 @@ namespace EntidadesJuego
                     if (enc == false)
                     {
                         lista.Add(n);
-                        listaCartasAuxiliar.Add(this.mazo.Cartas.Where(x => x.IdCarta == n).First());
-                        this.mazo.Cartas.Remove(this.mazo.Cartas.Where(x => x.IdCarta == n).First());
+                        listaCartasAuxiliar.Add(this.mazo.Cartas.Where(x => x.IdCarta == n.ToString()).First());
+                        this.mazo.Cartas.Remove(this.mazo.Cartas.Where(x => x.IdCarta == n.ToString()).First());
                         enc = true;
                     }
                 }
@@ -117,7 +118,7 @@ namespace EntidadesJuego
                 this.mazo.Cartas.Add(item);
             }
 
-
+    */
         }
 
 
@@ -152,8 +153,7 @@ namespace EntidadesJuego
         }
 
         public void Deja5Cartas(Jugador jespecial, Jugador jafectado)    //Modifico la lista del afectado
-        {
-            
+        {       
             while (jafectado.Cartas.Count > 5)
             {
                 jespecial.Cartas.Add(jafectado.Cartas[0]);
@@ -289,7 +289,7 @@ namespace EntidadesJuego
             return ganador;
         }
 
-        public string ResolverCartasNormales(string atributo, int iDCartaJugador1, int iDCartaJugador2) //Test
+        public string ResolverCartasNormales(string atributo, string iDCartaJugador1, string iDCartaJugador2) //Test
         {
             string posible;
 

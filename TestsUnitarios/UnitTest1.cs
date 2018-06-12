@@ -8,7 +8,7 @@ namespace TestsUnitarios
     [TestClass]
     public class PartidasTest
     {
-
+        /*
         [TestMethod]
         public void DeberiaGanarJugadroDosPorAtributoConValorMasAlto()
         {
@@ -453,6 +453,6 @@ namespace TestsUnitarios
         //    Assert.AreEqual("Palermo", nuevojuego.Partidas[0].resultado.NombreJugador2);
         //}
 
-      
+      */
     }
 }
