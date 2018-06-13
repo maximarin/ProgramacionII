@@ -31,6 +31,9 @@ namespace Cromy.web.Hubs
 
         public void UnirsePartida(string usuario, string partida)
         {
+           // Clients.Others
+
+
             var jugador2 = new Jugador();
             jugador2.Nombre(usuario).IdConexion(Context.ConnectionId).Numero(NumJugador.dos);
             juego.Jugadores.Add(jugador2);

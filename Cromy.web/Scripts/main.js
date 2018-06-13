@@ -91,7 +91,7 @@ function perderMano() {
     }, 2000);
 };
 
-function perderManoPorTarjeta() {
+function perderManoPorTarjeta(roja) {
     deshabilitarJuego();
     baraja2.rotateCard();
 
