@@ -137,8 +137,8 @@ namespace EntidadesJuego
                 {
                     var x = new PartidasHub();
                     x.Usuario = item.jugadores[0].nombre;
-                    x.Mazo = item.mazo.Nombre;
-                    x.Nombre = item.nombre;
+                    x.Mazo = item.Mazo.Nombre;
+                    x.Nombre = item.Nombre;
 
                     ListaRetornar.Add(x);
                 }           
@@ -200,9 +200,9 @@ namespace EntidadesJuego
                 Retornar.Jugador2.Cartas.Add(x);
             }
 
-            Retornar.Mazo.Nombre = p.mazo.Nombre;
+            Retornar.Mazo.Nombre = p.Mazo.Nombre;
         
-            foreach (var item in p.mazo.Cartas)
+            foreach (var item in p.Mazo.Cartas)
             {
                 if (item.TipoCarta== TipoDeCarta.Normal)
                 {
@@ -217,6 +217,7 @@ namespace EntidadesJuego
             return Retornar;
         }
 
+       
 
     }
 }

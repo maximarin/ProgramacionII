@@ -19,34 +19,40 @@ namespace Cromy.web.Hubs
             var jugador1 = new Jugador();
             jugador1.Nombre(usuario).Numero(NumJugador.uno).IdConexion(Context.ConnectionId);
 
-            partidaCreada.Nombre(partida).Jugador(jugador1);
-            partidaCreada.Mazo(juego.BuscarMazo(mazo));
+            partidaCreada.SetNombre(partida).Jugador(jugador1);
+            partidaCreada.SetMazo(juego.BuscarMazo(mazo));
             juego.AgregarPartida(partidaCreada);
             juego.Jugadores.Add(jugador1);
             // Notifico a los otros usuarios de la nueva partida.
-            Clients.Others.agregarPartida(partidaCreada);
+
+            var newMatch = new PartidasHub
+            {
+                Mazo = partidaCreada.Mazo.Nombre,
+                Nombre = partidaCreada.Nombre,
+                Usuario = partidaCreada.jugadores[0].nombre
+            };
+
+            Clients.Others.agregarPartida(newMatch);
 
             Clients.Caller.esperarJugador();                      
         }
 
         public void UnirsePartida(string usuario, string partida)
-        {
-           // Clients.Others
-
+        {       
 
             var jugador2 = new Jugador();
             jugador2.Nombre(usuario).IdConexion(Context.ConnectionId).Numero(NumJugador.dos);
             juego.Jugadores.Add(jugador2);
 
             //AgregarAlSegundoJugador, agrega al jugador a la partida que elige y devuelve la partida que es
-            var partidaEncontrada = juego.Partidas.Where(z => z.nombre == partida).First().Jugador(jugador2);
+            var partidaEncontrada = juego.Partidas.Where(z => z.Nombre == partida).First().Jugador(jugador2);
                             
             partidaEncontrada.RepartirCartas();
             
             //Dibujar
             var x = juego.DibujarTablero(partidaEncontrada);
 
-            Clients.All.eliminarPartida(partidaEncontrada.nombre);
+            Clients.All.eliminarPartida(partidaEncontrada.Nombre);
 
             Clients.Client(partidaEncontrada.jugadores[0].idConexion).dibujarTablero(x.Jugador1,x.Jugador2,x.Mazo);
             Clients.Client(partidaEncontrada.jugadores[1].idConexion).dibujarTablero(x.Jugador1, x.Jugador2, x.Mazo);

@@ -9,16 +9,16 @@ namespace EntidadesJuego
     public class Partida
     {
         public List<Jugador> jugadores { get; set; }
-        public Mazo mazo { get; set; }
+        public Mazo Mazo { get; set; }
         public Jugador Turno { get; set; }
         public bool EstaCompleto { get; set; }
-        public string nombre { get; set; }
-        public Ranking resultado { get; set; }
+        public string Nombre { get; set; }
+        public Ranking Resultado { get; set; }
 
         public Partida() //Test
         {
             this.jugadores = new List<Jugador>();
-            this.resultado = new Ranking();
+            this.Resultado = new Ranking();
         }
 
         public Partida Jugador(Jugador jugador) //Test
@@ -34,15 +34,15 @@ namespace EntidadesJuego
             return this;
         }
 
-        public Partida Mazo(Mazo mazoElegido) //Test
+        public Partida SetMazo(Mazo mazoElegido) //Test
         {
-            mazo = mazoElegido;
+            Mazo = mazoElegido;
             return this;
         }
 
-        public Partida Nombre(string nom)
+        public Partida SetNombre(string nom)
         {
-            this.nombre = nom;
+            this.Nombre = nom;
             return this;
         }
         private void RevisarCantidadJugadores()
@@ -59,7 +59,7 @@ namespace EntidadesJuego
         private void MezclarCartas() //Test 
         {
 
-            int total = this.mazo.Cartas.Count;
+            int total = this.Mazo.Cartas.Count;
             var listaCartasAuxiliar = new List<Carta>();
           
             Random numeroNuevo = new Random();
@@ -73,7 +73,7 @@ namespace EntidadesJuego
                     if (contador == 1)
                     {
                         sorteo.Add(sor);
-                        listaCartasAuxiliar.Add(this.mazo.Cartas[sor]);
+                        listaCartasAuxiliar.Add(this.Mazo.Cartas[sor]);
                         contador++;
                     }
                     else
@@ -90,7 +90,7 @@ namespace EntidadesJuego
 
                         if (encontrado == false)
                         {
-                            listaCartasAuxiliar.Add(this.mazo.Cartas[sor]);
+                            listaCartasAuxiliar.Add(this.Mazo.Cartas[sor]);
                             sorteo.Add(sor);
                             contador++;
                         }
@@ -99,7 +99,7 @@ namespace EntidadesJuego
                 }
 
 
-            this.mazo.Cartas = listaCartasAuxiliar;
+            this.Mazo.Cartas = listaCartasAuxiliar;
 
         }
 
@@ -108,14 +108,14 @@ namespace EntidadesJuego
         public void RepartirCartas()
         {
             RevisarCantidadJugadores();
-            if (this.mazo.Cartas != null && this.EstaCompleto == true)
+            if (this.Mazo.Cartas != null && this.EstaCompleto == true)
             {
 
                 //MezclarCartas(); //Mezclo el mazo asignado
 
 
                 int Cont = 1;
-                foreach (var item in this.mazo.Cartas)
+                foreach (var item in this.Mazo.Cartas)
                 {
                     //Asigna una carta a cada uno hasta que se terminen
                     if ((Cont % 2) != 0)
@@ -338,8 +338,8 @@ namespace EntidadesJuego
         {
             var ganador = new Jugador();
 
-            resultado.NombreJugador1 = jugadores[0].nombre;
-            resultado.NombreJugador2 = jugadores[1].nombre;
+            Resultado.NombreJugador1 = jugadores[0].nombre;
+            Resultado.NombreJugador2 = jugadores[1].nombre;
 
 
             if (HayCartas(jugadores[0], jugadores[1]))
@@ -348,11 +348,11 @@ namespace EntidadesJuego
 
                 if (ganador == jugadores[0])
                 {
-                    resultado.VecesQueGanoElJugador1 = resultado.VecesQueGanoElJugador1 + 1;
+                    Resultado.VecesQueGanoElJugador1 = Resultado.VecesQueGanoElJugador1 + 1;
                 }
                 else
                 {
-                    resultado.VecesQueGanoElJugador2 = resultado.VecesQueGanoElJugador2 + 1;
+                    Resultado.VecesQueGanoElJugador2 = Resultado.VecesQueGanoElJugador2 + 1;
                 }
             }
         }
