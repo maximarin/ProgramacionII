@@ -133,12 +133,15 @@ namespace EntidadesJuego
 
             foreach (var item in this.Partidas)
             {
-                var x = new PartidasHub();
-                x.Usuario = item.jugadores[0].nombre;
-                x.Mazo = item.mazo.Nombre;
-                x.Nombre = item.nombre;
+                if (item.EstaCompleto==false)
+                {
+                    var x = new PartidasHub();
+                    x.Usuario = item.jugadores[0].nombre;
+                    x.Mazo = item.mazo.Nombre;
+                    x.Nombre = item.nombre;
 
-                ListaRetornar.Add(x);
+                    ListaRetornar.Add(x);
+                }           
             }
             return ListaRetornar;
         }
@@ -149,19 +152,19 @@ namespace EntidadesJuego
             return mazo;
         }
 
-        public Partida AgregarSegundoJugador(Jugador jug, string parti)
-        {
-            var par = new Partida();
-            foreach (var item in this.Partidas)
-            {
-                 if (item.nombre==parti)
-                {
-                    item.jugadores.Add(jug);
-                    par = item;
-                }
-            }
-            return par;
-        }
+        //public Partida AgregarSegundoJugador(Jugador jug, string parti)
+        //{
+        //    var par = new Partida();
+        //    foreach (var item in this.Partidas)
+        //    {
+        //         if (item.nombre==parti)
+        //        {
+        //            item.jugadores.Add(jug);
+        //            par = item;
+        //        }
+        //    }
+        //    return par;
+        //}
 
         public List<string> NombreDeLosMazos()
         {

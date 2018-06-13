@@ -30,14 +30,14 @@ namespace Cromy.web.Hubs
         }
 
         public void UnirsePartida(string usuario, string partida)
-        {            
+        {
             var jugador2 = new Jugador();
             jugador2.Nombre(usuario).IdConexion(Context.ConnectionId).Numero(NumJugador.dos);
             juego.Jugadores.Add(jugador2);
 
             //AgregarAlSegundoJugador, agrega al jugador a la partida que elige y devuelve la partida que es
-            var partidaEncontrada = juego.AgregarSegundoJugador(jugador2 , partida);
-
+            var partidaEncontrada = juego.Partidas.Where(z => z.nombre == partida).First().Jugador(jugador2);
+                            
             partidaEncontrada.RepartirCartas();
             
             //Dibujar

@@ -23,7 +23,14 @@ namespace EntidadesJuego
 
         public Partida Jugador(Jugador jugador) //Test
         {
-            jugadores.Add(jugador);
+            if (this.EstaCompleto== false)
+            {
+                jugadores.Add(jugador);                                
+            }
+            if (this.jugadores.Count==2)
+            {
+                this.EstaCompleto = true;
+            }
             return this;
         }
 
