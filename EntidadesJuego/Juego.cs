@@ -34,7 +34,7 @@ namespace EntidadesJuego
 
         public List<Mazo> AgregarMazos()
         {           
-            var lines = File.ReadAllLines(@"C:\TP-Prog\ProgramacionII\Cromy.web\Mazos\X-Men\Informacion.txt");
+            var lines = File.ReadAllLines(@"C:\Users\Juan Aira\Desktop\TpProgramacion\Cromy.web\Mazos\X-Men\Informacion.txt");
             int cont = 0;
             var nuevoMazo = new Mazo();
             string[] datos;

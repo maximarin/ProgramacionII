@@ -11,10 +11,10 @@
     <link href="Content/css/baraja.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="Content/css/ns-default.css" />  
+    <link rel="stylesheet" type="text/css" href="Content/css/ns-default.css" />
     <link rel="stylesheet" type="text/css" href="Content/css/ns-style-growl.css" />
 
-    <script src="Scripts/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>  
+    <script src="Scripts/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
 </head>
 <body>
@@ -27,16 +27,16 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               
-                <a class="navbar-brand" href="#" style="color:white; font-weight:bold;">JUEGO DE CARTAS CROMY</a>              
+
+                <a class="navbar-brand" href="#" style="color:white; font-weight:bold;">JUEGO DE CARTAS CROMY</a>
             </div>
-        </div>       
+        </div>
     </nav>
     <div class="container">
         <div>&nbsp;</div>
         <!--<h1>Juego de Cartas</h1>-->
         <!-- Example row of columns -->
-       
+
         <div class="row" id="user-session-options">
             <fieldset>
                 <h3>  Completa tus datos...  </h3>
@@ -47,7 +47,7 @@
                             <label for="user-name">Nombre Jugador</label>
                             <input type="text" class="form-control" id="user-name" placeholder="Mi Nombre...">
                         </div>
-                        <button type="button" id="start-session" class="btn nuevo" >
+                        <button type="button" id="start-session" class="btn nuevo">
                             Iniciar juego <br>
                         </button>
                     </div>
@@ -56,7 +56,7 @@
         </div>
         <div class="row" id="start-session-options" style="display: none;">
             <fieldset>
-                <h3>Selecciona la forma de juego...</h3> 
+                <h3>Selecciona la forma de juego...</h3>
                 <br />
 
                 <div class="col-md-12">
@@ -103,39 +103,39 @@
                 </div>
             </fieldset>
         </div>
-        
-            <div id="game-area" class="row" style="display:none">
-                <div class="col-lg-6 col-md-6 col-sm-12 player-area" ">
-                    <h2 class="player-name">Jugador 1</h2>
-                    <h4 class="player-countcards">Cartas restantes: <span class="card-count"></span></h4>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-8 baraja-demo">
-                            <div class="star star-1"></div>
-                            <div class="star star-2"></div>
-                            <div class="star star-3"></div>
-                            <div class="star star-4"></div>
-                            <ul id="baraja-el" class="baraja-container"></ul>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-10 button-area">
-                        </div>
+
+        <div id="game-area" class="row" style="display:none">
+            <div class="col-lg-6 col-md-6 col-sm-12 player-area" ">
+                <h2 class="player-name">Jugador 1</h2>
+                <h4 class="player-countcards">Cartas restantes: <span class="card-count"></span></h4>
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-8 baraja-demo">
+                        <div class="star star-1"></div>
+                        <div class="star star-2"></div>
+                        <div class="star star-3"></div>
+                        <div class="star star-4"></div>
+                        <ul id="baraja-el" class="baraja-container"></ul>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-12 player2-area">
-                    <h2 class="player-name">Jugador 2</h2>
-                    <h4 class="player-countcards">Cartas restantes: <span class="card-count"></span></h4>
-                    <div class="row">
-                        <div class="col-md-offset-1 col-md-8 baraja-demo">
-                            <div class="star star-1"></div>
-                            <div class="star star-2"></div>
-                            <div class="star star-3"></div>
-                            <div class="star star-4"></div>
-                            <ul id="baraja-2" class="baraja-container"></ul>
-                        </div>
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-10 button-area">
                     </div>
                 </div>
             </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 player2-area">
+                <h2 class="player-name">Jugador 2</h2>
+                <h4 class="player-countcards">Cartas restantes: <span class="card-count"></span></h4>
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-8 baraja-demo">
+                        <div class="star star-1"></div>
+                        <div class="star star-2"></div>
+                        <div class="star star-3"></div>
+                        <div class="star star-4"></div>
+                        <ul id="baraja-2" class="baraja-container"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div>&nbsp;</div>
         <footer>
             <br />
@@ -168,5 +168,11 @@
 
     <script src="Scripts/classie.js"></script>
     <script src="Scripts/notificationFx.js"></script>
+
+    <!-- SCM Music Player http://scmplayer.co -->
+    <script type="text/javascript" src="http://scmplayer.co/script.js"
+            data-config="{'skin':'skins/tunes/skin.css','volume':72,'autoplay':true,'shuffle':true,'repeat':1,'placement':'top','showplaylist':false,'playlist':[{'title':'Dread Mar I - Hoja en Blanco','url':'https://www.youtube.com/watch?v=4dOT1BoJFko'},{'title':'Jurabas tu - Los del fuego','url':'https://www.youtube.com/watch?v=vhSIFloIMxI'},{'title':'La Groupera - Que nadie se entere','url':'https://www.youtube.com/watch?v=FN2_iMG4PEk'},{'title':'La Konga - Ya me enter%E9 ','url':'https://www.youtube.com/watch?v=zz7rmjjackY'},{'title':'Leo Mattioli - Le Pido a Dios','url':'https://www.youtube.com/watch?v=b_69rNlGYJQ'},{'title':'Los Palmeras - La cola ','url':'https://www.youtube.com/watch?v=PwGib4BMJyk'},{'title':'Mal ense%F1ado - Leo Mattioli','url':'https://www.youtube.com/watch?v=5vErFL7Pn8A'},{'title':'Mario Pereyra - Nada','url':'https://www.youtube.com/watch?v=0EUnXKZcOG0'},{'title':'Te perdiste mi amor-  La Konga y Dami%E1n Cordoba','url':'https://www.youtube.com/watch?v=IyMlJRnkrYM'},{'title':'Ulises Bueno - Ahora Mirame','url':'https://www.youtube.com/watch?v=0EUnXKZcOG0'},{'title':'Ulises Bueno - Intento','url':'https://www.youtube.com/watch?v=MMsNVph4n2o'},{'title':'Uriel Lozano - El chancho come caviar','url':'https://www.youtube.com/watch?v=kQ5CQUwaNnM'}]}"></script>
+    <!-- SCM Music Player script end -->
+
 </body>
 </html>
