@@ -1,15 +1,28 @@
 body {
-    background: #1065ce;
-    color: #fff;
+    background:url(../img/wolverine.jpg);
+    background-repeat:no-repeat;
+    
+    background-size:cover;
+    color: black;
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Raleway', cursive;
 }
 
+h3 {
+    color:black;
+    
+}
+button.nuevo {
+    color:white;
+    background-color:black;
+    border-style:groove;  
+}
 footer {
-    color: #1c1c1c;
+
     font-weight:bold;
-    text-align: center;
+    color: black;
+    text-align: left;
     font-family:'Open Sans Condensed', sans-serif;
 }
 
@@ -189,8 +202,16 @@ footer {
     border-color: #666;
 }
 
+.nuevo {
+    color: black;
+    background-color:coral;
+}
+.btn2 {
+    color:black;
+}
 .btn {
-    border-color: #1c1c1c;
+    color: black;
+    background-color: Background;
 }
 
 legend {
@@ -207,7 +228,8 @@ hr {
 
     .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
         border-color: #fff;
-        background-color: #fff;
+        background-color:black;
+        color:white;
     }
 
     .nav-tabs > li > a:hover {

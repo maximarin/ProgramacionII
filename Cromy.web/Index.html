@@ -11,7 +11,7 @@
     <link href="Content/css/baraja.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="Content/css/ns-default.css" />
+    <link rel="stylesheet" type="text/css" href="Content/css/ns-default.css" />  
     <link rel="stylesheet" type="text/css" href="Content/css/ns-style-growl.css" />
 
     <script src="Scripts/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>  
@@ -27,42 +27,44 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" style="color:white; font-weight:bold;">JUEGO DE CARTAS</a>
+               
+                <a class="navbar-brand" href="#" style="color:white; font-weight:bold;">JUEGO DE CARTAS CROMY</a>              
             </div>
-        </div>
+        </div>       
     </nav>
-
     <div class="container">
         <div>&nbsp;</div>
         <!--<h1>Juego de Cartas</h1>-->
         <!-- Example row of columns -->
+       
         <div class="row" id="user-session-options">
             <fieldset>
-                <legend>Completa tus datos...</legend>
+                <h3>  Completa tus datos...  </h3>
+                <br />
                 <div class="col-md-6">
                     <div>
                         <div class="form-group">
                             <label for="user-name">Nombre Jugador</label>
                             <input type="text" class="form-control" id="user-name" placeholder="Mi Nombre...">
                         </div>
-                        <button type="button" id="start-session" class="btn btn-default">
-                            INICIAR<br>
+                        <button type="button" id="start-session" class="btn nuevo" >
+                            Iniciar juego <br>
                         </button>
                     </div>
                 </div>
-                </fieldset>
+            </fieldset>
         </div>
         <div class="row" id="start-session-options" style="display: none;">
             <fieldset>
-                <legend>Selecciona la forma de juego...</legend>
+                <h3>Selecciona la forma de juego...</h3> 
+                <br />
 
                 <div class="col-md-12">
-                    <div role="tabpanel">
-
+                    <div role="tabpanel" style="color:black">
                         <!-- Nav tabs -->
-                        <ul class="nav nav-tabs" role="tablist">
+                        <ul class="nav nav-tabs" role="tablist" style="border-color:black">
                             <li role="presentation" class="active"><a href="#newGame" aria-controls="newGame" role="tab" data-toggle="tab">Nueva partida</a></li>
-                            <li role="presentation"><a href="#existingGame" aria-controls="existingGame" role="tab" data-toggle="tab">Sumarse a partida existente</a></li>
+                            <li role="presentation"><a href="#existingGame" aria-controls="existingGame" role="tab" data-toggle="tab" " >Sumarse a partida existente</a></li>
                         </ul>
 
                         <!-- Tab panes -->
@@ -78,12 +80,12 @@
                                         <label for="game-name">Nombre Partida</label>
                                         <input type="text" class="form-control" id="game-name" placeholder="Mi partida...">
                                     </div>
-                                    <button type="button" id="start-game" class="btn btn-default">CONFIRMAR</button>
+                                    <button type="button" id="start-game" class="btn nuevo">CONFIRMAR</button>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="existingGame">
                                 <table class="table" id="available-games">
-                                    <caption>Unite a una de las partidas disponibles:</caption>
+                                    <h5>Unite a una de las partidas disponibles:</h5>
                                     <thead>
                                         <tr>
                                             <th>Creador</th>
@@ -101,43 +103,53 @@
                 </div>
             </fieldset>
         </div>
-
-        <div id="game-area" class="row" style="display: none;">
-            <div class="col-lg-6 col-md-6 col-sm-12 player-area">
-                <h2 class="player-name">Jugador 1</h2>
-                <h4 class="player-countcards">Cartas restantes: <span class="card-count"></span></h4>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-8 baraja-demo">
-                        <div class="star star-1"></div>
-                        <div class="star star-2"></div>
-                        <div class="star star-3"></div>
-                        <div class="star star-4"></div>
-                        <ul id="baraja-el" class="baraja-container"></ul>
+        
+            <div id="game-area" class="row" style="display:none">
+                <div class="col-lg-6 col-md-6 col-sm-12 player-area" ">
+                    <h2 class="player-name">Jugador 1</h2>
+                    <h4 class="player-countcards">Cartas restantes: <span class="card-count"></span></h4>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-8 baraja-demo">
+                            <div class="star star-1"></div>
+                            <div class="star star-2"></div>
+                            <div class="star star-3"></div>
+                            <div class="star star-4"></div>
+                            <ul id="baraja-el" class="baraja-container"></ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-10 button-area">
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-10 button-area">
+                <div class="col-lg-6 col-md-6 col-sm-12 player2-area">
+                    <h2 class="player-name">Jugador 2</h2>
+                    <h4 class="player-countcards">Cartas restantes: <span class="card-count"></span></h4>
+                    <div class="row">
+                        <div class="col-md-offset-1 col-md-8 baraja-demo">
+                            <div class="star star-1"></div>
+                            <div class="star star-2"></div>
+                            <div class="star star-3"></div>
+                            <div class="star star-4"></div>
+                            <ul id="baraja-2" class="baraja-container"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 player2-area">
-                <h2 class="player-name">Jugador 2</h2>
-                <h4 class="player-countcards">Cartas restantes: <span class="card-count"></span></h4>
-                <div class="row">
-                    <div class="col-md-offset-1 col-md-8 baraja-demo">
-                        <div class="star star-1"></div>
-                        <div class="star star-2"></div>
-                        <div class="star star-3"></div>
-                        <div class="star star-4"></div>
-                        <ul id="baraja-2" class="baraja-container"></ul>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div>&nbsp;</div>
         <footer>
-            <p>&copy; UCSE DAR - 2018 - PROGRAMACION II </p>         
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <p>&copy; UCSE DAR - 2018 - PROGRAMACION II </p>
             <p>&copy; AIRA - MARÍN - MULLER   </p>
+
         </footer>
     </div> <!-- /container -->
 

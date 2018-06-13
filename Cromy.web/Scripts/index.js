@@ -143,6 +143,8 @@ $(function () {
             else {
                 juego.server.crearPartida($('#user-name').val(), $('#game-name').val(), $('#card-type').val());
                 esJugador1 = true;
+                var elemento = document.getElementsByTagName('body')[0];
+                document.body.style.backgroundImage = "url('../Content/img/pieza.jpg')"; 
             }
         });
 
@@ -151,6 +153,8 @@ $(function () {
 
             juego.server.unirsePartida($('#user-name').val(), gameId);
             esJugador1 = false;
+            var elemento = document.getElementsByTagName('body')[0];
+            document.body.style.backgroundImage = "url('../Content/img/pieza.jpg')";
         });
 
         $('body').on('click', '.button-area button', function () {

@@ -15,12 +15,9 @@ namespace EntidadesJuego
         public string nombre { get; set; }
         public Ranking resultado { get; set; }
 
-
-
         public Partida() //Test
         {
             this.jugadores = new List<Jugador>();
-
             this.resultado = new Ranking();
         }
 
