@@ -134,115 +134,42 @@ namespace EntidadesJuego
             }
         }
 
-        public void Deja5Cartas(Jugador jespecial, Jugador jafectado)    //Modifico la lista del afectado
-        {
-            while (jafectado.Cartas.Count > 5)
-            {
-                jespecial.Cartas.Add(jafectado.Cartas[0]);
-                jafectado.Cartas.Remove(jafectado.Cartas[0]);
-
-            }
-
-            return;
-        }
-
+        //public void Deja5Cartas(Jugador jespecial, Jugador jafectado)    //Modifico la lista del afectado
+        //{
+        //    while (jafectado.Cartas.Count > 5)
+        //    {
+        //        jespecial.Cartas.Add(jafectado.Cartas[0]);
+        //        jafectado.Cartas.Remove(jafectado.Cartas[0]);
+        //    }
+        //    return;
+        //}
+        
         public void AgregarCartasGanadas(Carta cartalost, Jugador jugadorlost, int cant, Carta cartawin, Jugador jugadorwin) //Metodo D10S
         {
             if (jugadorlost.Cartas.Count >= cant)
             {
                 if (cant == 1)
                 {
-
-
-                    jugadorwin.Cartas.Remove(cartawin);
-                    if (cartalost.TipoCarta == TipoDeCarta.Amarilla)
-                    {
-                        var siguienteCarta = jugadorlost.Cartas[1];
-                        jugadorlost.Cartas.Remove(cartalost);
-                        jugadorwin.Cartas.Add(siguienteCarta);
-                        jugadorlost.Cartas.Remove(siguienteCarta);
-
-                    }
-                    else
-                    {
+                        jugadorwin.Cartas.Remove(cartawin);
                         jugadorwin.Cartas.Add(cartalost);
-                        jugadorlost.Cartas.Remove(cartalost);
-                    }
-
+                        jugadorlost.Cartas.Remove(cartalost);            
                 }
                 else
                 {
-                    jugadorwin.Cartas.Remove(cartawin);
-
                     var siguienteCarta = jugadorlost.Cartas[1];
+                    
                     jugadorwin.Cartas.Add(cartalost);
                     jugadorwin.Cartas.Add(siguienteCarta);
-
                     jugadorlost.Cartas.Remove(cartalost);
-                    jugadorlost.Cartas.Remove(siguienteCarta);
+                    jugadorlost.Cartas.Remove(siguienteCarta);        
                 }
             }
         }
 
-
         private string ResolverCartasEspeciales(Carta carta1, Carta carta2, Jugador jugador1, Jugador jugador2)
         { //Doy por hecho que ambos se encuentran en la misma sala
 
-            string ganador = "";
-
-            //Verde vs normal
-            if ((carta1.TipoCarta == TipoDeCarta.Especial) && (carta2.TipoCarta == TipoDeCarta.Normal))
-            {
-                Deja5Cartas(jugador1, jugador2);
-
-                return ganador = jugador1.idConexion;
-            }
-            if ((carta2.TipoCarta == TipoDeCarta.Especial) && (carta1.TipoCarta == TipoDeCarta.Normal))
-            {
-                Deja5Cartas(jugador2, jugador1);
-                return ganador = jugador2.idConexion;
-            }
-
-            //Roja vs Amarilla 
-            if ((TipoDeCarta.Roja == carta1.TipoCarta) && (TipoDeCarta.Amarilla == carta2.TipoCarta))
-            {
-                AgregarCartasGanadas(carta2, jugador2, 1, carta1, jugador1);
-                return ganador = jugador1.idConexion;
-            }
-            if ((TipoDeCarta.Amarilla == carta1.TipoCarta) && (TipoDeCarta.Roja == carta2.TipoCarta))
-            {
-                AgregarCartasGanadas(carta1, jugador1, 1, carta2, jugador2);
-                return ganador = jugador2.idConexion;
-            }
-
-            //Verde vs Roja
-            if ((TipoDeCarta.Especial == carta1.TipoCarta) && (TipoDeCarta.Roja == carta2.TipoCarta))
-            {
-                Deja5Cartas(jugador1, jugador2);
-
-                return ganador = jugador1.idConexion;
-            }
-            if ((TipoDeCarta.Especial == carta2.TipoCarta) && (TipoDeCarta.Roja == carta1.TipoCarta))
-            {
-                Deja5Cartas(jugador2, jugador1);
-
-                return ganador = jugador2.idConexion;
-            }
-
-            //Verde vs amarilla
-            if ((TipoDeCarta.Especial == carta1.TipoCarta) && (TipoDeCarta.Amarilla == carta2.TipoCarta))
-            {
-                Deja5Cartas(jugador1, jugador2);
-
-                return ganador = jugador1.idConexion;
-            }
-            if ((TipoDeCarta.Especial == carta2.TipoCarta) && (TipoDeCarta.Amarilla == carta1.TipoCarta))
-            {
-                Deja5Cartas(jugador2, jugador1);
-
-
-                return ganador = jugador2.idConexion;
-            }
+            string ganador = "";                                       
 
             //Amarrilla vs Normal
             if ((TipoDeCarta.Amarilla == carta1.TipoCarta) && (TipoDeCarta.Normal == carta2.TipoCarta))
@@ -257,12 +184,12 @@ namespace EntidadesJuego
             }
 
             //Roja vs Normal
-            if ((TipoDeCarta.Roja == carta1.TipoCarta) && (TipoDeCarta.Normal == carta2.TipoCarta))
+            if ((TipoDeCarta.Roja == carta1.TipoCarta) && ((TipoDeCarta.Normal == carta2.TipoCarta) || (TipoDeCarta.Amarilla == carta2.TipoCarta) ))
             {
                 AgregarCartasGanadas(carta2, jugador2, 2, carta1, jugador1);
                 return ganador = jugador1.idConexion;
             }
-            if ((TipoDeCarta.Roja == carta2.TipoCarta) && (TipoDeCarta.Normal == carta1.TipoCarta))
+            if ((TipoDeCarta.Roja == carta2.TipoCarta) && ((TipoDeCarta.Normal == carta1.TipoCarta) || (TipoDeCarta.Amarilla == carta1.TipoCarta)))
             {
                 AgregarCartasGanadas(carta1, jugador1, 2, carta2, jugador2);
                 return ganador = jugador2.idConexion;
