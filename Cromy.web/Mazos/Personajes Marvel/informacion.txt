@@ -1,0 +1,22 @@
+Personajes Marvel
+Altura|Peso|Fuerza|Velocidad|Peleas Ganadas
+CN1|Thor|2,10|103|1100|250|975
+CN2|Hombre araña|1,82|83|500|150|986
+CN3|Rogue|1,56|53|800|65|706
+CN4|Thanos|1,98|444|2450|930|300
+CN5|Capitan America|1,85|99|950|92|1000
+CN6|Pantera negra|1,80|83|900|88|880
+CN7|Hulk|2,40|450|2500|130|997
+CN8|Dr Strange|1,88|81|500|110|866
+CN9|Iron man|1,90|587|930|197|900
+CN10|Ojo de halcón|1,88|90|850|80|936
+CN11|Viuda negra|1,68|56|750|69|850
+CN12|Gamora|1,87|54|250|80|881
+CN13|Tormenta|1,78|57|670|166|930
+CN14|Loki|1,83|77|870|86|979
+CN15|Daredevil|1,80|80|600|75|800
+CN16|Ant man|1,75|75|750|70|755
+CN17|Groot|2,10|100|850|30|450
+CN18|Hombre de arena|1,87|205|1760|150|117
+CN19|Dr. Octopus|1,76|90|750|42|4
+CN20|Antorcha humana|1,60|76|150|160|815

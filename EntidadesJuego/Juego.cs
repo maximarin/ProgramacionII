@@ -26,90 +26,98 @@ namespace EntidadesJuego
         {
             Partidas.Add(nuevaPartida);
             return nuevaPartida;
-        }  
+        }
 
         public List<Mazo> AgregarMazos()
-        {           
-            var lines = File.ReadAllLines(@"C:\Users\maxi_\Desktop\Juego\Cromy.web\Mazos\X-Men\Informacion.txt");
-            int cont = 0;
-            var nuevoMazo = new Mazo();
-            string[] datos;
-            List<Atributo> Atributos = new List<Atributo>();
+        {
+            var deckFolder = Directory.GetDirectories(@"C:\Users\Juan Aira\Desktop\TpProgramacion\Cromy.web\Mazos");           
 
-            var cartaRoja = new Carta();
-            cartaRoja.IdCarta = "roja";
-            cartaRoja.TipoCarta = TipoDeCarta.Roja;
-            cartaRoja.Atributos = null;
-
-            var cartaAmarilla = new Carta();
-            cartaAmarilla.IdCarta = "amarilla";
-            cartaAmarilla.TipoCarta = TipoDeCarta.Amarilla;
-            cartaAmarilla.Atributos = null;
-
-            nuevoMazo.Cartas.Add(cartaRoja);
-            nuevoMazo.Cartas.Add(cartaAmarilla);
-
-            foreach (var line in lines)   //LEO EL ARCHIVO
+            foreach (var deck in deckFolder)
             {
-                if (cont == 0)
-                {
-                    nuevoMazo.Nombre = line;  //SI ESTOY EN LA PRIMER LÍNEA DEFINO EL NOMBRE DEL MAZO 
-                }
-                else
-                {
-                    datos = line.Split('|');
+                var lines = File.ReadAllLines(deck + "\\informacion.txt");
+                int cont = 0;
+                var nuevoMazo = new Mazo();
+                string[] datos;
+                List<Atributo> Atributos = new List<Atributo>();
 
-                    if (cont == 1)     //SI ES LA SEGUNDA LÍNEA AÑADO LOS ATRIBUTOS A UN VECTOR 
+                var cartaRoja = new Carta();
+                cartaRoja.IdCarta = "roja";
+                cartaRoja.TipoCarta = TipoDeCarta.Roja;
+                cartaRoja.Atributos = null;
+
+                var cartaAmarilla = new Carta();
+                cartaAmarilla.IdCarta = "amarilla";
+                cartaAmarilla.TipoCarta = TipoDeCarta.Amarilla;
+                cartaAmarilla.Atributos = null;
+
+                nuevoMazo.Cartas.Add(cartaRoja);
+                nuevoMazo.Cartas.Add(cartaAmarilla);
+
+                foreach (var line in lines)   //LEO EL ARCHIVO
+                {
+                    if (cont == 0)
                     {
-
-                        for (int i = 0; i < datos.Length; i++)
-                        {
-                            var atrib = new Atributo();
-                            atrib.Nombre = datos[i];
-                            Atributos.Add(atrib);
-                        }
+                        nuevoMazo.Nombre = line;  //SI ESTOY EN LA PRIMER LÍNEA DEFINO EL NOMBRE DEL MAZO 
                     }
                     else
                     {
-                        var nuevaCarta = new Carta();        //A PARTIR DE LA TERCER LÍNEA VOY CREANDO LAS CARTAS Y ASIGNANDO LOS VALORES A LOS ATRIBUTOS
-                        List<Atributo> nuevosAtributos = new List<Atributo>();
-                        foreach (var item in Atributos)
-                        {
-                            Atributo atribut = new Atributo();
-                            atribut.Nombre = item.Nombre;
-                            nuevosAtributos.Add(atribut);
-                        }
+                        datos = line.Split('|');
 
-                        nuevaCarta.Atributos = nuevosAtributos;
-                        nuevaCarta.TipoCarta = TipoDeCarta.Normal;
-                        int j = 0;
-                        for (int i = 0; i < datos.Length; i++)
+                        if (cont == 1)     //SI ES LA SEGUNDA LÍNEA AÑADO LOS ATRIBUTOS A UN VECTOR 
                         {
-                            if (i == 0)
+
+                            for (int i = 0; i < datos.Length; i++)
                             {
-                                nuevaCarta.IdCarta = datos[i];
+                                var atrib = new Atributo();
+                                atrib.Nombre = datos[i];
+                                Atributos.Add(atrib);
                             }
-                            else
+                        }
+                        else
+                        {
+                            var nuevaCarta = new Carta();        //A PARTIR DE LA TERCER LÍNEA VOY CREANDO LAS CARTAS Y ASIGNANDO LOS VALORES A LOS ATRIBUTOS
+                            List<Atributo> nuevosAtributos = new List<Atributo>();
+                            foreach (var item in Atributos)
                             {
-                                if (i == 1)
-                                {
-                                    nuevaCarta.Nombre = datos[i];
+                                Atributo atribut = new Atributo();
+                                atribut.Nombre = item.Nombre;
+                                nuevosAtributos.Add(atribut);
+                            }
 
+                            nuevaCarta.Atributos = nuevosAtributos;
+                            nuevaCarta.TipoCarta = TipoDeCarta.Normal;
+                            int j = 0;
+                            for (int i = 0; i < datos.Length; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    nuevaCarta.IdCarta = datos[i];
                                 }
                                 else
                                 {
-                                    nuevaCarta.Atributos[j].Valor = Convert.ToDouble(datos[i]);
-                                    j++;
+                                    if (i == 1)
+                                    {
+                                        nuevaCarta.Nombre = datos[i];
+
+                                    }
+                                    else
+                                    {
+                                        nuevaCarta.Atributos[j].Valor = Convert.ToDouble(datos[i]);
+                                        j++;
+                                    }
                                 }
-                            }                            
+                            }
+                            nuevoMazo.Cartas.Add(nuevaCarta);
                         }
-                        nuevoMazo.Cartas.Add(nuevaCarta);
                     }
+                    cont++;
+                  
                 }
-                cont++;
+
+                Mazos.Add(nuevoMazo);
+
             }
 
-            Mazos.Add(nuevoMazo);
 
             return this.Mazos;
         }
@@ -120,7 +128,7 @@ namespace EntidadesJuego
 
             foreach (var item in this.Partidas)
             {
-                if (item.EstaCompleto==false)
+                if (item.EstaCompleto == false)
                 {
                     var x = new PartidasHub();
                     x.Usuario = item.jugadores[0].nombre;
@@ -128,7 +136,7 @@ namespace EntidadesJuego
                     x.Nombre = item.Nombre;
 
                     ListaRetornar.Add(x);
-                }           
+                }
             }
             return ListaRetornar;
         }
@@ -188,10 +196,10 @@ namespace EntidadesJuego
             }
 
             Retornar.Mazo.Nombre = p.Mazo.Nombre;
-        
+
             foreach (var item in p.Mazo.Cartas)
             {
-                if (item.TipoCarta== TipoDeCarta.Normal)
+                if (item.TipoCarta == TipoDeCarta.Normal)
                 {
                     foreach (var item2 in item.Atributos)
                     {
@@ -204,7 +212,7 @@ namespace EntidadesJuego
             return Retornar;
         }
 
-       
+
 
     }
 }
