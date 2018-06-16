@@ -161,9 +161,11 @@ namespace EntidadesJuego
                     jugadorwin.Cartas.Add(cartalost);
                     jugadorwin.Cartas.Add(siguienteCarta);
                     jugadorlost.Cartas.Remove(cartalost);
-                    jugadorlost.Cartas.Remove(siguienteCarta);        
+                    jugadorlost.Cartas.Remove(siguienteCarta);
+                    jugadorwin.Cartas.Remove(cartawin);
                 }
             }
+
         }
 
         private string ResolverCartasEspeciales(Carta carta1, Carta carta2, Jugador jugador1, Jugador jugador2)

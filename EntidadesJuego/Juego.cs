@@ -14,10 +14,6 @@ namespace EntidadesJuego
         public List<Jugador> Jugadores { get; set; }
         public List<Mazo> Mazos { get; set; }
 
-        //HAY UN SOLO JUEGO, POR LO TANTO SE APLICA SINGLETON 
-
-
-
         public Juego()
         {
             this.Partidas = new List<Partida>();
@@ -34,7 +30,7 @@ namespace EntidadesJuego
 
         public List<Mazo> AgregarMazos()
         {           
-            var lines = File.ReadAllLines(@"C:\Users\Juan Aira\Desktop\TpProgramacion\Cromy.web\Mazos\X-Men\Informacion.txt");
+            var lines = File.ReadAllLines(@"C:\Users\maxi_\Desktop\Juego\Cromy.web\Mazos\X-Men\Informacion.txt");
             int cont = 0;
             var nuevoMazo = new Mazo();
             string[] datos;
@@ -112,15 +108,6 @@ namespace EntidadesJuego
                 }
                 cont++;
             }
-
-            //var cartaEspecial = new Carta();
-            //cartaEspecial.IdCarta = "especial";
-            //cartaEspecial.TipoCarta = TipoDeCarta.Especial;
-            //cartaEspecial.Atributos = null;
-
-           // nuevoMazo.Cartas.Add(cartaRoja); //nuevoMazo.Cartas.Add(cartaEspecial);
-
-
 
             Mazos.Add(nuevoMazo);
 
