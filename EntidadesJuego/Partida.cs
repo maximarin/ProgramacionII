@@ -66,7 +66,7 @@ namespace EntidadesJuego
 
                 var sorteo = new List<int>();
                 int contador = 1;
-                while (total > contador)
+                while (total + 1> contador)
                 {
                     int sor = numeroNuevo.Next(1, total);
 
@@ -111,7 +111,7 @@ namespace EntidadesJuego
             if (this.Mazo.Cartas != null && this.EstaCompleto == true)
             {
 
-                //MezclarCartas(); //Mezclo el mazo asignado
+               MezclarCartas(); //Mezclo el mazo asignado
 
 
                 int Cont = 1;

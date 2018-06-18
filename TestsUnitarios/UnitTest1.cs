@@ -8,6 +8,16 @@ namespace TestsUnitarios
     [TestClass]
     public class PartidasTest
     {
+        [TestMethod]
+        public void DeberíaAgregarLaPartidaCreadaALaListaPartidasDelJuego()
+        {
+            var juego = new Juego();
+            var Partida = new Partida();
+            Partida.Nombre = "Partida";
+            juego.AgregarPartida(Partida);
+
+            Assert.AreEqual(1, juego.Partidas.Count);
+        }
 
         [TestMethod]
         public void DeberiaGanarJugadroDosPorAtributoConValorMasAlto()
@@ -394,9 +404,9 @@ namespace TestsUnitarios
             Partida nuevaPartida = new Partida();
             nuevaPartida.Jugador(jugador1).Jugador(jugador2);
 
-            nuevaPartida.AgregarCartasGanadas(carta3, jugador1, 1, carta4, jugador2);
-            Assert.AreEqual(3, nuevaPartida.jugadores[0].Cartas.Count);
-            Assert.AreEqual(2, nuevaPartida.jugadores[1].Cartas.Count);
+            nuevaPartida.AgregarCartasGanadas(carta3, jugador1, 2, carta4, jugador2);
+            Assert.AreEqual(5, nuevaPartida.jugadores[0].Cartas.Count);
+            Assert.AreEqual(0, nuevaPartida.jugadores[1].Cartas.Count);
 
 
         }

@@ -87,12 +87,12 @@ namespace Cromy.web.Hubs
 
             if (jugadorTurno.NumeroJugador == NumJugador.uno)
             {              
-               idGanador = partidaEcontrada.AnalizarCartas(jugadorTurno.Cartas.Where(x => x.IdCarta == idCarta).First(), jugadorOponente.Cartas.First(), idAtributo); 
+               idGanador = partidaEcontrada.AnalizarCartas(cartaJugadorTurno, cartaJugadorOponente, idAtributo); 
                 
             }
             else
             {
-                idGanador = partidaEcontrada.AnalizarCartas(jugadorOponente.Cartas.First(), jugadorTurno.Cartas.Where(x => x.IdCarta == idCarta).First(), idAtributo);
+                idGanador = partidaEcontrada.AnalizarCartas(cartaJugadorOponente,cartaJugadorTurno, idAtributo);
             }
                 
             if (idGanador == jugadorTurno.idConexion)
