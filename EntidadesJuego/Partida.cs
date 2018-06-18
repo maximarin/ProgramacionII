@@ -134,15 +134,6 @@ namespace EntidadesJuego
             }
         }
 
-        //public void Deja5Cartas(Jugador jespecial, Jugador jafectado)    //Modifico la lista del afectado
-        //{
-        //    while (jafectado.Cartas.Count > 5)
-        //    {
-        //        jespecial.Cartas.Add(jafectado.Cartas[0]);
-        //        jafectado.Cartas.Remove(jafectado.Cartas[0]);
-        //    }
-        //    return;
-        //}
         
         public void AgregarCartasGanadas(Carta cartalost, Jugador jugadorlost, int cant, Carta cartawin, Jugador jugadorwin) //Metodo D10S
         {
