@@ -66,9 +66,9 @@ namespace EntidadesJuego
 
                 var sorteo = new List<int>();
                 int contador = 1;
-                while (total + 1> contador)
+                while (total+1 > contador)
                 {
-                    int sor = numeroNuevo.Next(1, total);
+                    int sor = numeroNuevo.Next(0, total); //Avisarle a los otros
 
                     if (contador == 1)
                     {
