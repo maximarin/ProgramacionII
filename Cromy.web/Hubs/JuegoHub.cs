@@ -76,10 +76,9 @@ namespace Cromy.web.Hubs
         public void Cantar(string idAtributo, string idCarta)
         {
             var jugadorTurno = juego.Jugadores.Where(x => x.idConexion == Context.ConnectionId).FirstOrDefault();
-            var jugadorOponente = juego.Jugadores.Where(x => x.idConexion != Context.ConnectionId).FirstOrDefault();
-
             var partidaEcontrada = juego.Partidas.Where(x => x.jugadores[0].idConexion == jugadorTurno.idConexion || x.jugadores[1].idConexion == jugadorTurno.idConexion).FirstOrDefault();
-            
+            var jugadorOponente = partidaEcontrada.jugadores.Where(w => w.idConexion != jugadorTurno.idConexion).FirstOrDefault();
+
             string idGanador = "";
             string idPerdedor = "";
 
