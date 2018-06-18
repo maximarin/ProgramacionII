@@ -1,8 +1,5 @@
 X-Men
 Altura|Peso|Fuerza|PeleasGanadas|Velocidad
-1|Amarilla
-2|Especial
-3|Roja
 4|SuperSkrull|1,83|194|7370|188|990
 5|Mystique|1,78|54|395|415|65
 6|ManchaSolar|1,73|77|4300|770|247
