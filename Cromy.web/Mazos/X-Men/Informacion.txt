@@ -36,4 +36,3 @@ Altura|Peso|Fuerza|PeleasGanadas|Velocidad
 37|Wicked|1,55|45|110|627|30
 38|Vulcano|1,83|81|830|580|15000
 39|Arclight|1,77|57|4800|66|53
-40|Medula|1,74|75|780|190|57

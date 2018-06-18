@@ -68,7 +68,7 @@ namespace EntidadesJuego
                 int contador = 1;
                 while (total+1 > contador)
                 {
-                    int sor = numeroNuevo.Next(0, total); //Avisarle a los otros
+                    int sor = numeroNuevo.Next(0, total); 
 
                     if (contador == 1)
                     {
