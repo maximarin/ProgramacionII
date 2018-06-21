@@ -198,7 +198,7 @@ namespace EntidadesJuego
             var cartaJugador1 = jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First().Atributos.Where(x => x.Nombre == atributo).First();
             var cartaJugador2 = jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First().Atributos.Where(x => x.Nombre == atributo).First();
 
-            if (cartaJugador1.Valor > cartaJugador2.Valor) //GANA JUGADOR 1
+            if (cartaJugador1.Valor > cartaJugador2.Valor || cartaJugador1.Valor == cartaJugador2.Valor) //GANA JUGADOR 1 -> SI HAY EMPATE GANA EL QUE CANTA
             {
                 int indice = jugadores[1].Cartas.IndexOf(jugadores[1].Cartas.Where(x => x.IdCarta == iDCartaJugador2).First());
                 var cartaGanadora = jugadores[0].Cartas[0];
@@ -224,11 +224,9 @@ namespace EntidadesJuego
 
                     return posible = jugadores[1].idConexion;
                 }
-                else
-                {
-                    return posible = "EMPATE";
-                }
+                return "";
             }
+          
 
         }
 

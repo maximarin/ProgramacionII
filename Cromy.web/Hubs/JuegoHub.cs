@@ -94,6 +94,8 @@ namespace Cromy.web.Hubs
             {
                 idGanador = partidaEcontrada.AnalizarCartas(cartaJugadorOponente,cartaJugadorTurno, idAtributo);
             }
+
+       
                 
             if (idGanador == jugadorTurno.idConexion)
             {

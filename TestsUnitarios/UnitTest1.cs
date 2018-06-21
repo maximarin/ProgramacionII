@@ -425,6 +425,34 @@ namespace TestsUnitarios
             Assert.AreEqual(2, jugadorHab.Cartas.Count); Assert.AreEqual("Riquelme",jugadorHab.Nombre);
             Assert.AreEqual(dibujarTablero.Jugador1,jugadorHab); Assert.AreEqual(dibujarTablero.Jugador2, jugadorHab1); Assert.AreEqual(dibujarTablero.Mazo, mazoHub);
         }
-   
+
+        [TestMethod]
+        public void DeberiaGanarElJugadorDelTurnoCuandoHayEmpate()
+        {
+            var partida = new Partida();
+            List<Atributo> atributos = new List<Atributo>();
+            var atributo1 = new Atributo { Nombre = "Velocidad", Valor = 40 };
+
+            atributos.Add(atributo1);
+
+            var carta1 = new Carta { IdCarta = "1", Nombre = "CARTA1", TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+            var carta2 = new Carta { IdCarta = "1", Nombre = "CARTA2", TipoCarta = TipoDeCarta.Normal, Atributos = atributos };
+
+            Jugador jugador1 = new Jugador().Nombre("Maxi").Numero(NumJugador.uno).IdConexion("1");
+            Jugador jugador2 = new Jugador().Nombre("Juan").Numero(NumJugador.dos).IdConexion("2");
+
+            partida.Jugador(jugador1).Jugador(jugador2);
+            partida.jugadores[0].Cartas.Add(carta1);
+            partida.jugadores[1].Cartas.Add(carta2);
+
+            partida.AnalizarCartas(carta1, carta2, "Velocidad");
+
+            Assert.AreEqual(0, jugador2.Cartas.Count);
+            Assert.AreEqual(2, jugador1.Cartas.Count);
+
+
+        }
+
+
     }
 }
