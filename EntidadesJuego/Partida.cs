@@ -227,14 +227,16 @@ namespace EntidadesJuego
                 else
                 {
                     Random azar = new Random();
-                    int sorteo = azar.Next(1, 2);
+                    int sorteo = azar.Next(0,1);
 
+                 
+                 
                     var jugadorAzar = jugadores[sorteo];
                     var cartaGanadora = jugadores[sorteo].Cartas[0];
 
                     jugadores[sorteo].Cartas.Remove(cartaGanadora);
                     jugadores[sorteo].Cartas.Add(cartaGanadora);
-                    if (sorteo + 1 == 3)
+                    if (sorteo + 1 == 2)
                     {
                         jugadores[1].Cartas.Add(jugadores[0].Cartas.First(x => x.IdCarta == iDCartaJugador1));
                         jugadores[0].Cartas.RemoveAt(jugadores[0].Cartas.IndexOf((jugadores[0].Cartas.Where(x => x.IdCarta == iDCartaJugador1).First())));

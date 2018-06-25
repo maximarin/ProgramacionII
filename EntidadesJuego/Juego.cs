@@ -30,7 +30,9 @@ namespace EntidadesJuego
 
         public List<Mazo> AgregarMazos()
         {
+
             var deckFolder = Directory.GetDirectories(@"C:\Users\maxi_\Desktop\Juego\Cromy.web\Mazos");           
+
 
             foreach (var deck in deckFolder)
             {
