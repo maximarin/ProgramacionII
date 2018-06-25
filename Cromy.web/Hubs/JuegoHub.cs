@@ -109,12 +109,12 @@ namespace Cromy.web.Hubs
 
             if (idGanador == Context.ConnectionId)
             {
-                if (cartaJugadorTurno.TipoCarta == TipoDeCarta.Amarilla)
+                if (cartaJugadorTurno.IdCarta == "amarilla")
                 {
                     Clients.Caller.ganarManoPorTarjetaAmarilla();
                     Clients.Client(idPerdedor).perderMano();
                 }
-                else if (cartaJugadorTurno.TipoCarta == TipoDeCarta.Roja)
+                else if (cartaJugadorTurno.IdCarta == "roja")
                 {
                     Clients.Caller.ganarManoPorTarjetaRoja();
                     Clients.Client(idPerdedor).perderManoPorTarjetaRoja();                    
@@ -128,12 +128,12 @@ namespace Cromy.web.Hubs
             }
             else
             {
-                if (cartaJugadorOponente.TipoCarta == TipoDeCarta.Amarilla)
+                if (cartaJugadorOponente.IdCarta == "amarilla")
                 {
                     Clients.Client(idGanador).ganarManoPorTarjetaAmarilla();
                     Clients.Caller.perderManoPorTarjetaAmarilla();
                 }
-                else if (cartaJugadorOponente.TipoCarta == TipoDeCarta.Roja)
+                else if (cartaJugadorOponente.IdCarta == "roja")
                 {
                     Clients.Client(idGanador).ganarManoPorTarjetaRoja();
                     Clients.Caller.perderManoPorTarjetaRoja();                    
